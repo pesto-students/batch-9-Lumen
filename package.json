@@ -1,0 +1,19 @@
+{
+  "name": "batch-9-lumen",
+  "version": "1.0.0",
+  "description": "Lumen project repository.",
+  "main": "index.js",
+  "scripts": {
+    "server": "npm start --prefix server",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "test": "yarn test:client && yarn test:server",
+    "test:client": "cd client && yarn && yarn test",
+    "test:server": "cd server && yarn && yarn test"
+  },
+  "author": "Sumit Nihalani",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^4.1.1"
+  }
+}
