@@ -8,8 +8,6 @@ jobs:
     docker:
       - image: circleci/lts
 
-    working_directory: ~/repo
-
     steps:
       - checkout
 
