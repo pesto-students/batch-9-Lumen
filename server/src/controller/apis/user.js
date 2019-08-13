@@ -1,10 +1,9 @@
-import { Router } from 'express';
-import userService from '../../services/user/user';
+
+const Router = require('express').Router;
+import { testApi } from '../../services/user/user';
 
 let router = Router();
 
-router.get('/', userService.getUsers);
+router.get('/', testApi);
 
-export {
-    router
-}
+export default router;

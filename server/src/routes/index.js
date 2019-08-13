@@ -8,7 +8,8 @@ const init = (server) => {
     
     server.use('/api', restRoutes);
 }
-
-export {
+const routes = {
     init
 }
+
+export default routes;

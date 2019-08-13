@@ -1,9 +1,7 @@
-import { Router } from 'express';
+const Router = require('express').Router;
 import v1ApiController from './v1';
 
 let router = Router();
 router.use('/v1', v1ApiController);
 
-export {
-    router
-}
+export default router;

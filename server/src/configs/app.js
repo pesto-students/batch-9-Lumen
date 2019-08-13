@@ -1,7 +1,7 @@
 
-import express from 'express';
+const express = require('express');
 import bodyParser from 'body-parser';
-
+import routes from '../routes'
 const app =  (
 
 ) => {
@@ -12,8 +12,7 @@ const app =  (
     create = (
 
     ) => {
-        let routes = require('../routes');
-
+        
         server.set('port', 3000);
 
         server.use(bodyParser.json());
@@ -29,7 +28,7 @@ const app =  (
         const port = server.get('port');
 
         server.listen(port, function () {
-            console.log('Server listening on - http://' + hostname + ':' + port);
+            console.log('Server listening on - port:' + port);
         });
     };
     return {
