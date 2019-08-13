@@ -24,5 +24,5 @@ jobs:
           name: If branch is staging, deploy to staging Netlify 
           command: |
             if [ "${CIRCLE_BRANCH}" == "staging" ]; then
-            yarn build:client && netlify deploy --dir=client/build --prod
+            yarn build:client && npx netlify deploy --dir=client/build --prod
             fi      
