@@ -3,3 +3,5 @@ package-lock.json
 .vscode
 .env
 yarn.lock
+.yarn-error.log
+yarn-error.log
