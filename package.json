@@ -9,11 +9,24 @@
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "test": "yarn test:server | yarn test:client",
     "test:server": "cd server && yarn && yarn test",
-    "test:client": "cd client && yarn && yarn test"
+    "test:client": "cd client && yarn && yarn test",
+    "lint": "eslint . --ext js, jsx",
+    "lint:fix": "eslint --fix . --ext js, jsx"
   },
   "author": "Sumit Nihalani",
   "license": "ISC",
   "devDependencies": {
-    "concurrently": "^4.1.1"
+    "concurrently": "^4.1.1",
+    "eslint": "^6.1.0",
+    "eslint-config-airbnb": "^18.0.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.14.3",
+    "eslint-plugin-react-hooks": "^1.7.0"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0"
   }
 }
