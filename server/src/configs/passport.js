@@ -1,3 +1,5 @@
+import tokenization from '../utils/external/tokenization'
+
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 
@@ -17,7 +19,19 @@ const init = () => {
     },
     async (email, password, done) => {
       // TODO: Checks for sign up
-      const user = { email };
+      const user = tokenization.tokenize({ email });
+      return done(null, user);
+    },
+  ));
+
+  passport.use('local-signin', new LocalStrategy(
+    {
+      usernameField: 'email',
+      passwordField: 'password',
+    },
+    async (email, password, done) => {
+      // TODO: Checks for signin
+      const user = tokenization.tokenize({ email });
       return done(null, user);
     },
   ));

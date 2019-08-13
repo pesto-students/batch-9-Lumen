@@ -4,11 +4,15 @@ const testApi = (req, res) => {
 };
 
 const signUp = (req, res) => {
-  res.json({ msg: 'Working', user: req.user });
+  res.json({ msg: 'Working', token: req.user });
 };
 
+const signIn = (req, res) => {
+  res.json({ msg: 'Working', token: req.user });
+};
 const apis = {
   testApi,
   signUp,
+  signIn,
 };
 export default apis;

@@ -10,4 +10,6 @@ router.get('/', userAPI.testApi);
 
 router.post('/signup', passport.passport.authenticate('local-signup'), userAPI.signUp);
 
+router.post('/signin', passport.passport.authenticate('local-signup'), userAPI.signUp);
+
 export default router;
