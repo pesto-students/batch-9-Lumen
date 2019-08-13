@@ -1,0 +1,22 @@
+
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:lts
+
+    steps:
+      - checkout
+
+      - run:  
+          name: Install dependencies
+          command: yarn install
+
+      - run:
+          name: Testing Client
+          command: |
+            yarn && yarn test:client 
+      - run:
+          name: Testing Server
+          command: |
+            yarn && yarn test:server 
