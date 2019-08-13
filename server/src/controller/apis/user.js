@@ -5,4 +5,6 @@ let router = Router();
 
 router.get('/', userService.getUsers);
 
-module.exports = router;
+export {
+    router
+}
