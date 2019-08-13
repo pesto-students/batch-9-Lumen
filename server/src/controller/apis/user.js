@@ -7,4 +7,6 @@ const router = Router();
 
 router.get('/', userAPI.testApi);
 
+router.post('/signup', userAPI.testApi);
+
 export default router;

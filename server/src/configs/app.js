@@ -1,6 +1,7 @@
 
 import bodyParser from 'body-parser';
 import routes from '../routes';
+import passport from './passport';
 
 const express = require('express');
 
@@ -18,6 +19,10 @@ const app = (
     server.use(bodyParser.urlencoded({
       extended: false,
     }));
+
+    server.use(passport.passport.initialize());
+
+    passport.init();
 
     routes.init(server);
   };
