@@ -4,7 +4,7 @@ const testApi = (req, res) => {
 };
 
 const signUp = (req, res) => {
-  res.json({ msg: 'Working' });
+  res.json({ msg: 'Working', user: req.user });
 };
 
 const apis = {
