@@ -7,7 +7,9 @@
     "server": "npm start --prefix server",
     "client": "npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "yarn test:server | yarn test:client",
+    "test:server": "cd server && yarn && yarn test",
+    "test:client": "cd client && yarn && yarn test"
   },
   "author": "Sumit Nihalani",
   "license": "ISC",
