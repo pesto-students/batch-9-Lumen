@@ -1,9 +1,10 @@
 
-const Router = require('express').Router;
-import { testApi } from '../../services/user/user';
+import userAPI from '../../services/user/user';
 
-let router = Router();
+const { Router } = require('express');
 
-router.get('/', testApi);
+const router = Router();
+
+router.get('/', userAPI.testApi);
 
 export default router;
