@@ -1,12 +1,14 @@
-import React from "react";
-import { Card as Crd } from "semantic-ui-react";
+import React from 'react';
+import { Card as Crd } from 'semantic-ui-react';
 
-const Card = props => {
-  return (
-    <div>
-      <Crd> {props.childern} </Crd>
-    </div>
-  );
-};
+const Card = (props) => (
+  <div>
+    <Crd>
+      {' '}
+      {props.childern}
+      {' '}
+    </Crd>
+  </div>
+);
 
 export default Card;
