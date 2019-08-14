@@ -1,0 +1,1 @@
+This folders contains bindings of the versioned apis available with the available controller.
