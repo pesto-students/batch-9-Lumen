@@ -1,6 +1,8 @@
 import passport from 'passport';
 import { Strategy as LocalStrategy } from 'passport-local';
-import { tokenizeObject } from '../utils/tokenization';
+import { Strategy as AuthorizeStrategy } from 'passport-http-bearer';
+
+import { tokenizeObject, decodeToken } from '../utils/tokenization';
 
 function Authentication(
 
@@ -53,6 +55,17 @@ Authentication.prototype.start = () => {
       return done(null, user);
     },
   ));
+
+  passport.use('user-valid', new AuthorizeStrategy(
+    async (userToken, done) => {
+      try {
+        const decodedUser = decodeToken(userToken);
+        done(null, decodedUser);
+      } catch (err) {
+        done(err);
+      }
+    },
+  ));
 };
 
 
@@ -63,6 +76,8 @@ Authentication.prototype.authenticate = (...args) => passport.authenticate(...ar
 Authentication.prototype.localSignIn = (...args) => passport.authenticate('local-signin', ...args);
 
 Authentication.prototype.localSignUp = (...args) => passport.authenticate('local-signup', ...args);
+
+Authentication.prototype.isValidUser = (...args) => passport.authenticate('user-valid', ...args);
 
 const authInstance = new Authentication();
 export default authInstance;

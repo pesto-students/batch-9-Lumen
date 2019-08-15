@@ -16,3 +16,4 @@
 
 - Use authenticate() from auth instance for using the custom authorization that you have made.
 
+- Use isValidUser() from auth instance for doing user validation in the middleware. This is taking Authorization token from user and will be checking whether the user is valid or not.
