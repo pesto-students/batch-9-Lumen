@@ -26,7 +26,6 @@ const app = (
     routes.init(server);
   };
 
-
   const start = () => {
     const port = server.get('port');
 
