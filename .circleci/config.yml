@@ -2,15 +2,23 @@
 version: 2
 jobs:
   build:
+    working_directory: ~/batch-9-Lumen
     docker:
       - image: circleci/node:lts
 
     steps:
       - checkout
 
+      - restore_cache:
+        key: yarn-packages-{{ checksum "yarn.lock" }}
       - run:  
           name: Install dependencies
-          command: yarn install
+          command: yarn install --frozen-lockfile
+
+      - save_cache:
+        key: yarn-packages-{{ checksum "yarn.lock" }}
+        paths:
+          - ./cahce/yarn
 
       - run:
           name: Testing Client
@@ -20,3 +28,8 @@ jobs:
           name: Testing Server
           command: |
             yarn && yarn test:server 
+      - deploy:
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "dev" ]; then
+            git subtree push --prefix server https://heroku:$HEROMU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git dev
+            fi
