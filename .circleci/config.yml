@@ -8,17 +8,16 @@ jobs:
 
     steps:
       - checkout
-
       - restore_cache:
-        key: yarn-packages-{{ checksum "yarn.lock" }}
+          key: yarn-packages-{{ checksum "yarn.lock" }}
       - run:  
           name: Install dependencies
           command: yarn install --frozen-lockfile
 
       - save_cache:
-        key: yarn-packages-{{ checksum "yarn.lock" }}
-        paths:
-          - ./cahce/yarn
+          key: yarn-packages-{{ checksum "yarn.lock" }}
+          paths:
+            - ./cahce/yarn
 
       - run:
           name: Testing Client

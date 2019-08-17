@@ -1,37 +1,30 @@
-import React, { useState } from 'react';
-import { Route } from 'react-router-dom';
-import Modal from './components/UI/Modal/Modal';
+import React from 'react';
+import logo from './logo.svg';
 import './App.css';
-import Layout from './components/hoc/Layout/Layout';
-import Home from './containers/Home';
 
-const App = () => {
-  const [showAuthModal, setShowAuthModal] = useState(true);
-
+function App() {
   return (
-    <>
-      <Layout>
-        <Route
-          path="/signin"
-          render={props => {
-            setShowAuthModal(true);
-            return (
-              <Modal
-                history={props.history}
-                show={showAuthModal}
-                modalClosed={() => {
-                  setShowAuthModal(false);
-                }}
-              >
-                <h1> login page</h1>
-              </Modal>
-            );
-          }}
-        />
-        <Route path="/" component={Home} />
-      </Layout>
-    </>
+    <div className="App">
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <p>
+          Edit
+          <code>
+            src/App.js
+          </code>
+            and save to reload.
+        </p>
+        <a
+          className="App-link"
+          href="https://reactjs.org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn React with me ;0
+        </a>
+      </header>
+    </div>
   );
-};
+}
 
 export default App;
