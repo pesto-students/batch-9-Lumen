@@ -3,6 +3,12 @@ import { Strategy as LocalStrategy } from 'passport-local';
 import { Strategy as AuthorizeStrategy } from 'passport-http-bearer';
 
 import { tokenizeObject, decodeToken } from '../utils/tokenization';
+import {
+  userExists,
+  createUser,
+  verifyPassword as verifyUserPassword,
+  getUserProperties,
+} from '../services/user/service';
 
 function Authentication(
 
@@ -23,18 +29,22 @@ Authentication.prototype.start = () => {
     {
       usernameField: 'email',
       passwordField: 'password',
+      passReqToCallback: true,
     },
-    async (email, password, done) => {
-      // TODO: Checks for sign up (Waiting for Data models to be added)
-      /**
-       * Steps for sign up.
-       * 1.check if the user already exists in the database and return error in done callback.
-       * 2. If user does not exists,
-       *        -create a user in the database and return the created user object.
-       */
+    async (req, email, password, done) => {
+      try {
+        const userAlreadyExists = await userExists(email, req.body.username);
 
-      const user = { email };
-      return done(null, user);
+        if (userAlreadyExists) {
+          return done(null, false, 'User already exists with same email/username.');
+        }
+
+        const newUser = await createUser(req.body);
+        const userToken = tokenizeObject(newUser);
+        return done(null, userToken);
+      } catch (e) {
+        return done(e);
+      }
     },
   ));
 
@@ -44,15 +54,19 @@ Authentication.prototype.start = () => {
       passwordField: 'password',
     },
     async (email, password, done) => {
-      // TODO: Checks for sign in (Waiting for Data models to be added)
-      /**
-       * Steps for sign in.
-       * 1.check if the user already exists in the database and return error in done callback.
-       * 2. If user does not exists,
-       *        -create a user in the database and sign a token for the user and return token.
-       */
-      const user = tokenizeObject({ email });
-      return done(null, user);
+      const existingUser = await userExists(email);
+      if (!existingUser) {
+        return done(null, false, 'User does not exist .');
+      }
+
+      const validPassword = await verifyUserPassword(email, password);
+      if (!validPassword) {
+        return done(null, false, 'Invalid user password .');
+      }
+
+      const user = await getUserProperties(email);
+      const token = tokenizeObject(user);
+      return done(null, token);
     },
   ));
 

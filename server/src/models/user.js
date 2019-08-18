@@ -10,6 +10,7 @@ const UserSchema = new Schema({
     type: String,
     unique: true,
     required: true,
+    index: true,
   },
   password: {
     type: String,
@@ -18,6 +19,7 @@ const UserSchema = new Schema({
   username: {
     type: String,
     unique: true,
+    index: true,
   },
 }, {
   timestamps: true,
