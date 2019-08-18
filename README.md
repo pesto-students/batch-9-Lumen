@@ -1,6 +1,6 @@
 
 ## batch-9-Lumen
-	
+	BLog application.
 ### Project Specs
 - [Notion](https://www.notion.so/pesto/Batch-8-Project-Specs-33ef6ae26565459f98771b95c7f0cecd)
 
