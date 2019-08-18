@@ -6,7 +6,7 @@
   "scripts": {
     "server": "npm start --prefix server",
     "client": "npm start --prefix client",
-    "start": "yarn && concurrently \"npm run server\" \"npm run client\"",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
     "test": "yarn test:client && yarn test:server",
     "test:client": "cd client && yarn && yarn test",
     "test:server": "cd server && yarn && yarn test",
