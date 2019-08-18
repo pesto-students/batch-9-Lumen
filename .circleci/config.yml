@@ -4,31 +4,58 @@ jobs:
   build:
     working_directory: ~/batch-9-Lumen
     docker:
-      - image: circleci/node:lts
-
+      - image: circleci/node:10.16.3
     steps:
+    - checkout
+    - run:
+        name: Lint Code
+        command: |
+          yarn install --frozen-lockfile && yarn lint
+    
+    client-test:
+      docker: 
+        -image: circleci/node:10.16.3
+      steps:
       - checkout
-      - restore_cache:
-          key: yarn-packages-{{ checksum "yarn.lock" }}
-      - run:  
-          name: Install dependencies
-          command: yarn install --frozen-lockfile
-
-      - save_cache:
-          key: yarn-packages-{{ checksum "yarn.lock" }}
-          paths:
-            - ./cahce/yarn
-
       - run:
-          name: Testing Client
+          name: run client tests
           command: |
-            yarn && yarn test:client 
+            cd client && yarn test
+
+    server-test:
+      docker:
+        - image: circleci/node:10.16.3
+      steps:
+      - checkout
       - run:
-          name: Testing Server
+          name: run server tests
           command: |
-            yarn && yarn test:server 
-      - deploy:
-          command: |
-            if [ "${CIRCLE_BRANCH}" == "dev" ]; then
-            git subtree push --prefix server https://heroku:$HEROMU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git dev
-            fi
+            cd server && yarn test
+
+    deploy-server:
+        steps:
+          - checkout
+          - run:
+              name: Deploy server
+              command: |
+                git push https://heroku:$HEROMU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git dev
+
+workflows:
+  version: 2
+  pacman-build:
+    jobs:
+    - build
+    - client-test:
+        requires:
+        - build
+    - server-test:
+        requires:
+        - build
+    - deploy-server:
+        requires:
+        - client-test
+        - server-test
+        filters:
+          branches:
+            only:
+              - dev
