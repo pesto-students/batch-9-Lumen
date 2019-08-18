@@ -12,7 +12,7 @@ const app = (
   const create = (
 
   ) => {
-    const portToUse = process.env.PORT;
+    const portToUse = process.env.PORT || 4000;
     server.set('port', portToUse);
 
     server.use(bodyParser.json());
