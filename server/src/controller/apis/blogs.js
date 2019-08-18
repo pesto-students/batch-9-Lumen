@@ -7,12 +7,12 @@ const router = Router();
 
 router.get('/health', blogsAPI.health);
 
-router.get('/:id', blogsAPI.readPost);
+router.get('/:id', blogsAPI.readBlog);
 
-router.post('/', authInstance.isValidUser(), blogsAPI.createPost);
+router.post('/', authInstance.isValidUser(), blogsAPI.createBlog);
 
-router.put('/:id', authInstance.isValidUser(), blogExists, authenticateUserBlog, blogsAPI.updatePost);
+router.put('/:id', authInstance.isValidUser(), blogExists, authenticateUserBlog, blogsAPI.updateBlog);
 
-router.delete('/:id', authInstance.isValidUser(), blogExists, authenticateUserBlog, blogsAPI.deletePost);
+router.delete('/:id', authInstance.isValidUser(), blogExists, authenticateUserBlog, blogsAPI.deleteBlog);
 
 export default router;
