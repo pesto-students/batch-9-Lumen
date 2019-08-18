@@ -2,21 +2,30 @@
 version: 2
 jobs:
   build:
+    working_directory: ~/batch-9-Lumen
     docker:
-      - image: circleci/node:lts
-
+      - image: circleci/node:10.16.3
+      - image: mongo:3.4.4
     steps:
       - checkout
 
       - run:  
           name: Install dependencies
-          command: yarn install
-
+          command: yarn install --frozen-lockfile
+      - restore_cache:
+          key: dependency-cache-{{ checksum "yarn.lock" }}
+      - save_cache:
+          key: dependency-cache-{{ checksum "yarn.lock" }}
+          paths:
+            - ./cache/yarn
       - run:
-          name: Testing Client
+          name: Client Tests
           command: |
-            yarn && yarn test:client 
+            yarn test:client
       - run:
-          name: Testing Server
+          name: Server tests
           command: |
-            yarn && yarn test:server 
+            yarn test:server
+      - deploy:
+          command: |
+            git subtree push --prefix server https://heroku.$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git dev
