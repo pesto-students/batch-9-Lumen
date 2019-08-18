@@ -24,6 +24,8 @@
     "passport-local": "^1.0.0"
   },
   "devDependencies": {
-    "nodemon": "^1.19.1"
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
+    "nodemon": "^1.19.1",
+    "supertest": "^4.0.2"
   }
 }
