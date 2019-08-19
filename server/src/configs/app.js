@@ -3,6 +3,7 @@ import express from 'express';
 import routes from '../routes';
 import logger from '../utils/logger';
 import authInstance from './authentication';
+import env from './env';
 
 const app = (
 
@@ -12,8 +13,7 @@ const app = (
   const create = (
 
   ) => {
-    const portToUse = process.env.APP_PORT;
-    server.set('port', portToUse);
+    server.set('port', env.port);
 
     server.use(bodyParser.json());
     server.use(bodyParser.urlencoded({
