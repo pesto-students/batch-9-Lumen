@@ -22,5 +22,4 @@
 - Abstraction- things which are common throuhout the app should be abstracted like buttons, forms, inputs
 - Gifs/ video for frontend prs.
 - Review each other PRs.
-- don’t commit in someone else pr
-  
+- don’t commit in someone else's pr
