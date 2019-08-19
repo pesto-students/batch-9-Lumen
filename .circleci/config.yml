@@ -30,7 +30,14 @@ jobs:
           fingerprints:
             - $HEROKU_SSH_KEY
       - deploy:
+          name: Deploy server to Heroku
           command: |
-            if [ "${CIRCLE_BRANCH}" == "karan/heroku-server" ]; then
+            if [ "${CIRCLE_BRANCH}" == "dev" ]; then
             git subtree push --prefix server git@heroku.com:$HEROKU_APP_NAME.git dev
+            fi
+      - deploy:
+          name: Deploy client to Netlify
+          command: |
+            if [ $"{CIRCLE_BRANCH}" == "dev" ]; then
+            cd client && yarn build && netlify deploy --dir=client/build --prod
             fi
