@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { Route } from 'react-router-dom';
 import Modal from './components/UI/Modal/Modal';
 import './App.css';
-import 'semantic-ui-css/semantic.min.css'
+import 'semantic-ui-css/semantic.min.css';
 import Layout from './components/hoc/Layout/Layout';
 import Home from './containers/Home';
 import BlogBox from './components/blogBox';
-import Signin from "./containers/Authentication";
+import Signin from './containers/Authentication';
 
 const App = () => {
   const [showAuthModal, setShowAuthModal] = useState(true);
@@ -26,13 +26,13 @@ const App = () => {
                   setShowAuthModal(false);
                 }}
               >
-              <Signin/>
+                <Signin />
               </Modal>
             );
           }}
         />
-        <Route path="/" component={Home} />
-        <BlogBox />
+        <Route path="/write" exact component={BlogBox} />
+        <Route path="/" exact component={Home} />
       </Layout>
     </>
   );
