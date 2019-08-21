@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import { blogCreation as blogCreationValidation } from '../utils/validations';
 import {
   createBlog,
@@ -70,12 +71,11 @@ const updateBlog = async (req, res, next) => {
     const updatedBlog = await updateBlogInDB(blogID, newBlog);
     if (updatedBlog) {
       req.blog = updatedBlog;
-      next();
-    } else {
-      return res.status(404).json({ msg: "can't find blog with the given id." });
+      return next();
     }
+    return res.status(404).json({ msg: "can't find blog with the given id." });
   } catch (err) {
-    res.status(500).json({ msg: 'Something went wrong', error: err });
+    return res.status(500).json({ msg: 'Something went wrong', error: err });
   }
 };
 
@@ -85,12 +85,11 @@ const deleteBlog = async (req, res, next) => {
     const blog = await deleteBlogById(blogID);
     if (blog) {
       req.blog = blog;
-      next();
-    } else {
-      return res.status(404).json({ msg: 'Blog not found.' });
+      return next();
     }
+    return res.status(404).json({ msg: 'Blog not found.' });
   } catch (err) {
-    res.status(500).json({ msg: 'Something went wrong', error: err });
+    return res.status(500).json({ msg: 'Something went wrong', error: err });
   }
 };
 export {
