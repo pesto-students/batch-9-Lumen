@@ -1,31 +1,103 @@
-// eslint-disable-next-line arrow-body-style
-const blogExists = async (req, res, next) => {
-  // TODO: Validate whether blog exists or not
+import { blogCreation as blogCreationValidation } from '../utils/validations';
+import {
+  createBlog,
+  getBlogById,
+  updateBlog as updateBlogInDB,
+  deleteBlogById,
+} from '../services/blogs/service';
+import { isValid } from '../utils/helpers/mongoose';
 
-  /**
-        * Validation steps.
-        * 1. Check whether the blog exist or not using the blog service.
-        * 2. If the blog does not exists send response as 404: Not Found.
-        * 3. If the blog is found forward the request to the next middleware.
-        */
-  return next();
-};
-
-// eslint-disable-next-line arrow-body-style
 const authenticateUserBlog = async (req, res, next) => {
-  // TODO: Validate whether or not user owns the blog or not
+  const userID = req.user._id;
+  const blogOwnerId = req.blog.userId;
+  if (userID.toString() !== blogOwnerId.toString()) {
+    return res.status(401).json({ msg: 'Unauthorized Access' });
+  }
 
-  /**
-    * Validation steps.
-    * 1. Get the user id from the request object.
-    * 2. Use blog service to check whether the user owns the blog or not.
-    * 3. If the blog does not belong to user, return status as 401: Unauthorized Access.
-    * 4. Otherwise forward the request to next middleware.
-    */
   return next();
 };
 
+const createBlogRequestValidation = async (req, res, next) => {
+  const blog = req.body;
+  const userFieldsValidity = blogCreationValidation(blog);
+  if (!userFieldsValidity.isValid) {
+    res.status(400);
+    return res.json(userFieldsValidity.errors);
+  }
+  return next();
+};
+
+const saveBlog = async (req, res, next) => {
+  const { title, content } = req.body;
+  const userId = req.user._id;
+  try {
+    const newBlog = await createBlog(title, content, userId);
+    req.blog = newBlog;
+    next();
+  } catch (err) {
+    res.status(500).json({ msg: 'Something went wrong', error: err });
+  }
+};
+
+const getBlog = async (req, res, next) => {
+  const blogID = req.params.id;
+  const validObjectId = isValid(blogID);
+
+  if (validObjectId) {
+    try {
+      const blog = await getBlogById(blogID);
+      if (blog) {
+        req.blog = blog;
+        return next();
+      }
+      return res.status(404).json({ msg: 'Blog not found.' });
+    } catch (err) {
+      return res.status(500).json({ msg: 'Something went wrong', error: err });
+    }
+  } else {
+    return res.status(400).json({ msg: "Can't find blog, invalid url" });
+  }
+};
+
+const updateBlog = async (req, res, next) => {
+  const newBlog = { ...req.blog };
+  newBlog.title = req.body.title;
+  newBlog.content = req.body.content;
+  newBlog.private = req.body.private;
+  const blogID = req.params.id;
+
+  try {
+    const updatedBlog = await updateBlogInDB(blogID, newBlog);
+    if (updatedBlog) {
+      req.blog = updatedBlog;
+      next();
+    } else {
+      return res.status(404).json({ msg: "can't find blog with the given id." });
+    }
+  } catch (err) {
+    res.status(500).json({ msg: 'Something went wrong', error: err });
+  }
+};
+
+const deleteBlog = async (req, res, next) => {
+  const blogID = req.params.id;
+  try {
+    const blog = await deleteBlogById(blogID);
+    if (blog) {
+      req.blog = blog;
+      next();
+    } else {
+      return res.status(404).json({ msg: 'Blog not found.' });
+    }
+  } catch (err) {
+    res.status(500).json({ msg: 'Something went wrong', error: err });
+  }
+};
 export {
   authenticateUserBlog,
-  blogExists,
+  createBlogRequestValidation,
+  saveBlog,
+  getBlog,
+  updateBlog,
+  deleteBlog,
 };

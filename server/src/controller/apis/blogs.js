@@ -1,18 +1,20 @@
 import { Router } from 'express';
 import authInstance from '../../configs/authentication';
-import { authenticateUserBlog, blogExists } from '../../middlewares/blogs';
+import {
+  authenticateUserBlog, createBlogRequestValidation, saveBlog, getBlog, updateBlog, deleteBlog,
+} from '../../middlewares/blogs';
 import blogsAPI from '../../services/blogs/api';
 
 const router = Router();
 
 router.get('/health', blogsAPI.health);
 
-router.get('/:id', blogsAPI.readBlog);
+router.get('/:id', getBlog, blogsAPI.sendResponse);
 
-router.post('/', authInstance.isValidUser(), blogsAPI.createBlog);
+router.post('/', createBlogRequestValidation, authInstance.isValidUser(), saveBlog, blogsAPI.sendResponse);
 
-router.put('/:id', authInstance.isValidUser(), blogExists, authenticateUserBlog, blogsAPI.updateBlog);
+router.put('/:id', authInstance.isValidUser(), getBlog, authenticateUserBlog, updateBlog, blogsAPI.sendResponse);
 
-router.delete('/:id', authInstance.isValidUser(), blogExists, authenticateUserBlog, blogsAPI.deleteBlog);
+router.delete('/:id', authInstance.isValidUser(), getBlog, authenticateUserBlog, deleteBlog, blogsAPI.sendResponse);
 
 export default router;
