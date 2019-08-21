@@ -7,8 +7,9 @@ const VotesSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'Blogs',
     required: true,
+    index: true,
   },
-  user: {
+  userId: {
     type: Schema.Types.ObjectId,
     ref: 'User',
     required: true,
