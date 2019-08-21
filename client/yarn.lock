@@ -8716,10 +8716,10 @@ relateurl@0.2.x:
   resolved "https://registry.yarnpkg.com/relateurl/-/relateurl-0.2.7.tgz#54dbf377e51440aca90a4cd274600d3ff2d888a9"
   integrity sha1-VNvzd+UUQKypCkzSdGANP/LYiKk=
 
-remark-iframes-extended@^0.0.5:
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/remark-iframes-extended/-/remark-iframes-extended-0.0.5.tgz#6a6f7561dbf1d0fff66af192bbe6a50647373526"
-  integrity sha512-oprSWrGzPRBYOz1+2h+Y+I1JLm16fdk14IfinJQWRliFStAHbzeuCROKTf4zVwonsqcF1qrT0+g95YbJzuQJxw==
+remark-iframes-extended@^0.0.6:
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/remark-iframes-extended/-/remark-iframes-extended-0.0.6.tgz#c221a3de71ee8895881f34410982f7fb86edbb36"
+  integrity sha512-GEDmjeCwyUeHZEjqJ+vD3k+pPUFad6vvz35Sjnm/hzXyn4N/Q4AWXmm/Guei25wMQevDx/s2xhTv5nxhsoLhkQ==
   dependencies:
     cross-env "^5.2.0"
     node-fetch "^2.6.0"
