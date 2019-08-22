@@ -4,6 +4,7 @@ import styles from './Home.module.css';
 import FloatingActionButton from '../components/FloatingActionButton/FloatingActionButton';
 import BlogCard from '../components/BlogCard/index';
 import topTen from '../topTen';
+import '../customStyles.css';
 
 const biggerCards = topTen.slice(0, 2).map((props) => (
   <div className={styles['large-blog']}>
@@ -22,7 +23,6 @@ const smallerCardsSecondColumn = topTen.slice(6).map((props) => (
     <BlogCard {...props} />
   </div>
 ));
-
 
 const Home = ({ isAuthenticated }) => (
   <>
