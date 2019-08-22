@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon -r esm -r dotenv/config index.js",
-    "test": "jest"
+    "test": "jest --coverage test.js"
   },
   "author": "Sumit Nihalani",
   "license": "ISC",
@@ -25,6 +25,7 @@
   },
   "devDependencies": {
     "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
+    "mongodb-memory-server": "^5.2.0",
     "nodemon": "^1.19.1",
     "supertest": "^4.0.2"
   }
