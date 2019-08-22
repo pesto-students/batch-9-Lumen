@@ -38,3 +38,11 @@
   flex: 3;
   margin: 15px;
 }
+
+.small-blog img {
+  max-height: 5vh;
+}
+
+.large-blog img {
+  max-height: 20vh;
+}
