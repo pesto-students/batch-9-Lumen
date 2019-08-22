@@ -7,6 +7,8 @@ import blogsAPI from '../../services/blogs/api';
 
 const router = Router();
 
+router.get('/home/:pageNumber', blogsAPI.getBlogs);
+
 router.get('/health', blogsAPI.health);
 
 router.get('/:id', getBlog, blogsAPI.sendResponse);
