@@ -44,7 +44,7 @@ BlogCard.propTypes = {
 };
 
 BlogCard.defaultProps = {
-  image: '',
+  image: 'http://www.reginacaeli.be/fileadmin/templates/img/placeholder-small.png',
   title: 'A blog post',
   userName: 'User 1',
   content: 'This is some blog content',

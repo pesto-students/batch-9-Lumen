@@ -1,0 +1,23 @@
+.ui.card {
+  display: flex;
+  flex-direction: row;
+}
+
+.ui.card > .image {
+  flex: 1;
+}
+
+.ui.card > .content {
+  flex: 2;
+}
+
+.ui.card > .extra.content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.ui.card > .extra.content span {
+  position: relative;
+  bottom: 0rem;
+}
