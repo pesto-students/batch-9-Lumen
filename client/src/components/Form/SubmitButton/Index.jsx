@@ -1,8 +1,8 @@
 import React from 'react';
 import { Button } from 'semantic-ui-react';
 
-const SubmitButton = ({ children }) => (
-  <Button type="submit" color="teal" fluid size="large">
+const SubmitButton = ({ children, loading }) => (
+  <Button type="submit" color="teal" fluid size="large" loading={loading}>
     {children}
   </Button>
 );

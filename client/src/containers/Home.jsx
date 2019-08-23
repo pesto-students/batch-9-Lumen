@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styles from './Home.module.css';
 import FloatingActionButton from '../components/FloatingActionButton/FloatingActionButton';
 import BlogCard from '../components/BlogCard/index';
@@ -23,7 +24,7 @@ const smallerCardsSecondColumn = topTen.slice(6).map((props) => (
 ));
 
 
-const Home = () => (
+const Home = ({ isAuthenticated }) => (
   <>
     <h1> Top 10 trending blogs</h1>
     <div className={styles.container}>
@@ -39,8 +40,15 @@ const Home = () => (
         {smallerCardsSecondColumn}
       </div>
     </div>
-    <FloatingActionButton />
+    {isAuthenticated ? (<FloatingActionButton />) : null }
   </>
 );
 
+Home.propTypes = {
+  isAuthenticated: PropTypes.bool,
+};
+
+Home.defaultProps = {
+  isAuthenticated: false,
+};
 export default Home;

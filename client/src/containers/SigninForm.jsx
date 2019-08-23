@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
-import { Form, Grid, Header, Segment } from 'semantic-ui-react';
+import {
+  Form, Grid, Header, Segment,
+} from 'semantic-ui-react';
+import { connect } from 'react-redux';
 import EmailInput from '../components/Form/EmailInput/index';
 import PasswordInput from '../components/Form/PasswordInput';
 import SubmitButton from '../components/Form/SubmitButton/Index';
+import * as actions from '../store/actions/index';
 
-const SigninForm = () => {
+const SigninForm = ({onLogin, error, loading}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = () => {
-    // todo: dispatch action
-    console.log('Sign in button tapped.');
-  };
+  const handleLogin = () => onLogin(email, password);
 
   return (
     <Grid textAlign="center" verticalAlign="middle">
@@ -28,9 +29,10 @@ const SigninForm = () => {
             />
             <PasswordInput
               value={password}
-              onChange={event => setPassword(event.target.value)}
+              onChange={(event) => setPassword(event.target.value)}
             />
-            <SubmitButton>Sign in</SubmitButton>
+            {error ? (<p> { error } </p>) : null}
+            <SubmitButton loading={loading}>Sign in</SubmitButton>
           </Segment>
         </Form>
       </Grid.Column>
@@ -38,4 +40,19 @@ const SigninForm = () => {
   );
 };
 
-export default SigninForm;
+const mapStateToProps = (state) => ({
+  loading: state.auth.loading,
+  error: state.auth.error,
+  isAuthenticated: state.auth.token !== null,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onLogin: (email, password) => {
+    dispatch(actions.login(email, password));
+  },
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(SigninForm);
