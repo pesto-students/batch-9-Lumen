@@ -1,29 +1,17 @@
-import isEmpty from './isEmpty';
+import getErrorsForProperties from './errorForProperties';
+import addErrorIfEmpty from './addErrorIfEmpty';
+import { addErrorIfNotEmail } from './email';
+import { addErrorIfNotString } from './isString';
 
 function validateRegisterInput(user) {
-  const errors = {};
-
-
-  if (isEmpty(user.name)) {
-    errors.name = 'Name field is required';
-  }
-
-  if (isEmpty(user.email)) {
-    errors.email = 'Email field is required';
-  }
-
-  if (isEmpty(user.password)) {
-    errors.password = 'Password field is required';
-  }
-
-  if (isEmpty(user.username)) {
-    errors.username = 'Username field is required';
-  }
-
-  return {
-    errors,
-    isValid: isEmpty(errors),
-  };
+  const propertiesToCheck = [
+    ['email', [addErrorIfEmpty, addErrorIfNotString, addErrorIfNotEmail]],
+    ['password', [addErrorIfEmpty, addErrorIfNotString]],
+    ['name', [addErrorIfEmpty, addErrorIfNotString]],
+    ['username', [addErrorIfEmpty, addErrorIfNotString]],
+  ];
+  const isValidAndErrors = getErrorsForProperties(propertiesToCheck, user);
+  return isValidAndErrors;
 }
 
 export default validateRegisterInput;
