@@ -1,12 +1,19 @@
 import isEmpty from './isEmpty';
-import addErrorIfEmpty from './addErrorIfEmpty';
 
-const getErrorsForProperties = (properties, object) => {
-  const errors = properties.reduce((currentErrors, property) => addErrorIfEmpty(
-    currentErrors,
-    object,
-    property,
-  ), {});
+const addErrorForProperty = (key, object, addErrorFn, errors) => addErrorFn(errors, object, key);
+
+const getErrorsForProperties = (propertiesWithValidations, object) => {
+  const errors = propertiesWithValidations.reduce((currentErrors, propertyWithValidations) => {
+    const errorFunctions = propertyWithValidations[1];
+    const property = propertyWithValidations[0];
+    errorFunctions.every((errorFn) => addErrorForProperty(
+      property,
+      object,
+      errorFn,
+      currentErrors,
+    ) && isEmpty(currentErrors[property]));
+    return currentErrors;
+  }, {});
   return {
     errors,
     isValid: isEmpty(errors),
