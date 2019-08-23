@@ -21,6 +21,7 @@ const app = (
     }));
 
     server.use(authInstance.initialize());
+    server.use(setupCORS);
     authInstance.start();
 
     routes.init(server);
@@ -45,6 +46,14 @@ const app = (
       logger.error('Error in closing application. Forcing shutdown.');
       process.exit(1);
     }, 10000);
+  };
+
+  const setupCORS = (req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', '*');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    res.setHeader('access-control-expose-headers', '*');
+    next();
   };
   return {
     create,

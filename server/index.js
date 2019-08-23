@@ -22,3 +22,4 @@ database.connectDB(databaseUri);
 database.connectionError(shutdownApplication);
 process.on('SIGTERM', shutdownApplication);
 process.on('SIGINT', shutdownApplication);
+process.on('SIGQUIT', shutdownApplication);

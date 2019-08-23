@@ -9,7 +9,7 @@ const Modal = ({ show, modalClosed, history, children }) => {
       <Backdrop
         show={show}
         clicked={() => {
-          modalClosed();
+          modalClosed && modalClosed();
           history && history.goBack();
         }}
       />

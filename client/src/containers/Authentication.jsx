@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { Menu } from 'semantic-ui-react';
+import { connect } from 'react-redux';
 import SigninForm from './SigninForm';
 import SignupForm from './SignupForm';
+import Modal from '../components/UI/Modal/Modal';
+import * as actions from '../store/actions/index';
 
-const Authentication = () => {
+const Authentication = ({ showModal, toggleAuthModal }) => {
   const [activeItem, setActiveItem] = useState('signin');
 
   const menuStyle = {
@@ -15,28 +18,42 @@ const Authentication = () => {
   const renderForm = () => {
     if (activeItem === 'signin') {
       return <SigninForm />;
-    } else if (activeItem === 'signup') {
+    } if (activeItem === 'signup') {
       return <SignupForm />;
     }
   };
-
   return (
     <div>
-      <Menu pointing secondary style={menuStyle}>
-        <Menu.Item
-          name="Sign in"
-          active={activeItem === 'signin'}
-          onClick={() => setActiveItem('signin')}
-        />
-        <Menu.Item
-          name="Sign up"
-          active={activeItem === 'signup'}
-          onClick={() => setActiveItem('signup')}
-        />
-      </Menu>
-      {renderForm()}
+      <Modal
+        show={showModal}
+        modalClosed={toggleAuthModal}
+      >
+        <Menu pointing secondary style={menuStyle}>
+          <Menu.Item
+            name="Sign in"
+            active={activeItem === 'signin'}
+            onClick={() => setActiveItem('signin')}
+          />
+          <Menu.Item
+            name="Sign up"
+            active={activeItem === 'signup'}
+            onClick={() => setActiveItem('signup')}
+          />
+        </Menu>
+        {renderForm()}
+      </Modal>
     </div>
   );
 };
 
-export default Authentication;
+const mapStateToProps = (state) => ({
+  showModal: state.auth.showAuthModal,
+});
+const mapDispatchToProps = (dispatch) => ({
+  toggleAuthModal: () => {
+    dispatch(actions.toggleAuthModal());
+  },
+});
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Authentication);

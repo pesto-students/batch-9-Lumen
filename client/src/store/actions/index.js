@@ -1,4 +1,7 @@
 export {
-    registerUserAction,
-    loginUserAction
+  register,
+  login,
+  authAutoLogin,
+  logout,
+  toggleAuthModal,
 } from './authenticationActions';

@@ -7,9 +7,7 @@ const PasswordInput = ({ verify, passwordToMatch, ...props }) => {
     'Password should be of minimum 8 character long and contain atleast one uppercase, lowercase and special character';
   let label = 'Password';
   let id = 'password';
-  //TODO: uncomment below line after testing
-  // let pattern = '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,}$';
-  let pattern = '*';
+  let pattern = '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,}$';
 
   if (verify) {
     error = 'Verify password should match with above password';
