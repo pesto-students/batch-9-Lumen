@@ -4,6 +4,7 @@ import styles from './Home.module.css';
 import FloatingActionButton from '../components/FloatingActionButton/FloatingActionButton';
 import BlogCard from '../components/BlogCard/index';
 import topTen from '../topTen';
+import CommentsLayout from '../components/CommentsLayout';
 
 const biggerCards = topTen.slice(0, 2).map((props) => (
   <div className={styles['large-blog']}>
@@ -41,6 +42,7 @@ const Home = ({ isAuthenticated }) => (
       </div>
     </div>
     {isAuthenticated ? (<FloatingActionButton />) : null }
+    <CommentsLayout />
   </>
 );
 
