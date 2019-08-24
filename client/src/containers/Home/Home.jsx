@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './Home.module.css';
-import FloatingActionButton from '../components/FloatingActionButton/FloatingActionButton';
-import BlogCard from '../components/BlogCard/index';
-import topTen from '../topTen';
-import '../customStyles.css';
+import FloatingActionButton from '../../components/FloatingActionButton/FloatingActionButton';
+import BlogCard from '../../components/BlogCard/index';
+import topTen from '../../topTen';
+import '../../customStyles.css';
+import HomeExtended from './HomeExtended';
 
 const biggerCards = topTen.slice(0, 2).map((props) => (
   <div className={styles['large-blog']}>
@@ -25,8 +26,8 @@ const smallerCardsSecondColumn = topTen.slice(6).map((props) => (
 ));
 
 const Home = ({ isAuthenticated }) => (
-  <>
-    <h1> Top 10 trending blogs</h1>
+  <div className={styles.background}>
+    <h1 className={styles.title}> Top trending blogs</h1>
     <div className={styles.container}>
       <div className={[styles.column, styles['column-first']].join(' ')}>
         {biggerCards}
@@ -40,8 +41,10 @@ const Home = ({ isAuthenticated }) => (
         {smallerCardsSecondColumn}
       </div>
     </div>
+    <h1 className={styles.title}> Explore more</h1>
+    <HomeExtended />
     {isAuthenticated ? (<FloatingActionButton />) : null }
-  </>
+  </div>
 );
 
 Home.propTypes = {
