@@ -1,0 +1,92 @@
+.background{
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("https://images.pexels.com/photos/36717/amazing-animal-beautiful-beautifull.jpg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
+}
+.title{
+  color: white;
+  padding: 10px 0px 0px 20px;
+}
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 100%;
+  width: 100%;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  margin: 5px;
+}
+
+.column-first {
+  flex: 1;
+  display: flex;
+}
+
+.column-others {
+  flex: 1;
+  display: flex;
+}
+
+.small-blog {
+  flex: 1;
+  margin: 15px;
+}
+
+.medium-blog {
+  flex: 1;
+  margin: 15px;
+}
+
+.large-blog {
+  flex: 3;
+  margin: 15px;
+}
+
+.small-blog img {
+  max-height: 5vh;
+}
+
+.large-blog img {
+  max-height: 20vh;
+}
+
+@media (max-width: 800px) {
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    width: 100%;
+  }
+  
+  .column {
+    display: flex;
+    flex-direction: column;
+    height: 95vh;
+    margin: 5px;
+  }
+  
+  .column-first {
+    flex: 1;
+    display: flex;
+  }
+  
+  .column-others {
+    flex: 1;
+    display: flex;
+  }
+  
+  .small-blog {
+    flex: 1;
+    margin: 15px;
+  }
+  
+  
+  
+  .large-blog {
+    flex: 1;
+    margin: 15px;
+  }
+}

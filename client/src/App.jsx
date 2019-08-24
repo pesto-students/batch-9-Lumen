@@ -5,11 +5,13 @@ import PropTypes from 'prop-types';
 import './App.css';
 import 'semantic-ui-css/semantic.min.css';
 import Layout from './components/hoc/Layout/Layout';
-import Home from './containers/Home';
+import Home from './containers/Home/Home';
 import BlogBox from './components/blogBox';
 import Authentication from './containers/Authentication';
 import * as actions from './store/actions/index';
 import Loader from './components/UI/Loader';
+import Category from "./containers/Category";
+import CategoryType from "./containers/CategoryType";
 
 const App = ({ onTryAutoLogin, isAuthenticated, autoLoginLoading }) => {
   useEffect(() => {
@@ -19,6 +21,8 @@ const App = ({ onTryAutoLogin, isAuthenticated, autoLoginLoading }) => {
   let routes = (
     <Switch>
       <Route path="/" exact component={Home} />
+      <Route path="/category" exact component={Category} />
+      <Route path="/category/:type" component={CategoryType} />
       <Redirect to="/" />
     </Switch>
   );

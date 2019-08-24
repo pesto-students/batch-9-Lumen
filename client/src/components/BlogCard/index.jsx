@@ -28,7 +28,8 @@ const BlogCard = ({
       header={title}
       meta={userName}
       description={content}
-      extra={extra}
+      // extra={extra}
+      style={{ height: "100%", background: "linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3))"}}
     />
   );
 };

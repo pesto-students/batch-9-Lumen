@@ -11,6 +11,16 @@
   flex: 2;
 }
 
+.ui.card > .content .header {
+  color: white;
+}
+.ui.card > .content .meta {
+  color: white;
+}
+.ui.card > .content .description {
+  color: white;
+}
+
 .ui.card > .extra.content {
   position: relative;
   display: flex;
