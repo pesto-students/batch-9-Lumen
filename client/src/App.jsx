@@ -6,7 +6,8 @@ import './App.css';
 import 'semantic-ui-css/semantic.min.css';
 import Layout from './components/hoc/Layout/Layout';
 import Home from './containers/Home/Home';
-import BlogBox from './components/blogBox';
+import EditBlog from './components/blogBox';
+import PreviewBlog from './components/blogBox/preview';
 import createBlog from './components/createBlogs';
 import Authentication from './containers/Authentication/Authentication';
 import * as actions from './store/actions/index';
@@ -25,7 +26,7 @@ const App = ({
   useEffect(() => {
     onTryAutoLogin();
     getCategories();
-  }, [autoLoginLoading]);
+  }, [autoLoginLoading, onTryAutoLogin, getCategories]);
 
   let routes = (
     <Switch>
@@ -42,7 +43,8 @@ const App = ({
     routes = (
       <Switch>
         <Route path="/write" exact component={createBlog} />
-        <Route path="/edit/:blogId" exact component={BlogBox} />
+        <Route path="/edit/:blogId" exact component={EditBlog} />
+        <Route path="/preview/:blogId" exact component={PreviewBlog} />
         <Route
           path="/"
           exact
@@ -89,5 +91,5 @@ App.propTypes = {
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(App);

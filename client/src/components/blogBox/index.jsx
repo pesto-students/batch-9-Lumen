@@ -2,43 +2,87 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Form from '../common/Form';
-import BlogMarkdownInput, { 
+import BlogMarkdownInput, {
   BlogsTitleInput,
-   BlogsCoverImage,
-    BlogsPreviewButton,
-    BlogsCategorySelect,
-    BlogsToggle,
-  } from '../Form/BlogsInputs';
-import useInput from '../../hooks/useInput';
-import useToggle from '../../hooks/useToggle';
+  BlogsCoverImage,
+  BlogsPreviewButton,
+  BlogsCategorySelect,
+  BlogsToggle
+} from '../Form/BlogsInputs';
+import useGetBlog from '../../hooks/useBlog';
 
-
-const BlogBox = (props) => {
-  const { content = '', title = '', imageUrl = '', isPrivate = true, published = false, category = 'ss'  } = props;
-  const { value:markdownData, bind:bindMarkdownData } = useInput(content);
-  const {value:blogTitle , bind:bindBlogTitle} = useInput(title);
-  const {value:blogImage , bind:bindBlogImage} = useInput(imageUrl);
-  const {open:isPublished, onToggle:togglePublished} = useToggle(published);
-  const {open:isPrivateBlog, onToggle:togglePrivate} = useToggle(isPrivate);
+const BlogBox = ({
+  match: {
+    params: { blogId }
+  },
+  history
+}) => {
+  const [blog, updateBlog, updating] = useGetBlog(blogId);
+  const {
+    content = '',
+    title = '',
+    imageUrl = '',
+    isPrivate = true,
+    published = false,
+    category = null
+  } = blog;
+  const onChangeBlog = (property, data) =>
+    updateBlog({ ...blog, [property]: data });
 
   const redirectToPreview = () => {
-    console.log('Request sent to show the preview component.')
-  }
-  const changeSelectedCategory = (data) => {
-    console.log(' The user selected the following category id', data);
-  }
+    const redirectPreviewUrl = `/preview/${blogId}`;
+    history.push(redirectPreviewUrl);
+  };
+  const handleKeyDown = event => {
+    const isPreviewEvent = event.key === 'p' && event.altKey;
+    if (isPreviewEvent) {
+      redirectToPreview();
+    }
+  };
+
   return (
     <div>
-      <h1>
-         Edit your blog
-      </h1>
-      <Form>
-        <BlogsCoverImage {...bindBlogImage} />
-        <BlogsCategorySelect selected={category} onSelected={changeSelectedCategory} />
-        <BlogsTitleInput {...bindBlogTitle} />
-        <BlogMarkdownInput  {...bindMarkdownData}/>
-        <BlogsToggle value={isPublished} onToggle={togglePublished} name="Public" />
-        <BlogsToggle value={isPrivateBlog} onToggle={togglePrivate} name="Private" />
+      {updating && <p>Saving Changes...</p>}
+      <h1>Edit your blog</h1>
+      <Form onKeyDown={handleKeyDown}>
+        <BlogsCoverImage
+          onChange={value => {
+            onChangeBlog('imageUrl', value);
+          }}
+          value={imageUrl}
+        />
+        <BlogsCategorySelect
+          selected={category}
+          onSelected={data => {
+            onChangeBlog('category', data);
+          }}
+        />
+        <BlogsTitleInput
+          onChange={value => {
+            onChangeBlog('title', value);
+          }}
+          value={title}
+        />
+        <BlogMarkdownInput
+          onChange={value => {
+            onChangeBlog('content', value);
+          }}
+          value={content}
+        />
+        <BlogsToggle
+          value={published}
+          onToggle={() => {
+            onChangeBlog('published', !published);
+          }}
+          name="Published"
+        />
+        <BlogsToggle
+          value={isPrivate}
+          onToggle={() => {
+            onChangeBlog('isPrivate', !isPrivate);
+          }}
+          name="Private"
+        />
         <BlogsPreviewButton redirectToView={redirectToPreview} />
       </Form>
     </div>
@@ -46,19 +90,20 @@ const BlogBox = (props) => {
 };
 
 BlogBox.defaultProps = {
-  content: '',
-  imageUrl: '',
-  title: '',
-  isPrivate: false,
-  published: false,
-  category: null,
-}
+  match: {
+    params: {
+      blogId: null
+    }
+  }
+};
 BlogBox.propTypes = {
-  content: PropTypes.string,
-  imageUrl: PropTypes.string,
-  title: PropTypes.string,
-  isPrivate: PropTypes.bool,
-  published: PropTypes.bool,
-  category: PropTypes.string,
-}
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      blogId: PropTypes.string
+    })
+  }),
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired
+  }).isRequired
+};
 export default BlogBox;

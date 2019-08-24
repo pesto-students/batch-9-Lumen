@@ -14,4 +14,12 @@ const categoryCount = async () => {
   const categoriesCount = CategoriesModel.count({});
   return categoriesCount;
 };
-export { getAllCategories, categoryCount };
+
+const getDefaultCategory = async () => {
+  const query = {
+    name:'Miscellaneous'
+  }
+  const category = CategoriesModel.findOne(query).lean();
+  return category;
+};
+export { getAllCategories, categoryCount, getDefaultCategory };

@@ -1,9 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import FormField from '../../common/FormField';
 import TextAreaAutoResize from '../../common/TextAreaAutoResize';
 import classes from './BlogsInputs.module.css';
 
-const BlogsMarkdownInput = (props) => {
+const BlogsMarkdownInput = ({onChange, ...rest}) => {
     return (
         <FormField
         control={ TextAreaAutoResize }
@@ -13,9 +15,14 @@ const BlogsMarkdownInput = (props) => {
         className={classes.textAreaBg}
         minRows={20}
         rows={10}
-        {...props}
+        onChange={(event) => {onChange(event.target.value)} }
+        {...rest}
         />
     )
 }
 
+BlogsMarkdownInput.propTypes = {
+    onChange: PropTypes.func.isRequired,
+  }
+  
 export default BlogsMarkdownInput;

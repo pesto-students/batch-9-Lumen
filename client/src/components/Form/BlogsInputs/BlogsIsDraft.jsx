@@ -13,6 +13,7 @@ const BlogIsDraft = ({
     <FormField
     >
         <ToggleButton
+            name={name}
             onToggle={onToggle}
             checked={value}
         />
@@ -20,6 +21,7 @@ const BlogIsDraft = ({
     </FormField>
     
 )
+
 BlogIsDraft.defaultProps = {
     value: false,
     name: 'Checkbox',

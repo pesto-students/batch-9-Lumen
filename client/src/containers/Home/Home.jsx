@@ -8,19 +8,19 @@ import '../../customStyles.css';
 import HomeExtended from './HomeExtended';
 
 const biggerCards = topTen.slice(0, 2).map((props) => (
-  <div className={styles['large-blog']}>
+  <div className={styles['large-blog']} key={props.index}>
     <BlogCard {...props} />
   </div>
 ));
 
 const smallerCardsFirstColumn = topTen.slice(2, 6).map((props) => (
-  <div className={styles['small-blog']}>
+  <div className={styles['small-blog']} key={props.index}>
     <BlogCard {...props} />
   </div>
 ));
 
 const smallerCardsSecondColumn = topTen.slice(6).map((props) => (
-  <div className={styles['small-blog']}>
+  <div className={styles['small-blog']} key={props.index}>
     <BlogCard {...props} />
   </div>
 ));
