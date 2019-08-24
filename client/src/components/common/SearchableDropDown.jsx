@@ -7,7 +7,6 @@ const SearchableDropDown = ({
     options,
     onSelect,
     icon,
-    name,
     loading,
     value,
 }) => (
@@ -19,7 +18,6 @@ const SearchableDropDown = ({
     icon={icon}
     options={options}
     search
-    text={name}
     onChange={onSelect}
     loading={loading}
     selection
@@ -37,7 +35,6 @@ SearchableDropDown.propTypes = {
     options: PropTypes.arrayOf(PropTypes.object).isRequired,
     onSelect: PropTypes.func.isRequired,
     icon: PropTypes.string,
-    name: PropTypes.string.isRequired,
     loading:PropTypes.bool,
     value: PropTypes.string,
 }

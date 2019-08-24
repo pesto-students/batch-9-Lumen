@@ -4,24 +4,26 @@ const createBlog = async (title, content, userId) => {
   const blog = {
     title,
     content,
-    userId,
+    userId
   };
 
   const newBlog = await Blogs.create(blog);
   return newBlog.toObject();
 };
 
-const getBlogById = async (blogID) => {
+const getBlogById = async blogID => {
   const blog = await Blogs.findById(blogID);
   return blog.toObject();
 };
 
 const updateBlog = async (blogId, newBlog) => {
-  const updatedBlog = await Blogs.findByIdAndUpdate(blogId, newBlog, { new: true });
+  const updatedBlog = await Blogs.findByIdAndUpdate(blogId, newBlog, {
+    new: true
+  });
   return updatedBlog.toObject();
 };
 
-const deleteBlogById = async (blogID) => {
+const deleteBlogById = async blogID => {
   const blog = await Blogs.findByIdAndDelete(blogID);
   return blog.toObject();
 };
@@ -31,8 +33,8 @@ const getBlogsForQuery = async (page = 1, categories, searchString) => {
   const pageOffset = parseInt(page, 10) - 1;
   const blogsToSkip = pageOffset * maxBlogsPerPage;
   const query = {
-    private: false,
-    published: true,
+    isPrivate: false,
+    published: true
   };
   const hasCategories = categories && categories.length > 0;
   if (hasCategories) {
@@ -56,5 +58,5 @@ export {
   getBlogById,
   updateBlog,
   deleteBlogById,
-  getBlogsForQuery,
+  getBlogsForQuery
 };

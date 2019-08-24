@@ -4,7 +4,7 @@ import {
   createBlog,
   getBlogById,
   updateBlog as updateBlogInDB,
-  deleteBlogById,
+  deleteBlogById
 } from '../services/blogs/service';
 import { isValid } from '../utils/helpers/mongoose';
 
@@ -64,7 +64,10 @@ const updateBlog = async (req, res, next) => {
   const newBlog = { ...req.blog };
   newBlog.title = req.body.title;
   newBlog.content = req.body.content;
-  newBlog.private = req.body.private;
+  newBlog.isPrivate = req.body.isPrivate;
+  newBlog.published = req.body.published;
+  newBlog.category = req.body.category;
+  newBlog.imageUrl = req.body.imageUrl;
   const blogID = req.params.id;
 
   try {
@@ -92,6 +95,20 @@ const deleteBlog = async (req, res, next) => {
     return res.status(500).json({ msg: 'Something went wrong', error: err });
   }
 };
+
+const forwardPublicBlog = async (req, res, next) => {
+  const isPublicBlog = !req.blog.isPrivate && req.blog.published;
+  if (isPublicBlog) {
+    return next();
+  }
+
+  const isUserBlog =
+    req.user && String(req.user._id) === String(req.blog.userId);
+  if (isUserBlog) {
+    return next();
+  }
+  return res.status(404).json({ msg: 'Not Found' });
+};
 export {
   authenticateUserBlog,
   createBlogRequestValidation,
@@ -99,4 +116,5 @@ export {
   getBlog,
   updateBlog,
   deleteBlog,
+  forwardPublicBlog
 };
