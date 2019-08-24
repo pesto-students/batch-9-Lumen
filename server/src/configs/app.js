@@ -5,22 +5,28 @@ import logger from '../utils/logger';
 import authInstance from './authentication';
 import env from './env';
 
-const app = (
+const setupCORS = (req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', '*');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.setHeader('access-control-expose-headers', '*');
+  next();
+};
 
-) => {
+const app = () => {
   const server = express();
   let application;
-  const create = (
-
-  ) => {
+  const create = () => {
     server.set('port', env.port);
 
     server.set('view engine', 'ejs');
 
     server.use(bodyParser.json());
-    server.use(bodyParser.urlencoded({
-      extended: false,
-    }));
+    server.use(
+      bodyParser.urlencoded({
+        extended: false
+      })
+    );
 
     server.use(authInstance.initialize());
     server.use(setupCORS);
@@ -50,17 +56,10 @@ const app = (
     }, 10000);
   };
 
-  const setupCORS = (req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', '*');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-    res.setHeader('access-control-expose-headers', '*');
-    next();
-  };
   return {
     create,
     start,
-    stop,
+    stop
   };
 };
 

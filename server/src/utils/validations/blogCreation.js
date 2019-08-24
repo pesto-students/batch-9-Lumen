@@ -1,9 +1,10 @@
 import getErrorsForProperties from './errorForProperties';
+import addErrorIfEmpty from './addErrorIfEmpty';
 
 function validateBlogInput(blog) {
   const propertiesToCheck = [
-    'title',
-    'content',
+    ['title', [addErrorIfEmpty]],
+    ['content', [addErrorIfEmpty]]
   ];
   const isValidAndErrors = getErrorsForProperties(propertiesToCheck, blog);
   return isValidAndErrors;

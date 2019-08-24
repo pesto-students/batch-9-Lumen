@@ -7,6 +7,7 @@ import 'semantic-ui-css/semantic.min.css';
 import Layout from './components/hoc/Layout/Layout';
 import Home from './containers/Home/Home';
 import BlogBox from './components/blogBox';
+import createBlog from './components/createBlogs';
 import Authentication from './containers/Authentication/Authentication';
 import * as actions from './store/actions/index';
 import Loader from './components/UI/Loader';
@@ -15,9 +16,15 @@ import CategoryType from './containers/CategoryType/CategoryType';
 import Recent from './containers/Recent/Recent';
 import Profile from './containers/Profile';
 
-const App = ({ onTryAutoLogin, isAuthenticated, autoLoginLoading }) => {
+const App = ({
+  onTryAutoLogin,
+  isAuthenticated,
+  autoLoginLoading,
+  getCategories
+}) => {
   useEffect(() => {
     onTryAutoLogin();
+    getCategories();
   }, [autoLoginLoading]);
 
   let routes = (
@@ -34,7 +41,8 @@ const App = ({ onTryAutoLogin, isAuthenticated, autoLoginLoading }) => {
   if (isAuthenticated) {
     routes = (
       <Switch>
-        <Route path="/write" exact component={BlogBox} />
+        <Route path="/write" exact component={createBlog} />
+        <Route path="/edit/:blogId" exact component={BlogBox} />
         <Route
           path="/"
           exact
@@ -68,13 +76,15 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onTryAutoLogin: () => dispatch(actions.authAutoLogin())
+  onTryAutoLogin: () => dispatch(actions.authAutoLogin()),
+  getCategories: () => dispatch(actions.getCategories())
 });
 
 App.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
   onTryAutoLogin: PropTypes.func.isRequired,
-  autoLoginLoading: PropTypes.bool.isRequired
+  autoLoginLoading: PropTypes.bool.isRequired,
+  getCategories: PropTypes.func.isRequired
 };
 
 export default connect(
