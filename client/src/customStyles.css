@@ -6,6 +6,11 @@
 .ui.card > .image {
   flex: 1;
 }
+.ui.card > .image img{
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+}
 
 .ui.card > .content {
   flex: 2;

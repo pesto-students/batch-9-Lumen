@@ -7,11 +7,17 @@ import * as actions from '../../../store/actions/index';
 
 const AuthNavigationItems = ({ isAuthenticated, openAuthenticationModal }) => (
   <ul className={classes.NavigationItems}>
+    <NavigationItem link="/category" exact>
+        Category
+    </NavigationItem>
+    <NavigationItem link="/recent" exact>
+        Recent
+    </NavigationItem>
     {!isAuthenticated ? (
       <NavigationItem clicked={openAuthenticationModal}>
         Signin
       </NavigationItem>
-    ) : (<ProfileDropdown />)}
+    ) : (<ProfileDropdown/>)}
   </ul>
 );
 

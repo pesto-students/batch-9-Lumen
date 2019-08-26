@@ -7,11 +7,12 @@ import 'semantic-ui-css/semantic.min.css';
 import Layout from './components/hoc/Layout/Layout';
 import Home from './containers/Home/Home';
 import BlogBox from './components/blogBox';
-import Authentication from './containers/Authentication';
+import Authentication from './containers/Authentication/Authentication';
 import * as actions from './store/actions/index';
 import Loader from './components/UI/Loader';
-import Category from "./containers/Category";
-import CategoryType from "./containers/CategoryType";
+import Category from "./containers/Category/Category";
+import CategoryType from "./containers/CategoryType/CategoryType";
+import  Recent from './containers/Recent/Recent'
 
 const App = ({ onTryAutoLogin, isAuthenticated, autoLoginLoading }) => {
   useEffect(() => {
@@ -23,6 +24,7 @@ const App = ({ onTryAutoLogin, isAuthenticated, autoLoginLoading }) => {
       <Route path="/" exact component={Home} />
       <Route path="/category" exact component={Category} />
       <Route path="/category/:type" component={CategoryType} />
+      <Route path="/recent" exact component={Recent} />
       <Redirect to="/" />
     </Switch>
   );
@@ -32,6 +34,9 @@ const App = ({ onTryAutoLogin, isAuthenticated, autoLoginLoading }) => {
       <Switch>
         <Route path="/write" exact component={BlogBox} />
         <Route path="/" exact render={() => <Home isAuthenticated={isAuthenticated} />} />
+        <Route path="/category" exact component={Category} />
+        <Route path="/category/:type" component={CategoryType} />
+        <Route path="/recent" exact component={Recent} />
         <Redirect to="/" />
       </Switch>
     );
