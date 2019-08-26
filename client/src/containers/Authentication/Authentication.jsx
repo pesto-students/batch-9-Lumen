@@ -3,8 +3,8 @@ import { Menu } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import SigninForm from './SigninForm';
 import SignupForm from './SignupForm';
-import Modal from '../components/UI/Modal/Modal';
-import * as actions from '../store/actions/index';
+import Modal from '../../components/UI/Modal/Modal';
+import * as actions from '../../store/actions/index';
 
 const Authentication = ({ showModal, toggleAuthModal }) => {
   const [activeItem, setActiveItem] = useState('signin');

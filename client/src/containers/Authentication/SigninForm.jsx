@@ -3,10 +3,10 @@ import {
   Form, Grid, Header, Segment,
 } from 'semantic-ui-react';
 import { connect } from 'react-redux';
-import EmailInput from '../components/Form/EmailInput/index';
-import PasswordInput from '../components/Form/PasswordInput';
-import SubmitButton from '../components/Form/SubmitButton/Index';
-import * as actions from '../store/actions/index';
+import EmailInput from '../../components/Form/EmailInput/index';
+import PasswordInput from '../../components/Form/PasswordInput';
+import SubmitButton from '../../components/Form/SubmitButton/Index';
+import * as actions from '../../store/actions/index';
 
 const SigninForm = ({onLogin, error, loading}) => {
   const [email, setEmail] = useState('');

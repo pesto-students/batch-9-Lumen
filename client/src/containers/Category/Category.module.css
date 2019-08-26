@@ -1,0 +1,9 @@
+.background{
+    /* background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("https://images.pexels.com/photos/87739/pexels-photo-87739.jpeg?cs=srgb&dl=clouds-cloudscape-nature-87739.jpg"); */
+    background: black;
+  }
+
+.title{
+    color: white;
+    padding: 10px 0px 0px 20px;
+}

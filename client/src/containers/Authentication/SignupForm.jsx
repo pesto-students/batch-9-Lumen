@@ -4,11 +4,11 @@ import {
 } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 
-import SubmitButton from '../components/Form/SubmitButton/Index';
-import TextInput from '../components/Form/TextInput';
-import EmailInput from '../components/Form/EmailInput/index';
-import PasswordInput from '../components/Form/PasswordInput';
-import * as actions from '../store/actions/index';
+import SubmitButton from '../../components/Form/SubmitButton/Index';
+import TextInput from '../../components/Form/TextInput';
+import EmailInput from '../../components/Form/EmailInput/index';
+import PasswordInput from '../../components/Form/PasswordInput';
+import * as actions from '../../store/actions/index';
 
 const SignupForm = ({ onRegister, error, loading }) => {
   const [email, setEmail] = useState('');
