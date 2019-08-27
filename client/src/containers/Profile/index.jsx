@@ -2,6 +2,7 @@ import React from 'react';
 import { Image, Divider } from 'semantic-ui-react';
 import styles from './Profile.module.css';
 import ProfileBlogs from './ProfileBlogs';
+import EditProfile from './EditProfile';
 
 const Profile = () => {
   return (
@@ -25,6 +26,8 @@ const Profile = () => {
               debitis. Animi, qui dignissimos!{' '}
             </h3>
           </div>
+          {/* TODO: Conditional render */}
+          <EditProfile />
         </div>
         <Divider horizontal inverted>
           ***
