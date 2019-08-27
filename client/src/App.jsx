@@ -10,9 +10,10 @@ import BlogBox from './components/blogBox';
 import Authentication from './containers/Authentication/Authentication';
 import * as actions from './store/actions/index';
 import Loader from './components/UI/Loader';
-import Category from "./containers/Category/Category";
-import CategoryType from "./containers/CategoryType/CategoryType";
-import  Recent from './containers/Recent/Recent'
+import Category from './containers/Category/Category';
+import CategoryType from './containers/CategoryType/CategoryType';
+import Recent from './containers/Recent/Recent';
+import Profile from './containers/Profile';
 
 const App = ({ onTryAutoLogin, isAuthenticated, autoLoginLoading }) => {
   useEffect(() => {
@@ -25,6 +26,7 @@ const App = ({ onTryAutoLogin, isAuthenticated, autoLoginLoading }) => {
       <Route path="/category" exact component={Category} />
       <Route path="/category/:type" component={CategoryType} />
       <Route path="/recent" exact component={Recent} />
+      <Route path="/profile" component={Profile} />
       <Redirect to="/" />
     </Switch>
   );
@@ -33,7 +35,11 @@ const App = ({ onTryAutoLogin, isAuthenticated, autoLoginLoading }) => {
     routes = (
       <Switch>
         <Route path="/write" exact component={BlogBox} />
-        <Route path="/" exact render={() => <Home isAuthenticated={isAuthenticated} />} />
+        <Route
+          path="/"
+          exact
+          render={() => <Home isAuthenticated={isAuthenticated} />}
+        />
         <Route path="/category" exact component={Category} />
         <Route path="/category/:type" component={CategoryType} />
         <Route path="/recent" exact component={Recent} />
@@ -44,31 +50,34 @@ const App = ({ onTryAutoLogin, isAuthenticated, autoLoginLoading }) => {
 
   return (
     <>
-      { autoLoginLoading ? (<Loader size="huge" text="Almost there!" />)
-        : (
-          <Layout>
-            {!isAuthenticated ? (<Authentication />) : null }
-            {routes}
-          </Layout>
-        )}
-
+      {autoLoginLoading ? (
+        <Loader size="huge" text="Almost there!" />
+      ) : (
+        <Layout>
+          {!isAuthenticated ? <Authentication /> : null}
+          {routes}
+        </Layout>
+      )}
     </>
   );
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   isAuthenticated: state.auth.token !== null,
-  autoLoginLoading: state.auth.autoLoginLoading,
+  autoLoginLoading: state.auth.autoLoginLoading
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  onTryAutoLogin: () => dispatch(actions.authAutoLogin()),
+const mapDispatchToProps = dispatch => ({
+  onTryAutoLogin: () => dispatch(actions.authAutoLogin())
 });
 
 App.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
   onTryAutoLogin: PropTypes.func.isRequired,
-  autoLoginLoading: PropTypes.bool.isRequired,
+  autoLoginLoading: PropTypes.bool.isRequired
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);
