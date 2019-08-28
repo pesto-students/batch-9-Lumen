@@ -1,10 +1,12 @@
 import {
   signUp as validateSignup,
   signIn as validateSignIn,
-  isEmpty
+  isEmpty,
+  validateUpdateUser
 } from '../utils/validations';
 import { decodeToken } from '../utils/tokenization';
 import logger from '../utils/logger';
+import { getProfileByUsername } from '../services/user/service';
 
 const signUpFieldsValid = async (req, res, next) => {
   const user = req.body;
@@ -43,5 +45,29 @@ const attachUserIfExists = async (req, res, next) => {
   }
   next();
 };
+const updateProfileFieldsValid = async (req, res, next) => {
+  const user = req.body;
+  const userFieldsValidity = validateUpdateUser(user);
+  if (!userFieldsValidity.isValid) {
+    res.status(400);
+    return res.json(userFieldsValidity.errors);
+  }
+  return next();
+};
 
-export { signUpFieldsValid, signInFieldsValid, attachUserIfExists };
+const checkAndAttachUserForUsername = async (req, res, next) => {
+  const getId = true;
+  const user = await getProfileByUsername(req.params.username, getId);
+  if (isEmpty(user)) {
+    return res.status(404).json({ msg: 'User not found' });
+  }
+  req.referenceUser = user;
+  return next();
+};
+export {
+  signUpFieldsValid,
+  signInFieldsValid,
+  attachUserIfExists,
+  updateProfileFieldsValid,
+  checkAndAttachUserForUsername
+};
