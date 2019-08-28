@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import Blogs from '../../models/blogs';
 
 const createBlog = async (title, content, userId) => {
@@ -53,10 +54,39 @@ const getBlogsForQuery = async (page = 1, categories, searchString) => {
   return blogs;
 };
 
+const getUserBlogs = async userId => {
+  const query = {
+    userId
+  };
+  const blogs = await Blogs.find(query).lean();
+  const published = [];
+  const drafts = [];
+  blogs.forEach(blog => {
+    if (blog.published) {
+      published.push(blog);
+    } else {
+      drafts.push(blog);
+    }
+  });
+  return { published, drafts };
+};
+
+const getUsersPublicBlog = async userId => {
+  const query = {
+    userId,
+    published: true,
+    isPrivate: false
+  };
+  const blogs = await Blogs.find(query).lean();
+  return blogs;
+};
+
 export {
   createBlog,
   getBlogById,
   updateBlog,
   deleteBlogById,
-  getBlogsForQuery
+  getBlogsForQuery,
+  getUserBlogs,
+  getUsersPublicBlog
 };

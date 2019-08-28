@@ -1,4 +1,9 @@
-import { getBlogsForQuery } from './service';
+/* eslint-disable no-underscore-dangle */
+import {
+  getBlogsForQuery,
+  getUserBlogs as getUserBlogsService,
+  getUsersPublicBlog
+} from './service';
 
 const health = (req, res) => {
   res.json({ status: 'Ok' });
@@ -17,9 +22,20 @@ const getBlogs = async (req, res) => {
   res.json({ msg: 'Working', blogs });
 };
 
+const getUserBlogs = async (req, res) => {
+  const blogs = await getUserBlogsService(req.user._id);
+  res.json({ msg: 'Working', blogs });
+};
+
+const getPublicBlogsOfUser = async (req, res) => {
+  const blogs = await getUsersPublicBlog(req.referenceUser._id);
+  res.json({ msg: 'Working', blogs });
+};
 const apis = {
   health,
   sendResponse,
   getBlogs,
+  getUserBlogs,
+  getPublicBlogsOfUser
 };
 export default apis;

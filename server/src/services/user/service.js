@@ -3,9 +3,7 @@ import { compareHashData, hashData } from '../../utils/hashing';
 
 const userExists = async (email, username) => {
   const query = {
-    $or: [
-      { email },
-    ],
+    $or: [{ email }]
   };
   if (username) {
     query.$or.push({ username });
@@ -18,16 +16,16 @@ const userExists = async (email, username) => {
   return true;
 };
 
-const createUser = async (userProperties) => {
+const createUser = async userProperties => {
   const hashedPassword = await hashData(userProperties.password);
   Object.assign(userProperties, { password: hashedPassword });
   const newUserInstance = await User.create(userProperties);
   return newUserInstance.toObject();
 };
 
-const usernameExists = async (username) => {
+const usernameExists = async username => {
   const query = {
-    username,
+    username
   };
   const userCountForGivenUsername = await User.countDocuments(query);
 
@@ -39,7 +37,7 @@ const usernameExists = async (username) => {
 
 const verifyPassword = async (email, password) => {
   const query = {
-    email,
+    email
   };
   const projection = 'password';
   const user = await User.findOne(query, projection);
@@ -49,7 +47,7 @@ const verifyPassword = async (email, password) => {
 
 const getUserProperties = async (email, id) => {
   const query = {
-    email,
+    email
   };
   if (id) {
     // eslint-disable-next-line no-underscore-dangle
@@ -60,10 +58,39 @@ const getUserProperties = async (email, id) => {
   return user.toObject();
 };
 
+const updateProfile = async (userId, update) => {
+  await User.findByIdAndUpdate(userId, update);
+};
+
+const getProfile = async userId => {
+  const user = await User.findById(userId);
+  return user;
+};
+
+const getProfileByUsername = async (username, getId) => {
+  const query = {
+    username
+  };
+  const user = await User.findOne(query)
+    .select({
+      _id: getId ? 1 : 0,
+      username: 1,
+      name: 1,
+      description: 1,
+      profileImage: 1,
+      email: 1
+    })
+    .lean();
+  return user;
+};
+
 export {
   userExists,
   createUser,
   usernameExists,
   verifyPassword,
   getUserProperties,
+  updateProfile,
+  getProfile,
+  getProfileByUsername
 };

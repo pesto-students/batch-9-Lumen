@@ -9,7 +9,10 @@ import {
   deleteBlog,
   forwardPublicBlog
 } from '../../middlewares/blogs';
-import { attachUserIfExists } from '../../middlewares/user';
+import {
+  attachUserIfExists,
+  checkAndAttachUserForUsername
+} from '../../middlewares/user';
 import blogsAPI from '../../services/blogs/api';
 
 const router = Router();
@@ -50,6 +53,14 @@ router.delete(
   authenticateUserBlog,
   deleteBlog,
   blogsAPI.sendResponse
+);
+
+router.get('/', authInstance.isValidUser(), blogsAPI.getUserBlogs);
+
+router.get(
+  '/public/:username',
+  checkAndAttachUserForUsername,
+  blogsAPI.getPublicBlogsOfUser
 );
 
 export default router;
