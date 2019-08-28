@@ -9,7 +9,7 @@ import createBlog from '../../apis/blogs';
 const CreateBlog = ({ history }) => {
   const [blogCreated, updateBlogCreated] = useState(null);
   const [createError, updateCreateError] = useState(null);
-  if (!isEmpty(createError)) {
+  if (createError) {
     return (
       <div>
         <Loader
