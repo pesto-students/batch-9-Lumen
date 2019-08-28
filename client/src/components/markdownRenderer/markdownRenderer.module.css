@@ -1,0 +1,145 @@
+.md{
+    padding: 20px 20vw 40px 20vw;
+    color: #B3FFFFFF;
+    font-family: 'Livvic', sans-serif;
+    font-size: 22px;
+}
+
+.md h1{
+    font-size: 36px;
+    color: #fff;
+}
+.md h2{
+    font-size: 32px;
+    color: #fff;
+}
+.md h3{
+    font-size: 30px;
+    color: #fff;
+}
+.md h4{
+    font-size: 28px;
+    color: #fff;
+}
+.md h5{
+    font-size: 26px;
+    color: #fff;
+}
+
+.md p{
+    font-size: 22px;
+}
+
+.md li{
+    font-size: 20px;
+    line-height: 24px;
+    color: #DEE4E7
+}
+
+.md a{
+    color: orange;
+}
+
+.md pre {
+    font-family: "Times New Roman", Times, serif;
+    background: #f4f4f4;
+    border: 1px solid #ddd;
+    border-left: 3px solid orange;
+    color: #666;
+    page-break-inside: avoid;
+    font-family: monospace;
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 1.6em;
+    max-width: 100%;
+    overflow: auto;
+    padding: 1em 1.5em;
+    display: block;
+    word-wrap: break-word;
+}
+
+.md table {
+  border: 1px solid #fff;
+  width: 100%;
+  text-align: left;
+  border-collapse: collapse;
+}
+.md table td, table th {
+  border: 1px solid #fff;
+  padding: 5px 4px;
+}
+
+.md table tbody td {
+  font-size: 20px;
+}
+.md table thead {
+  background: #333;
+  border-bottom: 3px solid #fff;
+}
+.md table thead th {
+  font-weight: bold;
+  color: #f3f3f3;
+  text-align: left;
+}
+.md table tfoot {
+  font-weight: bold;
+  color: #B3FFFFFF;
+  border-top: 2px solid #fff;
+}
+.md table tfoot td {
+  font-size: 20px;
+}
+
+.md video,
+.md img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    border: 1px solid #fff;
+}
+
+.md iframe{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+    border: 1px solid #fff;
+    height: 400px;
+}
+
+@media(max-width: 700px){
+    .md{
+        padding: 20px 5vw 40px 5vw;
+        font-size: 20px;
+    }
+    
+    .md h1{
+        font-size: 30px;
+    }
+    .md h2{
+        font-size: 28px;
+    }
+    .md h3{
+        font-size: 26px;
+    }
+    .md h4{
+        font-size: 24px;
+    }
+    .md h5{
+        font-size: 22px;
+    }
+
+    .md p{
+        font-size: 20px;
+    }
+    
+    .md video,
+    .md img{
+        width: 90%;
+    }
+    
+    .md iframe{
+        width: 90%;
+    }
+}

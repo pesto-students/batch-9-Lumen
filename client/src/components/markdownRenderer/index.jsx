@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import ReactMarkdown from 'react-markdown';
 import plugins from './plugins';
 import renderers from './renderers';
+import styles from './markdownRenderer.module.css';
 
 class Markdown extends PureComponent {
   state = { markdownCollapsed: false };
@@ -36,6 +37,7 @@ class Markdown extends PureComponent {
         source={data}
         renderers={renderers}
         plugins={plugins}
+        className={styles.md}
       />
       {this.props.children}
       </div>
