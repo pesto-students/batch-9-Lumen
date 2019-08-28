@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 
 import useGetBlog from '../../hooks/useBlog';
 import Loader from '../UI/Loader';
-import MarkdownRenderer from '../markdownRenderer';
+import ViewBlog from '../ViewBlog/ViewBlog';
+import isEmpty from '../../utils/validations/isEmpty';
 
 const PreviewBlog = ({match: { params: { blogId }}, history}) => {
     const [blog] = useGetBlog(blogId);
-    const { content = '', title = '', imageUrl = ''} = blog;
-    if(!blog) {
+    if(isEmpty(blog)) {
         return (
             <div>
                 <Loader
@@ -31,11 +31,8 @@ const PreviewBlog = ({match: { params: { blogId }}, history}) => {
       }
 
     return (
-        <div onKeyDown={handleKeyDown} tabIndex="0" role="presentation">
-            <h1>{title}</h1>
-            <img src={imageUrl} alt={title}/>
-            <MarkdownRenderer data={content} />
-
+        <div onKeyDown={handleKeyDown} tabIndex="0" role="presentation" style={{background: "#121212"}}>
+            <ViewBlog title={blog.title} content={blog.content} imageUrl={blog.imageUrl} description={blog.description} />
         </div>
     )
 }

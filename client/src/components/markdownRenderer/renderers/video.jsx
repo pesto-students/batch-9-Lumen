@@ -5,7 +5,7 @@ const Video = (props) => {
   const { data: { hProperties } } = props;
   return (
     <div>
-      <video>
+      <video controls>
         <source src={hProperties.src} />
       </video>
     </div>

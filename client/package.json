@@ -16,6 +16,7 @@
     "react-scripts": "3.1.0",
     "react-test-renderer": "^16.9.0",
     "react-textarea-autosize": "^7.1.0",
+    "react-ui-avatars": "^3.0.2",
     "redux": "^4.0.4",
     "redux-thunk": "^2.3.0",
     "remark-iframes-extended": "^0.0.6",
