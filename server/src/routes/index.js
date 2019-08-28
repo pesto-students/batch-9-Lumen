@@ -1,5 +1,6 @@
 
 import restRoutes from './rest';
+import shareViews from '../controller/views/share';
 
 const init = (server) => {
   server.get('*', (req, res, next) => {
@@ -8,6 +9,8 @@ const init = (server) => {
   });
 
   server.use('/api', restRoutes);
+  server.use('/share', shareViews);
+
 };
 const routes = {
   init,
