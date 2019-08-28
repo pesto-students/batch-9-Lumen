@@ -15,6 +15,8 @@ const app = (
   ) => {
     server.set('port', env.port);
 
+    server.set('view engine', 'ejs');
+
     server.use(bodyParser.json());
     server.use(bodyParser.urlencoded({
       extended: false,
