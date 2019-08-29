@@ -34,7 +34,7 @@ const App = ({
       <Route path="/category" exact component={Category} />
       <Route path="/category/:type" component={CategoryType} />
       <Route path="/recent" exact component={Recent} />
-      <Route path="/profile" component={Profile} />
+      <Route path="/profile/:publicUser" exact component={Profile} />
       <Redirect to="/" />
     </Switch>
   );
@@ -53,6 +53,8 @@ const App = ({
         <Route path="/category" exact component={Category} />
         <Route path="/category/:type" component={CategoryType} />
         <Route path="/recent" exact component={Recent} />
+        <Route path="/profile" exact component={Profile} />
+        <Route path="/profile/:publicUser" exact component={Profile} />
         <Redirect to="/" />
       </Switch>
     );

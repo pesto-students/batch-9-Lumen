@@ -5,9 +5,9 @@ const createBlog = async newBlog => {
     const newBlogData = await axios.post('/', newBlog);
     return newBlogData.data.blog;
   } catch (e) {
-    if (!e.response) return e;
+    if (!e.response) throw e;
 
-    return e.response.data;
+    throw e.response.data;
   }
 };
 
@@ -16,24 +16,48 @@ const getBlog = async blogId => {
     const newBlogData = await axios.get(`/${blogId}`);
     return newBlogData.data.blog;
   } catch (e) {
-    if (!e.response) return e;
+    if (!e.response) throw e;
 
-    return e.response.data;
+    throw e.response.data;
   }
 };
 
 const updateBlog = async (blogData, blogId) => {
   try {
-    const newBlogData = await axios.put(`/${blogId}`, blogData);
-    return newBlogData.data.blog;
+    const blogsData = await axios.put(`/${blogId}`, blogData);
+    return blogsData.data.blog;
   } catch (e) {
-    if (!e.response) return e;
+    if (!e.response) throw e;
 
-    return e.response.data;
+    throw e.response.data;
   }
 };
+
+const getBlogsFromUsername = async (username) => {
+  try {
+    const newBlogData = await axios.get(`/public/${username}`);
+    return newBlogData.data.blogs;
+  } catch (e) {
+    if (!e.response) throw e;
+
+    throw e.response.data;
+  }
+}
+
+const getUserBlogs = async () => {
+  try {
+    const userBlogs = await axios.get(`/`);
+    return userBlogs.data.blogs;
+  } catch (e) {
+    if (!e.response) throw e;
+
+    throw e.response.data;
+  }
+}
 export {
   getBlog,
   updateBlog,
+  getBlogsFromUsername,
+  getUserBlogs,
 }
 export default createBlog;

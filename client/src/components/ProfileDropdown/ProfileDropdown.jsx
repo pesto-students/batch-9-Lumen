@@ -1,22 +1,27 @@
 import React from 'react';
 import { Dropdown } from 'semantic-ui-react';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../../store/actions/index';
 import styles from './ProfileDropdown.module.css';
+import useProfile from '../../hooks/useProfile';
 
-const ProfileDropdown = ({ onLogout }) => (
-  <div className={styles.container}>
-  <Dropdown text="Profile" item floating>
-    <Dropdown.Menu direction={"left"}>
-      <Dropdown.Item text="Profile" />
-      <Dropdown.Item text="Sign out" onClick={onLogout} />
-    </Dropdown.Menu>
-  </Dropdown>
-  </div>
-);
+const ProfileDropdown = ({ onLogout, history }) => {
+  const [profile] = useProfile()
+  return (<div className={styles.container}>
+    <Dropdown text={profile.name} item floating>
+      <Dropdown.Menu direction="left">
+        <Dropdown.Item text="Profile" onClick={() => { history.push('/profile')}} />
+        <Dropdown.Item text="Sign out" onClick={onLogout} />
+      </Dropdown.Menu>
+    </Dropdown>
+    </div>
+  );
+}
+ 
 
 const mapDispatchToProps = (dispatch) => ({
   onLogout: () => dispatch(actions.logout()),
 });
 
-export default connect(null, mapDispatchToProps)(ProfileDropdown);
+export default withRouter(connect(null, mapDispatchToProps)(ProfileDropdown));

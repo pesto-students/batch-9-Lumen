@@ -29,6 +29,7 @@ function useBlog(blogId) {
       window.removeEventListener('beforeunload', preventUnloadBeforeSaving);
     };
   }, [updating, preventUnloadBeforeSaving]);
+
   useEffect(() => {
     function handleBlogResponse(blogData) {
       updateBlog(blogData);
