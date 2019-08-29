@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import classes from './NavigationItems.module.css';
 import NavigationItem from './NavigationItem/NavigationItem';
-import ProfileDropdown from '../../ProfileDropdown';
+import ProfileDropdown from '../../ProfileDropdown/ProfileDropdown';
 import * as actions from '../../../store/actions/index';
 
 const AuthNavigationItems = ({ isAuthenticated, openAuthenticationModal }) => (
