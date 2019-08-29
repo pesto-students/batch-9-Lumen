@@ -43,12 +43,18 @@ const saveBlog = async (req, res, next) => {
 const getBlog = async (req, res, next) => {
   const blogID = req.params.id;
   const validObjectId = isValid(blogID);
-
   if (validObjectId) {
     try {
       const blog = await getBlogById(blogID);
       if (blog) {
+        const { privatePath, draftPath } = blog;
+        delete blog.privatePath;
+        delete blog.draftPath;
         req.blog = blog;
+        req.serverSecrets = {
+          privatePath,
+          draftPath
+        };
         return next();
       }
       return res.status(404).json({ msg: 'Blog not found.' });
@@ -109,6 +115,23 @@ const forwardPublicBlog = async (req, res, next) => {
   }
   return res.status(404).json({ msg: 'Not Found' });
 };
+
+const forwardPrivateBlog = async (req, res, next) => {
+  const validPrivatePath =
+    req.params.privateUrl === req.serverSecrets.privatePath;
+  if (validPrivatePath && req.blog.published) {
+    return next();
+  }
+  return res.status(404).json({ msg: 'Not Found' });
+};
+
+const forwardDraftBlog = async (req, res, next) => {
+  const validDraftPath = req.params.draftUrl === req.serverSecrets.draftPath;
+  if (validDraftPath) {
+    return next();
+  }
+  return res.status(404).json({ msg: 'Not Found' });
+};
 export {
   authenticateUserBlog,
   createBlogRequestValidation,
@@ -116,5 +139,7 @@ export {
   getBlog,
   updateBlog,
   deleteBlog,
-  forwardPublicBlog
+  forwardPublicBlog,
+  forwardPrivateBlog,
+  forwardDraftBlog
 };

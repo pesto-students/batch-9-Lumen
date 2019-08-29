@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 import mongoose from 'mongoose';
-
+import uniqueString from 'crypto-random-string';
 import { getDefaultCategory } from '../services/home/service';
 import isEmpty from '../utils/validations/isEmpty';
 
@@ -37,8 +37,20 @@ const BlogsSchema = new Schema(
       ref: 'Categories'
     },
     imageUrl: {
-      type: String,
+      type: String
     },
+    privatePath: {
+      type: Schema.Types.String,
+      default() {
+        return uniqueString({ length: 10, type: 'url-safe' });
+      }
+    },
+    draftPath: {
+      type: Schema.Types.String,
+      default() {
+        return uniqueString({ length: 10, type: 'url-safe' });
+      }
+    }
   },
   {
     timestamps: true
@@ -59,13 +71,13 @@ BlogsSchema.index(
   }
 );
 
-BlogsSchema.pre('save', async function save (next) {
-  if(isEmpty(this.category)) {
-   const defaultCategory =  await getDefaultCategory();
-   this.category = defaultCategory._id
+BlogsSchema.pre('save', async function save(next) {
+  if (isEmpty(this.category)) {
+    const defaultCategory = await getDefaultCategory();
+    this.category = defaultCategory._id;
   }
   next();
-})
+});
 
 const Blogs = mongoose.model('Blogs', BlogsSchema);
 export default Blogs;

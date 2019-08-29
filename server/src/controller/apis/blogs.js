@@ -7,7 +7,9 @@ import {
   getBlog,
   updateBlog,
   deleteBlog,
-  forwardPublicBlog
+  forwardPublicBlog,
+  forwardDraftBlog,
+  forwardPrivateBlog
 } from '../../middlewares/blogs';
 import {
   attachUserIfExists,
@@ -61,6 +63,20 @@ router.get(
   '/public/:username',
   checkAndAttachUserForUsername,
   blogsAPI.getPublicBlogsOfUser
+);
+
+router.get(
+  '/share/draft/:draftUrl/:id',
+  getBlog,
+  forwardDraftBlog,
+  blogsAPI.sendResponse
+);
+
+router.get(
+  '/share/private/:privateUrl/:id',
+  getBlog,
+  forwardPrivateBlog,
+  blogsAPI.sendResponse
 );
 
 export default router;
