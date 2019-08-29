@@ -10,7 +10,7 @@ import { isValid } from '../utils/helpers/mongoose';
 
 const authenticateUserBlog = async (req, res, next) => {
   const userID = req.user._id;
-  const blogOwnerId = req.blog.userId;
+  const blogOwnerId = req.blog.userId._id;
   if (userID.toString() !== blogOwnerId.toString()) {
     return res.status(401).json({ msg: 'Unauthorized Access' });
   }
@@ -103,7 +103,7 @@ const forwardPublicBlog = async (req, res, next) => {
   }
 
   const isUserBlog =
-    req.user && String(req.user._id) === String(req.blog.userId);
+    req.user && String(req.user._id) === String(req.blog.userId._id);
   if (isUserBlog) {
     return next();
   }
