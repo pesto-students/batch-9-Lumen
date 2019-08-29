@@ -2,6 +2,7 @@ import React from 'react';
 import {Redirect} from 'react-router-dom';
 import { Image, Divider } from 'semantic-ui-react';
 import UIAvatar from 'react-ui-avatars';
+import { connect } from 'react-redux';
 
 import styles from './Profile.module.css';
 import ProfileBlogs from './ProfileBlogs';
@@ -11,7 +12,8 @@ import useProfile from '../../hooks/useProfile';
 import isEmpty from '../../utils/validations/isEmpty';
 
 const Profile = ({
-  match:{params:{publicUser}}
+  match:{params:{publicUser}},
+   user,
 }) => {
   const [profile, updateProfile, saving, profileExist] = useProfile(publicUser);
   const isPublicProfile = !isEmpty(publicUser)
@@ -20,7 +22,7 @@ const Profile = ({
     username = '',
     profileImage,
     description = '',
-  } = profile;
+  } = isPublicProfile? profile : user || {};
   if(!profileExist) {
     return (
       <div>
@@ -49,7 +51,7 @@ const Profile = ({
             </h3>
           </div>
           {/* TODO: Conditional render */}
-         { !isPublicProfile &&  <EditProfile profile={profile} updateProfile={updateProfile} saving={saving} />}
+         { !isPublicProfile &&  <EditProfile />}
         </div>
         <Divider horizontal inverted>
           ***
@@ -61,5 +63,7 @@ const Profile = ({
     </div>
   );
 };
-
-export default Profile;
+const mapStateToProps = (state) => ({
+  user: state.auth.user
+});
+export default connect(mapStateToProps, {})(Profile);

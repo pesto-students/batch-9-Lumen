@@ -47,10 +47,10 @@ function useProfile(username) {
 
   useEffect(() => {
     if(profileExist && !username) {
-      changeUpdating(true);
-      saveUpdate(profile, () => {
-        changeUpdating(false);
-      });
+      changeUpdating(false);
+      // saveUpdate(profile, () => {
+      //   changeUpdating(false);
+      // });
     }
   }, [profile]);
 

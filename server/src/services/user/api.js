@@ -12,12 +12,12 @@ const health = (req, res) => {
 
 const signUp = (req, res) => {
   res.status(200);
-  res.json({ msg: 'success', token: req.user });
+  res.json({ msg: 'success', token: req.user.token, user:req.user.user });
 };
 
 const signIn = (req, res) => {
   res.status(200);
-  res.json({ msg: 'success', token: req.user });
+  res.json({ msg: 'success', token: req.user.token, user:req.user.user  });
 };
 
 const updateProfile = async (req, res) => {
@@ -27,8 +27,8 @@ const updateProfile = async (req, res) => {
       description: req.body.description,
       profileImage: req.body.profileImage
     };
-    await updateProfileService(req.user._id, updates);
-    res.json({ msg: 'success' });
+    const user = await updateProfileService(req.user._id, updates);
+    res.json({ msg: 'success', user });
   } catch (e) {
     res.status(500).json({ msg: 'failed', error: e });
   }

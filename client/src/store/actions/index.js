@@ -5,7 +5,8 @@ export {
   login,
   authAutoLogin,
   logout,
-  toggleAuthModal
+  toggleAuthModal,
+  updateUser
 } from './authenticationActions';
 
 export { getCategories };
