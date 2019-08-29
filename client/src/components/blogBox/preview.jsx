@@ -32,7 +32,7 @@ const PreviewBlog = ({match: { params: { blogId }}, history}) => {
 
     return (
         <div onKeyDown={handleKeyDown} tabIndex="0" role="presentation" style={{background: "#121212"}}>
-            <ViewBlog title={blog.title} content={blog.content} imageUrl={blog.imageUrl} description={blog.description} />
+            <ViewBlog blog={blog}/>
         </div>
     )
 }
