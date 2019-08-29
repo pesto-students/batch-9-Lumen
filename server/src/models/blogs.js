@@ -24,6 +24,11 @@ const BlogsSchema = new Schema(
       required: true,
       default: '## My Blog is about'
     },
+    description: {
+      type: String,
+      required: true,
+      default: 'This is an awesome blog written by an awesome blogger.'
+    },
     isPrivate: {
       type: Boolean,
       default: false

@@ -74,6 +74,7 @@ const updateBlog = async (req, res, next) => {
   newBlog.published = req.body.published;
   newBlog.category = req.body.category;
   newBlog.imageUrl = req.body.imageUrl;
+  newBlog.description = req.body.description;
   const blogID = req.params.id;
 
   try {
