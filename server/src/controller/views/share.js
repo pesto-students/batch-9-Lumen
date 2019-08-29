@@ -1,9 +1,18 @@
 import { Router } from 'express';
-import {getBlog} from '../../middlewares/blogs';
+import {
+  getBlog,
+  forwardPublicBlog,
+  forwardPrivateBlog,
+  forwardDraftBlog
+} from '../../middlewares/blogs';
 import shareBlog from '../../services/blogs/render';
 
 const router = Router();
 
-router.get('/:id', getBlog, shareBlog);
+router.get('/:id', getBlog, forwardPublicBlog, shareBlog);
+
+router.get('/draft/:draftUrl/:id', getBlog, forwardDraftBlog, shareBlog);
+
+router.get('/private/:privateUrl/:id', getBlog, forwardPrivateBlog, shareBlog);
 
 export default router;
