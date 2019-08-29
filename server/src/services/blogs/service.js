@@ -15,7 +15,7 @@ const createBlog = async (title, content, userId) => {
 const getBlogById = async blogID => {
   const blog = await Blogs.findById(blogID).populate(
     'userId',
-    'name email -_id username profileImage description'
+    'name email _id username profileImage description'
   );
   return blog.toObject();
 };
