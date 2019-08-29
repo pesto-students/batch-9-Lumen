@@ -1,0 +1,11 @@
+.container{
+    color: white; 
+    height: 100%; 
+    padding: 16px 10px; 
+    width: auto;
+    boxSizing: border-box;
+}
+
+.container:hover{
+    border-bottom: 4px solid #fff;
+}
