@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 
 import { getBlogsFromUsername, getUserBlogs } from '../apis/blogs';
 
-function useProfile(username) {
+function useGetBlogs(username) {
   const blogsShape = username ? [] : { drafts: [], published: []};
   const [blogs, updateBlogs] = useState(blogsShape);
   const [blogsFetched, updateBlogsFetched] = useState(false);
@@ -29,4 +29,4 @@ function useProfile(username) {
   return [blogs, blogsExist, blogsFetched];
 }
 
-export default useProfile;
+export default useGetBlogs;

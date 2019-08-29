@@ -1,24 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
 import { Button, Modal, Icon, TextArea } from 'semantic-ui-react';
 import styles from './EditProfile.module.css';
 import TextInput from '../../components/Form/TextInput';
+import { updateUser as updateUserAction } from '../../store/actions'
 
 const EditProfile = ({
-  profile,
-  updateProfile,
-  saving,
+  user,
+  updateUser,
+  userUpdating,
 }) => {
   // TODO: use useInput hook for editing data
   const [open, setOpen] = useState(false);
+  const [profile = {}, updateProfile] = useState(user);
+  useEffect(()=>{
+    updateProfile(user);
+  },[user]);
 
-  const onSaveClicked = (property, value) => {
-    // TODO: save changes to database
-    // setOpen(false);
+  const onUpdateProfile = (property, value) => {
     updateProfile({
       ...profile,
       [property]:value,
     })
   };
+
+  const onSaveClicked = () => {
+    updateUser(profile);
+  }
 
   return (
     <Modal
@@ -28,7 +36,6 @@ const EditProfile = ({
       open={open}
     >
       <Modal.Header>Edit profile</Modal.Header>
-      <p>{saving && 'Saving...'}</p>
       <div className={styles.container}>
         <div className={styles.input}>
           <TextInput
@@ -36,16 +43,17 @@ const EditProfile = ({
             name="Name"
             iconName="user"
             value={profile.name}
-            onChange={(e) => onSaveClicked('name',e.target.value)}
+            onChange={(e) => onUpdateProfile('name',e.target.value)}
           />
         </div>
         <div className={styles.input}>
           <TextInput
+            placeholder="Profile Image Url"
             focus
-            name="Profile Image (put 'use name' for using your name as image)"
-            iconName="user image"
-            value={profile.profileImage}
-            onChange={(e) => onSaveClicked('profileImage',e.target.value)}
+            name="Profile Image"
+            iconName="image"
+            value={profile.profileImage === 'use name' ? '': profile.profileImage}
+            onChange={(e) => onUpdateProfile('profileImage',e.target.value)}
           />
         </div>
         <div className={styles.input}>
@@ -54,11 +62,14 @@ const EditProfile = ({
             rows={5}
             style={{ width: '100%' }}
             value={profile.description}
-            onChange={(e) => onSaveClicked('description',e.target.value)}
+            onChange={(e) => onUpdateProfile('description',e.target.value)}
           />
         </div>
       </div>
       <Modal.Actions>
+      <Button color="green" loading={userUpdating} onClick={() => onSaveClicked()}>
+          <Icon name="save" /> Save
+        </Button>
         <Button color="red" onClick={() => setOpen(false)}>
           <Icon name="remove" /> Close
         </Button>
@@ -67,4 +78,9 @@ const EditProfile = ({
   );
 };
 
-export default EditProfile;
+const mapStateToProps = (state) => ({
+  user: state.auth.user,
+  userUpdating: state.auth.updatingUser,
+});
+
+export default connect(mapStateToProps,{ updateUser:updateUserAction })(EditProfile);

@@ -39,9 +39,10 @@ Authentication.prototype.start = () => {
           return done(null, false, 'User already exists with same email/username.');
         }
 
-        const newUser = await createUser(req.body);
-        const userToken = tokenizeObject(newUser);
-        return done(null, userToken);
+        const user = await createUser(req.body);
+        delete user.password;
+        const token = tokenizeObject(user);
+        return done(null, {token, user});
       } catch (e) {
         return done(e);
       }
@@ -66,7 +67,7 @@ Authentication.prototype.start = () => {
 
       const user = await getUserProperties(email);
       const token = tokenizeObject(user);
-      return done(null, token);
+      return done(null, {token, user});
     },
   ));
 

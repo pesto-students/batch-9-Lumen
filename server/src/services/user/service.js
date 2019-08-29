@@ -53,13 +53,13 @@ const getUserProperties = async (email, id) => {
     // eslint-disable-next-line no-underscore-dangle
     query._id = id;
   }
-  const projection = 'email name username';
+  const projection = 'email name username profileImage description';
   const user = await User.findOne(query, projection);
   return user.toObject();
 };
 
 const updateProfile = async (userId, update) => {
-  await User.findByIdAndUpdate(userId, update);
+  await User.findByIdAndUpdate(userId, update, {new: true});
 };
 
 const getProfile = async userId => {

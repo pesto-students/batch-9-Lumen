@@ -4,10 +4,9 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../../store/actions/index';
 import styles from './ProfileDropdown.module.css';
-import useProfile from '../../hooks/useProfile';
 
-const ProfileDropdown = ({ onLogout, history }) => {
-  const [profile] = useProfile()
+const ProfileDropdown = ({ onLogout, history, user }) => {
+  const profile = user || {};
   return (<div className={styles.container}>
     <Dropdown text={profile.name} item floating>
       <Dropdown.Menu direction="left">
@@ -19,9 +18,12 @@ const ProfileDropdown = ({ onLogout, history }) => {
   );
 }
  
+const mapStateToProps = (state) => ({
+  user: state.auth.user
+});
 
 const mapDispatchToProps = (dispatch) => ({
   onLogout: () => dispatch(actions.logout()),
 });
 
-export default withRouter(connect(null, mapDispatchToProps)(ProfileDropdown));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ProfileDropdown));
