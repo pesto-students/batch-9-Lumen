@@ -52,7 +52,8 @@ const getBlogsForQuery = async (page = 1, categories, searchString) => {
   const blogs = await Blogs.find(query, options)
     .sort({ score: { $meta: 'textScore' } })
     .skip(blogsToSkip)
-    .limit(maxBlogsPerPage);
+    .limit(maxBlogsPerPage)
+    .populate('userId', 'name email -_id username profileImage description')
   return blogs;
 };
 

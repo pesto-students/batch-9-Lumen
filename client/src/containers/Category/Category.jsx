@@ -1,32 +1,25 @@
-import React from 'react'
+import React from 'react';
+import { connect } from 'react-redux';
 import MovableStackedCard from "../../components/MovableStackedCard/MovableStackedCard";
 import styles from './Category.module.css';
 
-const Category = () => {
+const Category = ({
+    categories = [],
+}) => {
+    const categoriesCards = categories.map((category) => {
+       return( <>
+       <h1 className={styles.title}> {category.name}</h1>
+            <MovableStackedCard {...category} />
+       </>)
+    })
     return (
         <div className={styles.background}>
-            <h1 className={styles.title}> Category 1</h1>
-            <MovableStackedCard />
-            <h1 className={styles.title}> Category 2</h1>
-            <MovableStackedCard />
-            <h1 className={styles.title}> Category 3</h1>
-            <MovableStackedCard />
-            <h1 className={styles.title}> Category 4</h1>
-            <MovableStackedCard />
-            <h1 className={styles.title}> Category 5</h1>
-            <MovableStackedCard />
-            <h1 className={styles.title}> Category 6</h1>
-            <MovableStackedCard />
-            <h1 className={styles.title}> Category 7</h1>
-            <MovableStackedCard />
-            <h1 className={styles.title}> Category 8</h1>
-            <MovableStackedCard />
-            <h1 className={styles.title}> Category 9</h1>
-            <MovableStackedCard />
-            <h1 className={styles.title}> Category 10</h1>
-            <MovableStackedCard />
+          {categoriesCards}
         </div>
     )
 }
-
-export default Category;
+const mapStateToProps = (state) => ({
+    categories: state.home.categories,
+  })
+  
+  export default connect(mapStateToProps, {})(Category);

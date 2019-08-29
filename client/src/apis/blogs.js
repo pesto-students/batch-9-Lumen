@@ -54,10 +54,25 @@ const getUserBlogs = async () => {
     throw e.response.data;
   }
 }
+
+const searchBlogs = async (pageNumber, searchString = '', categoryList = []) => {
+  try {
+
+    const categories = categoryList.join(',');
+    const response = await axios.get(`/home/${pageNumber}?search=${searchString}&category=${categories}`);
+    return response.data.blogs;
+  } catch(e) {
+    if(!e.response) {
+      throw e;
+    }
+    throw new Error(e.response.data);
+  }
+}
 export {
   getBlog,
   updateBlog,
   getBlogsFromUsername,
   getUserBlogs,
+  searchBlogs,
 }
 export default createBlog;

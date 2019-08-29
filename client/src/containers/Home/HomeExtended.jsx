@@ -1,42 +1,30 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable no-underscore-dangle */
 import React from 'react';
+import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import styles from './HomeExtended.module.css';
 import {Card} from "semantic-ui-react"
+import styles from './HomeExtended.module.css';
 
-const data = [
-  { title: 'Trending', link: '/category/Trending' },
-  { title: 'Recent', link: '/category/Recent' },
-  { title: 'Category 1', link: '/category/1' },
-  { title: 'Category 2', link: '/category/1' },
-  { title: 'Category 3', link: '/category/1' },
-  { title: 'Category 4', link: '/category/1' },
-  { title: 'Category 5', link: '/category/1' },
-  { title: 'Category 6', link: '/category/1' },
-  { title: 'Category 7', link: '/category/1' },
-  { title: 'Category 8', link: '/category/1' },
-  { title: 'Category 9', link: '/category/1' },
-  { title: 'Category 10', link: '/category/1' },
-];
-
-const imgURL = 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/skyscrapers.jpg';
-
-const NewHome = () => (
+const NewHome = ({
+  categories = [],
+}) => (
   <div className={styles.parent}>
-    {data.map((category) => (
+    {categories.map((category) => (
       <div
         className={styles.child}
-        key={category.title}
+        key={category._id}
         style={{
           background:
             `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),url(${
-              imgURL
+              category.image
             }) no-repeat`,
           backgroundSize: 'cover',
         }}
       >
-        <NavLink to={category.link}>
+        <NavLink to={`/category/${category.name}?search=${category._id}`}>
           <div className={styles.fragment}>
-            <h2>{category.title}</h2>
+            <h2>{category.name}</h2>
           </div>
         </NavLink>
       </div>
@@ -44,4 +32,8 @@ const NewHome = () => (
   </div>
 );
 
-export default NewHome;
+const mapStateToProps = (state) => ({
+  categories: state.home.categories,
+})
+
+export default connect(mapStateToProps, {})(NewHome);
