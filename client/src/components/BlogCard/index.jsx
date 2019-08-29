@@ -3,55 +3,44 @@ import PropTypes from 'prop-types';
 import { Card, Icon } from 'semantic-ui-react';
 
 const BlogCard = ({
-  image,
+  imageUrl,
   title,
-  userName,
+  username,
   content,
-  datePublished,
-  upVotes,
+  createdAt,
+  description,
+  href,
 }) => {
-  const extra = (
-    <div>
-      <a href="/">
-        <Icon name="sort" />
-        {`${upVotes} upvotes`}
-      </a>
-      <span className="extra content right floated">
-        {`${datePublished.toDateString()}`}
-      </span>
-    </div>
-  );
   return (
     <Card
       fluid
-      image={image}
+      image={imageUrl}
       header={title}
-      meta={userName}
-      description={content}
+      meta={username}
+      description={description}
       // extra={extra}
       style={{ height: "100%", background: "linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3))"}}
+      href={href}
     />
   );
 };
 
 BlogCard.propTypes = {
-  image: PropTypes.string,
+  imageUrl: PropTypes.string,
   title: PropTypes.string,
-  userName: PropTypes.string,
+  username: PropTypes.string,
   content: PropTypes.string,
-  datePublished: PropTypes.instanceOf(Date),
-  upVotes: PropTypes.number,
-
+  createdAt: PropTypes.string,
+  description:  PropTypes.string,
 };
 
 BlogCard.defaultProps = {
-  image: 'http://www.reginacaeli.be/fileadmin/templates/img/placeholder-small.png',
+  imageUrl: 'http://www.reginacaeli.be/fileadmin/templates/img/placeholder-small.png',
   title: 'A blog post',
-  userName: 'User 1',
+  username: 'User 1',
   content: 'This is some blog content',
-  datePublished: new Date(),
-  upVotes: 0,
-
+  createdAt: '',
+  description:  'Blog',
 };
 
 export default BlogCard;

@@ -1,35 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Tab } from 'semantic-ui-react';
 import Blogcard from '../../components/BlogCard';
 import styles from './ProfileBlogs.module.css';
 import useGetUserBlogs from '../../hooks/useGetUserBlogs';
 
-const ProfileBlogs = ({ 
+const ProfileBlogs = ({
   username,
 }) => {
-  const [blogs = { drafts: [], published: []}, blogsExist, fetched] = useGetUserBlogs();
-  const draftsBlogsCards = blogs.drafts.map((blog) => (
+  const [blogs = [], blogsExist, fetched ] = useGetUserBlogs(username);
+  const blogsCards = blogs.map((blog) => (
     <div className={styles.blogcardContainer} key={blog._id}>
-    <Blogcard {...blog} username={username} href={`/edit/${blog._id}`}/>
+    <Blogcard blog={blog} username={username} href={`/preview/${blog._id}`} />
     </div>
   ));
-
-  const publishedBlogsCards = blogs.published.map((blog) => (
-    <div className={styles.blogcardContainer} key={blog._id}>
-    <Blogcard {...blog}  username={username} href={`/preview/${blog._id}`}/>
-    </div>
-  ));
-  const panes = [
+  const panes =[
     {
-      menuItem: 'Drafts',
-      render: () => <Tab.Pane loading={!fetched}> {draftsBlogsCards} </Tab.Pane>,
-    },
-    {
-      menuItem: 'Published',
-      render: () => <Tab.Pane loading={!fetched}> {publishedBlogsCards} </Tab.Pane>,
+      menuItem: 'Blogs',
+      render: () => (<Tab.Pane loading={!fetched}> {blogsCards} </Tab.Pane>),
     },
   ]
- 
+  
   return (
     <div>
       {/* <Menu pointing secondary className={styles.menuStyle} inverted>

@@ -24,7 +24,7 @@ const updateProfile = async (req, res) => {
   try {
     const updates = {
       name: req.body.name,
-      description: req.body.name,
+      description: req.body.description,
       profileImage: req.body.profileImage
     };
     await updateProfileService(req.user._id, updates);
@@ -46,9 +46,12 @@ const sendProfile = async (req, res) => {
 const getPublicProfile = async (req, res) => {
   try {
     const user = await getProfileByUsername(req.params.username);
-    res.json({ msg: 'success', user });
+    if(!user) {
+      return res.status(404).json({msg: 'User Not Found'});
+    }
+    return res.json({ msg: 'success', user });
   } catch (e) {
-    res.status(500).json({ msg: 'failed', error: e });
+    return res.status(500).json({ msg: 'failed', error: e });
   }
 };
 const apis = {
