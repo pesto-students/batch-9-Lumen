@@ -16,6 +16,7 @@ import Category from './containers/Category/Category';
 import CategoryType from './containers/CategoryType/CategoryType';
 import Recent from './containers/Recent/Recent';
 import Profile from './containers/Profile';
+import BlogPage from './containers/BlogPage';
 
 const App = ({
   onTryAutoLogin,
@@ -35,6 +36,7 @@ const App = ({
       <Route path="/category/:type" component={CategoryType} />
       <Route path="/recent" exact component={Recent} />
       <Route path="/profile/:publicUser" exact component={Profile} />
+      <Route path="/blog/:blogId" exact component={BlogPage} />
       <Redirect to="/" />
     </Switch>
   );
@@ -55,6 +57,7 @@ const App = ({
         <Route path="/recent" exact component={Recent} />
         <Route path="/profile" exact component={Profile} />
         <Route path="/profile/:publicUser" exact component={Profile} />
+        <Route path="/blog/:blogId" exact component={BlogPage} />
         <Redirect to="/" />
       </Switch>
     );
@@ -93,5 +96,5 @@ App.propTypes = {
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(App);
