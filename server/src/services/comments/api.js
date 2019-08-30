@@ -28,7 +28,7 @@ const createComment = async (req, res) => {
 const getTenComments = async (req, res) => {
   try {
     const commentsParentId = req.query.parentId || null;
-    const commentsPerPage = 10;
+    const commentsPerPage = 100;
     const comments = await getTenCommentsService(
       req.blog._id,
       req.params.page,
