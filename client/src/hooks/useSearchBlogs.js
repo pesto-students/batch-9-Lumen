@@ -16,10 +16,10 @@ function useSearchBlogs(pageNumber, search = '', categoryList = [] ) {
         updateBlogsExist(false);
         updateBlogsFetched(true);
     }
-  
+    updateBlogsFetched(false);
     searchBlogs(pageNumber,search,categoryList).then(handleBlogsResponse).catch(handleBlogsReject);
     
-  }, []);
+  }, [search]);
 
 
   return [blogs, blogsFetched, blogsExist];

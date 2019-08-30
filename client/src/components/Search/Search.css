@@ -1,0 +1,50 @@
+.wrapxx{
+    width: 25vw;
+    padding: 16px 10px;
+  }
+
+.searchxx {
+    width: 100%;
+    position: relative;
+    display: flex;
+  }
+  
+  .searchTermxx {
+    width: 100%;
+    border: 1px solid #3E50B4;
+    border-right: none;
+    padding: 5px;
+    height: 100%;
+    border-radius: 5px 0 0 5px;
+    outline: none;
+    color: #9DBFAF;
+  }
+  
+  .searchTermxx:focus{
+    color: #3E50B4;
+  }
+  
+  .searchButtonxx {
+    width: 30px;
+    height: 100%;
+    border: 1px solid #3E50B4;
+    background: #3E50B4;
+    text-align: center;
+    color: #fff;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    font-size: 18px;
+    padding: 1px 2px;
+  }
+  .search-iconxx{
+      height:80%;
+  }
+
+  @media(max-width: 600px){
+    .searchButtonxx{
+      width:20px;
+      font-size: 14px;
+      margin: 0px;
+    }
+  }
+ 

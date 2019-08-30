@@ -14,7 +14,7 @@ import * as actions from './store/actions/index';
 import Loader from './components/UI/Loader';
 import Category from './containers/Category/Category';
 import CategoryType from './containers/CategoryType/CategoryType';
-import Recent from './containers/Recent/Recent';
+import SearchPage from './containers/Search/SearchPage';
 import Profile from './containers/Profile';
 import BlogPage from './containers/BlogPage';
 
@@ -34,7 +34,7 @@ const App = ({
       <Route path="/" exact component={Home} />
       <Route path="/category" exact component={Category} />
       <Route path="/category/:type" component={CategoryType} />
-      <Route path="/recent" exact component={Recent} />
+      <Route path="/search" component={SearchPage} />
       <Route path="/profile/:publicUser" exact component={Profile} />
       <Route path="/blog/:blogId" exact component={BlogPage} />
       <Redirect to="/" />
@@ -54,7 +54,7 @@ const App = ({
         />
         <Route path="/category" exact component={Category} />
         <Route path="/category/:type" component={CategoryType} />
-        <Route path="/recent" exact component={Recent} />
+        <Route path="/search" component={SearchPage} />
         <Route path="/profile" exact component={Profile} />
         <Route path="/profile/:publicUser" exact component={Profile} />
         <Route path="/blog/:blogId" exact component={BlogPage} />
