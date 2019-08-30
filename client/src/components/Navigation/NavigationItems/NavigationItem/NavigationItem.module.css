@@ -24,3 +24,9 @@
   border-bottom: 4px solid #fff;
   color: white;
 }
+
+@media(max-width: 700ox){
+  .NavigationItem a {
+    padding: 16px 6px;
+  }
+}

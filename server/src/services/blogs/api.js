@@ -6,6 +6,7 @@ import {
   findBlogsFromArray
 } from './service';
 import { getTopVotedBlogs } from '../votes/service';
+import logger from '../../utils/logger';
 
 const health = (req, res) => {
   res.json({ status: 'Ok' });
@@ -16,12 +17,17 @@ const sendResponse = (req, res) => {
 };
 
 const getBlogs = async (req, res) => {
-  const { pageNumber } = req.params.pageNumber;
-  const { category = '' } = req.query;
-  const { search = '' } = req.query;
-  const categories = category.split(',');
-  const blogs = await getBlogsForQuery(pageNumber, categories, search);
-  res.json({ msg: 'Working', blogs });
+  try{
+    const { pageNumber } = req.params.pageNumber;
+    const { category = '' } = req.query;
+    const { search = '' } = req.query;
+    const categories = category.length >0 ? category.split(',') : [];
+    const blogs = await getBlogsForQuery(pageNumber, categories, search);
+    res.json({ msg: 'Working', blogs });
+  } catch(e) {
+    logger.error(e)
+    res.status(500).json({msg:'Something went wrong', error:e})
+  }
 };
 
 const getTopBlogs = async (req, res) => {
