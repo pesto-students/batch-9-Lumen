@@ -33,7 +33,7 @@ const updateBlog = async (blogData, blogId) => {
   }
 };
 
-const getBlogsFromUsername = async (username) => {
+const getBlogsFromUsername = async username => {
   try {
     const newBlogData = await axios.get(`/public/${username}`);
     return newBlogData.data.blogs;
@@ -42,7 +42,7 @@ const getBlogsFromUsername = async (username) => {
 
     throw e.response.data;
   }
-}
+};
 
 const getUserBlogs = async () => {
   try {
@@ -68,11 +68,24 @@ const searchBlogs = async (pageNumber, searchString = '', categoryList = []) => 
     throw new Error(e.response.data);
   }
 }
+const getTopBlogs = async (pageNumber = 1) => {
+  try {
+    const response = await axios.get(`/top/${pageNumber}`);
+    return response.data.blogs;
+  } catch (e) {
+    if (!e.response) {
+      throw e;
+    }
+    throw e.response.data.msg;
+  }
+};
+
 export {
   getBlog,
   updateBlog,
   getBlogsFromUsername,
   getUserBlogs,
   searchBlogs,
+  getTopBlogs,
 }
 export default createBlog;
