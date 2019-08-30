@@ -21,6 +21,8 @@ const router = Router();
 
 router.get('/home/:pageNumber', blogsAPI.getBlogs);
 
+router.get('/top/:pageNumber', blogsAPI.getTopBlogs);
+
 router.get('/health', blogsAPI.health);
 
 router.get(

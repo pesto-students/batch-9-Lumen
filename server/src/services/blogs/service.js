@@ -84,6 +84,19 @@ const getUsersPublicBlog = async userId => {
   return blogs;
 };
 
+const findBlogsFromArray = async (blogIdList = [], limit = 10) => {
+  const query = {};
+  if (blogIdList && blogIdList.length > 0) {
+    query._id = { $in: blogIdList };
+  }
+  const blogs = await Blogs.find(query)
+    .select('-content -isPrivate -privatePath -draftPath')
+    .populate('userId', 'name email _id username profileImage description')
+    .limit(limit)
+    .lean();
+  return blogs;
+};
+
 export {
   createBlog,
   getBlogById,
@@ -91,5 +104,6 @@ export {
   deleteBlogById,
   getBlogsForQuery,
   getUserBlogs,
-  getUsersPublicBlog
+  getUsersPublicBlog,
+  findBlogsFromArray
 };
