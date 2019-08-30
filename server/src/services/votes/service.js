@@ -28,7 +28,7 @@ const voteBlog = async (blogId, userId, addVotes) => {
 const countVotesOfBlog = async blogId => {
   const query = {
     blogId: convertIntoObjectID(blogId),
-    upVotes: { $gt: 0 }
+    upVotes: {$gt: 0},
   };
   const filterBlog = { $match: query };
 
@@ -43,6 +43,13 @@ const countVotesOfBlog = async blogId => {
 
   const countVotesAggregationPipeline = [filterBlog, groupVotes];
   const votes = await VotesModel.aggregate(countVotesAggregationPipeline);
+  if(!votes[0]) {
+    return {
+      _id: blogId,
+      totalUpVotes : 0,
+      uniqueUpVotes : 0,
+    }
+  }
   return votes[0];
 };
 
@@ -55,6 +62,11 @@ const getUserUpVotes = async (blogId, userId) => {
   const projection = 'upVotes';
 
   const votes = await VotesModel.findOne(query, projection);
+  if(!votes) {
+    return {
+      upVotes: 0,
+    }
+  }
   return votes;
 };
 

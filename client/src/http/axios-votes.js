@@ -2,8 +2,19 @@
 import axios from 'axios';
 import constants from '../constants/constants';
 
+const jwtToken = localStorage.getItem('token');
+let token;
+if(jwtToken && jwtToken.length >0) {
+  token= `Bearer ${jwtToken}`
+} else {
+  token = ''
+}
+
 const instance = axios.create({
-  baseURL: `${constants.serverURL}${constants.userRoute}`,
+  baseURL: `${constants.serverURL}${constants.votesRoute}`,
+  headers: {
+    Authorization: token
+  }
 });
 
 instance.interceptors.request.use(config => {

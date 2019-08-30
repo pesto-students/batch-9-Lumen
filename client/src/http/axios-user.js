@@ -2,16 +2,29 @@
 import axios from 'axios';
 import constants from '../constants/constants';
 
+const jwtToken = localStorage.getItem('token');
+let token;
+if(jwtToken && jwtToken.length >0) {
+  token= `Bearer ${jwtToken}`
+} else {
+  token = ''
+}
+
 const instance = axios.create({
   baseURL: `${constants.serverURL}${constants.userRoute}`,
   headers: {
-    Authorization: `Bearer ${localStorage.getItem('token')}`
+    Authorization: token
   }
 });
 
 instance.interceptors.request.use(config => {
-  const token = `Bearer ${localStorage.getItem('token')}`;
-  config.headers.Authorization = token;
+  const authToken = localStorage.getItem('token');
+  const bearerToken = `Bearer ${authToken}`;
+  if(authToken && authToken.length > 0) {
+    config.headers.Authorization = bearerToken;
+  } else {
+    config.headers.Authorization = '';
+  }
   return config;
 });
 export default instance;
