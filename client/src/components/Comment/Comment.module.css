@@ -1,0 +1,10 @@
+.container{
+    padding: 20px 20vw;
+    color: white;
+}
+
+@media(max-width: 700px){
+    .container{
+        padding: 20px 5vw;
+    }
+}
