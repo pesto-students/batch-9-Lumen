@@ -33,7 +33,7 @@ const BlogPage = ({
       <Divider horizontal inverted>
           <LikeButton blogId={blogId} {...user}/>
         </Divider>
-      <BlogComments />
+      <BlogComments blogId={blogId} {...user}/>
     </div>
   );
 };

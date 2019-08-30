@@ -4,6 +4,7 @@ const constants = {
   blogRoute: '/api/v1/blogs',
   categoriesRoute: '/api/v1/categories',
   votesRoute: '/api/v1/votes',
+  commentsRoute: '/api/v1/comments',
 };
 
 Object.freeze(constants);

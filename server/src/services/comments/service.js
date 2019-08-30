@@ -35,7 +35,8 @@ const getComments = async (blogId, page = 1, parentId = null, commentsInOnePage 
   const requiredTenComments = await CommentsModel.find(query)
     .sort(sortOptions)
     .skip(skipComments)
-    .limit(commentsInOnePage);
+    .limit(commentsInOnePage)
+    .populate('author', '-_id -password -email');
   return requiredTenComments;
 };
 
