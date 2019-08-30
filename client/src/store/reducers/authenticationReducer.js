@@ -26,7 +26,7 @@ const authFail = (state, action) => updateObject(state, {
   loading: false,
 });
 
-const authLogout = (state, action) => updateObject(state, { token: null });
+const authLogout = (state, action) => updateObject(state, { token: null , user: {}});
 
 const toggleAuthModal = (state, action) => {
   return updateObject(state, { showAuthModal: !state.showAuthModal });

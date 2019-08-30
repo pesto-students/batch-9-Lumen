@@ -17,7 +17,7 @@ const BlogBox = ({
   },
   history
 }) => {
-  const [blog, updateBlog, updating] = useGetBlog(blogId);
+  const [blog, updateBlog, updating] = useGetBlog(blogId, true);
   const {
     content = '',
     title = '',

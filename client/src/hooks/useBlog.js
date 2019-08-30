@@ -9,7 +9,7 @@ const saveUpdate = debounce((blog, blogId, completeCallback) => {
   completeCallback();
 }, threeSeconds);
 
-function useBlog(blogId) {
+function useBlog(blogId, editing = false) {
   const [blog, updateBlog] = useState({});
   const [updating, changeUpdating] = useState(false);
 
@@ -38,10 +38,12 @@ function useBlog(blogId) {
   }, [blogId]);
 
   useEffect(() => {
-    changeUpdating(true);
-    saveUpdate(blog, blogId, () => {
-      changeUpdating(false);
-    });
+    if(editing) {
+      changeUpdating(true);
+      saveUpdate(blog, blogId, () => {
+        changeUpdating(false);
+      });
+    }
   }, [blog, blogId]);
 
   return [blog, updateBlog, updating];
