@@ -3,12 +3,17 @@
     flex: 1;
     justify-content: 'center';
     padding-left: 30px;
+    border-width: 0px !important;
 }
 
 .blogcardContainer {
     height: 200px;
     margin: 30px;
   }
+
+.title{
+  font-family: 'Hepta Slab', serif;
+}
 
 @media(max-width: 800px){
     .blogcardContainer {
