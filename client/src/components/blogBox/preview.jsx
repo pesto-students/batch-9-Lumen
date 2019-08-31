@@ -44,16 +44,14 @@ const PreviewBlog = ({
         style={{ margin: '20px 0px 0px 20px' }}
         onClick={redirectToEdit}
       >
-        {' '}
-        Go Back{' '}
+        Edit
       </PrimaryButton>
       <ViewBlog blog={blog} />
       <PrimaryButton
         style={{ margin: '0px 0px 20px 20px' }}
         onClick={redirectToEdit}
       >
-        {' '}
-        Go Back{' '}
+        Edit
       </PrimaryButton>
     </div>
   );
