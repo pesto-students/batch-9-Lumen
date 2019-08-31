@@ -5,7 +5,6 @@ import FormInput from '../FormInput';
 
 const BlogsCoverImage = ({onChange, ...rest}) => (
     <FormInput
-    required
     placeholder="Enter Image Url for your blog"
     type="text"
     label="Cover Image"
