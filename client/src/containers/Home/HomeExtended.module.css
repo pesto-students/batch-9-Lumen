@@ -49,5 +49,8 @@ font-family: "Fjalla One", sans-serif;
         font-weight: 700;
         font-size: 1.8rem;
     }  
+    .child:hover h2{
+      font-size: 2.2rem;
+    }
 }
   

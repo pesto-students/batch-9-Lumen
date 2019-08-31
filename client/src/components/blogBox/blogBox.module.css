@@ -11,8 +11,4 @@
   .container {
     padding: 20px 5vw 60px 5vw;
   }
-  .preview{
-    display: block;
-    margin-top: 20px !important;
-  }
 }

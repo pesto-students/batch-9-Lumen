@@ -129,7 +129,6 @@ const BlogBox = ({
           <BlogsPreviewButton
             redirectToView={redirectToPreview}
             floated="right"
-            className={classes.preview}
           />
         </Form>
       </div>
