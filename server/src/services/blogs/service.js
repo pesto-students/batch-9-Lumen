@@ -61,7 +61,9 @@ const getUserBlogs = async userId => {
   const query = {
     userId
   };
-  const blogs = await Blogs.find(query).lean();
+  const blogs = await Blogs.find(query)
+    .sort({ _id: 'asc' })
+    .lean();
   const published = [];
   const drafts = [];
   blogs.forEach(blog => {
@@ -95,6 +97,7 @@ const findBlogsFromArray = async (blogIdList = [], limit = 10) => {
   const blogs = await Blogs.find(query)
     .select('-content -isPrivate -privatePath -draftPath')
     .populate('userId', 'name email _id username profileImage description')
+    .sort({ _id: 'asc' })
     .limit(limit)
     .lean();
   return blogs;
