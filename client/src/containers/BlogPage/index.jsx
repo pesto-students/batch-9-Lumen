@@ -2,7 +2,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Divider} from 'semantic-ui-react';
+import { Divider } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 
 import ViewBlog from '../../components/ViewBlog/ViewBlog';
@@ -14,11 +14,27 @@ import LikeButton from '../../components/Like';
 
 const BlogPage = ({
   match: {
-    params: { blogId }
+    params: { blogId, draftPath, privatePath }
   },
-  user,
+  user
 }) => {
-  const [blog] = useGetBlog(blogId);
+  const [blog, , , fetchBlogError] = useGetBlog(
+    blogId,
+    false,
+    draftPath,
+    privatePath
+  );
+  if (!isEmpty(fetchBlogError)) {
+    return (
+      <div>
+        <Loader
+          size="small"
+          text="Oops! We cannot find blog you are looking for. 😕"
+          disabled
+        />
+      </div>
+    );
+  }
   if (isEmpty(blog)) {
     return (
       <div>
@@ -52,8 +68,11 @@ BlogPage.propTypes = {
     })
   })
 };
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   user: state.auth.user
 });
 
-export default connect(mapStateToProps, {})(BlogPage);
+export default connect(
+  mapStateToProps,
+  {}
+)(BlogPage);

@@ -1,4 +1,4 @@
-import { Form, TextArea, Button, FormField, Dropdown, Checkbox, Label } from 'semantic-ui-react';
+import { Form, TextArea, Button, FormField, Dropdown, Checkbox, Label, Popup } from 'semantic-ui-react';
 import TextAreaAutoResize from 'react-textarea-autosize';
 
 export {
@@ -10,4 +10,5 @@ export {
   Dropdown,
   Checkbox,
   Label,
+  Popup,
 };

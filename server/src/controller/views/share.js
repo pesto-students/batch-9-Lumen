@@ -13,6 +13,6 @@ router.get('/:id', getBlog, forwardPublicBlog, shareBlog);
 
 router.get('/draft/:draftUrl/:id', getBlog, forwardDraftBlog, shareBlog);
 
-router.get('/private/:privateUrl/:id', getBlog, forwardPrivateBlog, shareBlog);
+router.get('/secured/:privateUrl/:id', getBlog, forwardPrivateBlog, shareBlog);
 
 export default router;
