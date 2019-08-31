@@ -11,9 +11,15 @@ const createBlog = async newBlog => {
   }
 };
 
-const getBlog = async blogId => {
+const getBlog = async (blogId, draftPath, privatePath) => {
   try {
-    const newBlogData = await axios.get(`/${blogId}`);
+    let requestUrl = `/${blogId}`;
+    if (draftPath) {
+      requestUrl = `/share/draft/${draftPath}${requestUrl}`;
+    } else if (privatePath) {
+      requestUrl = `/share/private/${privatePath}${requestUrl}`;
+    }
+    const newBlogData = await axios.get(requestUrl);
     return newBlogData.data.blog;
   } catch (e) {
     if (!e.response) throw e;
@@ -53,21 +59,26 @@ const getUserBlogs = async () => {
 
     throw e.response.data;
   }
-}
+};
 
-const searchBlogs = async (pageNumber, searchString = '', categoryList = []) => {
+const searchBlogs = async (
+  pageNumber,
+  searchString = '',
+  categoryList = []
+) => {
   try {
-
     const categories = categoryList.join(',');
-    const response = await axios.get(`/home/${pageNumber}?search=${searchString}&category=${categories}`);
+    const response = await axios.get(
+      `/home/${pageNumber}?search=${searchString}&category=${categories}`
+    );
     return response.data.blogs;
-  } catch(e) {
-    if(!e.response) {
+  } catch (e) {
+    if (!e.response) {
       throw e;
     }
     throw new Error(e.response.data);
   }
-}
+};
 const getTopBlogs = async (pageNumber = 1) => {
   try {
     const response = await axios.get(`/top/${pageNumber}`);
@@ -86,6 +97,6 @@ export {
   getBlogsFromUsername,
   getUserBlogs,
   searchBlogs,
-  getTopBlogs,
-}
+  getTopBlogs
+};
 export default createBlog;

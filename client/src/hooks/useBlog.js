@@ -9,8 +9,9 @@ const saveUpdate = debounce((blog, blogId, completeCallback) => {
   completeCallback();
 }, threeSeconds);
 
-function useBlog(blogId, editing = false) {
+function useBlog(blogId, editing = false, draftPath, privatePath) {
   const [blog, updateBlog] = useState({});
+  const [fetchBlogError, updateFetchBlogError] = useState({});
   const [updating, changeUpdating] = useState(false);
 
   const preventUnloadBeforeSaving = useCallback(
@@ -34,11 +35,16 @@ function useBlog(blogId, editing = false) {
     function handleBlogResponse(blogData) {
       updateBlog(blogData);
     }
-    getBlog(blogId).then(handleBlogResponse);
-  }, [blogId]);
+    function handleBlogError(error) {
+      updateFetchBlogError(error);
+    }
+    getBlog(blogId, draftPath, privatePath)
+      .then(handleBlogResponse)
+      .catch(handleBlogError);
+  }, [blogId, draftPath, privatePath]);
 
   useEffect(() => {
-    if(editing) {
+    if (editing) {
       changeUpdating(true);
       saveUpdate(blog, blogId, () => {
         changeUpdating(false);
@@ -46,7 +52,7 @@ function useBlog(blogId, editing = false) {
     }
   }, [blog, blogId]);
 
-  return [blog, updateBlog, updating];
+  return [blog, updateBlog, updating, fetchBlogError];
 }
 
 export default useBlog;

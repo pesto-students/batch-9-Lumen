@@ -37,6 +37,12 @@ const App = ({
       <Route path="/search" component={SearchPage} />
       <Route path="/profile/:publicUser" exact component={Profile} />
       <Route path="/blog/:blogId" exact component={BlogPage} />
+      <Route path="/blog/draft/:draftPath/:blogId" exact component={BlogPage} />
+      <Route
+        path="/blog/secured/:privatePath/:blogId"
+        exact
+        component={BlogPage}
+      />
       <Redirect to="/" />
     </Switch>
   );
@@ -58,6 +64,16 @@ const App = ({
         <Route path="/profile" exact component={Profile} />
         <Route path="/profile/:publicUser" exact component={Profile} />
         <Route path="/blog/:blogId" exact component={BlogPage} />
+        <Route
+          path="/blog/draft/:draftPath/:blogId"
+          exact
+          component={BlogPage}
+        />
+        <Route
+          path="/blog/secured/:privatePath/:blogId"
+          exact
+          component={BlogPage}
+        />
         <Redirect to="/" />
       </Switch>
     );

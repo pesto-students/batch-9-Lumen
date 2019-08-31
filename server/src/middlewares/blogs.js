@@ -112,6 +112,7 @@ const forwardPublicBlog = async (req, res, next) => {
   const isUserBlog =
     req.user && String(req.user._id) === String(req.blog.userId._id);
   if (isUserBlog) {
+    req.blog = {...req.blog, ...req.serverSecrets}
     return next();
   }
   return res.status(404).json({ msg: 'Not Found' });

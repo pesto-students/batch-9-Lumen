@@ -53,7 +53,7 @@ const getBlogsForQuery = async (page = 1, categories, searchString) => {
     .sort({ score: { $meta: 'textScore' } })
     .skip(blogsToSkip)
     .limit(maxBlogsPerPage)
-    .populate('userId', 'name email -_id username profileImage description')
+    .populate('userId', 'name email -_id username profileImage description');
   return blogs;
 };
 
@@ -85,7 +85,10 @@ const getUsersPublicBlog = async userId => {
 };
 
 const findBlogsFromArray = async (blogIdList = [], limit = 10) => {
-  const query = {};
+  const query = {
+    isPrivate: false,
+    published: true
+  };
   if (blogIdList && blogIdList.length > 0) {
     query._id = { $in: blogIdList };
   }
