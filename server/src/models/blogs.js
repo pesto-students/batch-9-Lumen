@@ -42,7 +42,8 @@ const BlogsSchema = new Schema(
       ref: 'Categories'
     },
     imageUrl: {
-      type: String
+      type: String,
+      default: 'https://miro.medium.com/max/2082/1*7goNE2n2xxOlmomHfC0-Qw.jpeg'
     },
     privatePath: {
       type: Schema.Types.String,

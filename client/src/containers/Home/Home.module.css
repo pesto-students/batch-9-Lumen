@@ -1,8 +1,21 @@
-.background{
-  /* background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("https://images.pexels.com/photos/36717/amazing-animal-beautiful-beautifull.jpg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"); */
+.background {
   background: #121212;
 }
-.title{
+
+.parent {
+  display: flex;
+  flex-wrap: wrap;
+  cursor: pointer;
+}
+
+.child {
+  flex: 1 0 30% !important;
+  margin: 25px;
+  background-size: cover;
+  position: relative;
+  float: left;
+}
+.title {
   color: white;
   padding: 10px 0px 0px 25px;
   font-family: 'Hepta Slab', serif;
@@ -15,45 +28,6 @@
   width: 100%;
 }
 
-.column {
-  display: flex;
-  flex-direction: column;
-  margin: 25px;
-}
-
-.column-first {
-  flex: 1;
-  display: flex;
-}
-
-.column-others {
-  flex: 1;
-  display: flex;
-}
-
-.small-blog {
-  flex: 1;
-  margin: 15px;
-}
-
-.medium-blog {
-  flex: 1;
-  margin: 15px;
-}
-
-.large-blog {
-  flex: 3;
-  margin: 15px;
-}
-
-.small-blog img {
-  max-height: 5vh;
-}
-
-.large-blog img {
-  max-height: 20vh;
-}
-
 @media (max-width: 800px) {
   .container {
     display: flex;
@@ -62,33 +36,14 @@
     height: 100%;
     width: 100%;
   }
-  
-  .column {
-    display: flex;
+
+  .parent{
     flex-direction: column;
-    height: 95vh;
-    margin: 5px;
   }
-  
-  .column-first {
-    flex: 1;
-    display: flex;
-  }
-  
-  .column-others {
-    flex: 1;
-    display: flex;
-  }
-  
-  .small-blog {
-    flex: 1;
-    margin: 15px;
-  }
-  
-  
-  
-  .large-blog {
-    flex: 1;
-    margin: 15px;
+
+  .child {
+    flex: 0 0 90%;
+    margin: 0px;
+    padding: 5px 5vw;
   }
 }
