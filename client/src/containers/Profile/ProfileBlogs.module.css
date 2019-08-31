@@ -17,8 +17,8 @@
 
 @media(max-width: 800px){
     .blogcardContainer {
-        height: 150px;
-        margin: 15px;
+        /* height: 150px; */
+        margin: 15px 0px;
       } 
     .menuStyle{
         padding-left: 15px;
