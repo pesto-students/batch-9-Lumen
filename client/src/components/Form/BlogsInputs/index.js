@@ -4,6 +4,7 @@ import BlogsCoverImage from './BlogsCoverImage';
 import BlogsPreviewButton from './BlogsPreviewButton';
 import BlogsCategorySelect from './BlogsCategorySelect';
 import BlogsToggle from './BlogsIsDraft';
+import BlogDescriptionInput from './BlogDescriptionInput';
 
 export {
     BlogsTitleInput,
@@ -11,5 +12,6 @@ export {
     BlogsPreviewButton,
     BlogsCategorySelect,
     BlogsToggle,
+    BlogDescriptionInput
 }
 export default BlogsMarkdownInput;

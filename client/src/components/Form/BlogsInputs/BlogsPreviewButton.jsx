@@ -3,8 +3,8 @@ import propTypes from 'prop-types';
 
 import PrimaryButton from '../../common/PrimaryButton';
 
-const BlogsPreviewButton = ({redirectToView}) => (
-    <PrimaryButton onClick={() => {redirectToView()}}>
+const BlogsPreviewButton = ({redirectToView, ...rest}) => (
+    <PrimaryButton {...rest} onClick={() => {redirectToView()}}>
         Preview
     </PrimaryButton>
 )

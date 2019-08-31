@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Icon } from 'semantic-ui-react';
+import LabelButton from '../common/LabelButton';
 
 import Form from '../common/Form';
 import BlogMarkdownInput, {
@@ -7,9 +9,11 @@ import BlogMarkdownInput, {
   BlogsCoverImage,
   BlogsPreviewButton,
   BlogsCategorySelect,
-  BlogsToggle
+  BlogsToggle,
+  BlogDescriptionInput
 } from '../Form/BlogsInputs';
 import useGetBlog from '../../hooks/useBlog';
+import classes from './blogBox.module.css';
 
 const BlogBox = ({
   match: {
@@ -21,6 +25,7 @@ const BlogBox = ({
   const {
     content = '',
     title = '',
+    description = '',
     imageUrl = '',
     isPrivate = true,
     published = false,
@@ -41,50 +46,72 @@ const BlogBox = ({
   };
 
   return (
-    <div>
-      {updating && <p>Saving Changes...</p>}
-      <h1>Edit your blog</h1>
-      <Form onKeyDown={handleKeyDown}>
-        <BlogsCoverImage
-          onChange={value => {
-            onChangeBlog('imageUrl', value);
-          }}
-          value={imageUrl}
-        />
-        <BlogsCategorySelect
-          selected={category}
-          onSelected={data => {
-            onChangeBlog('category', data);
-          }}
-        />
-        <BlogsTitleInput
-          onChange={value => {
-            onChangeBlog('title', value);
-          }}
-          value={title}
-        />
-        <BlogMarkdownInput
-          onChange={value => {
-            onChangeBlog('content', value);
-          }}
-          value={content}
-        />
-        <BlogsToggle
-          value={published}
-          onToggle={() => {
-            onChangeBlog('published', !published);
-          }}
-          name="Published"
-        />
-        <BlogsToggle
-          value={isPrivate}
-          onToggle={() => {
-            onChangeBlog('isPrivate', !isPrivate);
-          }}
-          name="Private"
-        />
-        <BlogsPreviewButton redirectToView={redirectToPreview} />
-      </Form>
+    <div className={classes.background}>
+      <div className={classes.container}>
+        <h1>
+          Edit your blog{' '}
+          {updating && (
+            <span>
+              <Icon name="sync" size="tiny" />
+            </span>
+          )}
+        </h1>
+        <Form onKeyDown={handleKeyDown}>
+          <BlogsTitleInput
+            onChange={value => {
+              onChangeBlog('title', value);
+            }}
+            value={title}
+          />
+          <BlogDescriptionInput
+            onChange={value => {
+              onChangeBlog('description', value);
+            }}
+            value={description}
+          />
+          <BlogsCoverImage
+            onChange={value => {
+              onChangeBlog('imageUrl', value);
+            }}
+            value={imageUrl}
+          />
+          <BlogsCategorySelect
+            selected={category}
+            onSelected={data => {
+              onChangeBlog('category', data);
+            }}
+          />
+          <BlogMarkdownInput
+            onChange={value => {
+              onChangeBlog('content', value);
+            }}
+            value={content}
+          />
+          <LabelButton
+            activeText="Public"
+            deActiveText="Private"
+            activeIcon="unlock"
+            deActiveIcon="lock"
+            active={isPrivate}
+            onClick={() => {
+              onChangeBlog('isPrivate', !isPrivate);
+            }}
+          />
+
+          <LabelButton
+            activeText="Published"
+            deActiveText="Publish"
+            activeIcon="check"
+            deActiveIcon="circle outline"
+            active={published}
+            onClick={() => {
+              console.log('clicked');
+              onChangeBlog('published', !published);
+            }}
+          />
+          <BlogsPreviewButton redirectToView={redirectToPreview} floated="right" className={classes.preview}/>
+        </Form>
+      </div>
     </div>
   );
 };

@@ -5,32 +5,22 @@ import ToggleButton from '../../common/ToggleButton';
 import FormField from '../../common/FormField';
 import Label from '../../common/Label';
 
-const BlogIsDraft = ({
-    value,
-    onToggle,
-    name,
-}) => (
-    <FormField
-    >
-        <ToggleButton
-            name={name}
-            onToggle={onToggle}
-            checked={value}
-        />
-        <Label>{name}</Label>
-    </FormField>
-    
-)
+const BlogIsDraft = ({ value, onToggle, name }) => (
+  <FormField>
+    <ToggleButton name={name} onToggle={onToggle} checked={value}  />
+    <Label>{name}</Label>
+  </FormField>
+);
 
 BlogIsDraft.defaultProps = {
-    value: false,
-    name: 'Checkbox',
-}
+  value: false,
+  name: 'Checkbox'
+};
 
 BlogIsDraft.propTypes = {
-    value: PropTypes.bool,
-    onToggle: PropTypes.func.isRequired,
-    name: PropTypes.string,
-}
+  value: PropTypes.bool,
+  onToggle: PropTypes.func.isRequired,
+  name: PropTypes.string
+};
 
 export default BlogIsDraft;
