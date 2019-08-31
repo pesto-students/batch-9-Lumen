@@ -1,28 +1,33 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable react/jsx-props-no-spreading */
 import React, {useState} from 'react';
 import { Menu } from 'semantic-ui-react';
 import Blogcard from '../../components/BlogCard';
 import styles from './ProfileBlogs.module.css';
 import useGetUserBlogs from '../../hooks/useGetUserBlogs';
+import BlogsLoader from '../Home/HomeLoader';
 
 const ProfileBlogs = ({ 
-  username,
+  profile,
 }) => {
   const [activeItem, setActiveItem] = useState('blog');
-  const [blogs = { drafts: [], published: []}, blogsExist, fetched] = useGetUserBlogs();
+  const [blogs = { drafts: [], published: []}, ,fetched ] = useGetUserBlogs();
+  const loaderStyles = {
+    flexDirection :'column'
+  }
   const draftsBlogsCards = blogs.drafts.map(blog => {
-    const user = blog.userId && blog.userId.name ? blog.userId : {};
     return (
       <div className={styles.blogcardContainer} key={blog._id}>
-        <Blogcard {...user} {...blog} username={username} href={`/edit/${blog._id}`} />
+        <Blogcard {...profile} {...blog} href={`/edit/${blog._id}`} />
       </div>
     );
   });
 
   const publishedBlogsCards = blogs.published.map(blog => {
-    const user = blog.userId && blog.userId.name ? blog.userId : {};
     return (
       <div className={styles.blogcardContainer} key={blog._id}>
-        <Blogcard {...user} {...blog} username={username} href={`/preview/${blog._id}`} />
+        <Blogcard {...profile} {...blog}  href={`/preview/${blog._id}`} />
       </div>
     );
   });
@@ -33,6 +38,7 @@ const ProfileBlogs = ({
     } if (activeItem === 'draft') {
       return draftsBlogsCards;
     }
+    return (<></>);
   };
  
   return (
@@ -50,7 +56,9 @@ const ProfileBlogs = ({
         />
       </Menu>
       
-      {renderBlogs()}
+      { !fetched ? <BlogsLoader externalStyles={loaderStyles}/> :
+        renderBlogs()
+      }
     </div>
   );
 };
