@@ -1,0 +1,22 @@
+.background {
+  background: #121212;
+  min-height: 100vh;
+  overflow-y: scroll;
+}
+
+.container {
+  padding: 5vh 25vw;
+  color: #f6f4f6;
+  min-height: 100vh;
+}
+
+.title {
+  color: white;
+  font-family: 'Hepta Slab', serif;
+}
+
+@media (max-width: 700px) {
+    .container {
+        padding: 5vh 5vw;
+      }
+}

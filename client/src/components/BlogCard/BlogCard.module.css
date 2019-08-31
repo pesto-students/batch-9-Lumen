@@ -56,7 +56,7 @@
 }
 
 .postTitle {
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   line-height: 1.6;
   color: white;
   font-weight: 700;
@@ -64,7 +64,7 @@
 }
 
 .postDescription{
-    font-size: 1.1em;
+    font-size: 1.3em;
 }
 
 .postAuthor {
@@ -88,5 +88,11 @@
 @media(max-width: 700px){
     .articleDetails {
         padding: 0.5rem;
+    }
+    .postDescription{
+      font-size: 1.1em;
+    }
+    .postTitle{
+      font-size: 1.5rem;
     }
 }
