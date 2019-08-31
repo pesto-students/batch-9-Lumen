@@ -65,6 +65,7 @@ const BlogsSchema = new Schema(
 
 BlogsSchema.index(
   {
+    description: 'text',
     title: 'text',
     content: 'text'
   },
@@ -72,6 +73,7 @@ BlogsSchema.index(
     name: 'SearchBlogIndex',
     weights: {
       title: 10,
+      description: 5,
       content: 1
     }
   }
