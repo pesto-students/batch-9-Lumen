@@ -19,10 +19,10 @@ const BlogLoader = () => (
   </div>
 );
 
-const HomeLoader = () => {
+const HomeLoader = ({externalStyles = {}}) => {
   return (
     <>
-      <div className={styles.parent}>
+      <div className={styles.parent} style={externalStyles}>
         <BlogLoader />
         <BlogLoader />
         <BlogLoader />

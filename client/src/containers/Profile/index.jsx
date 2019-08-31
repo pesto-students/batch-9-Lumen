@@ -10,19 +10,22 @@ import ProfileBlogsPublic from './ProfileBlogsPublic';
 import EditProfile from './EditProfile';
 import useProfile from '../../hooks/useProfile';
 import isEmpty from '../../utils/validations/isEmpty';
+import ProfileLoader from './ProfileLoader';
 
 const Profile = ({
   match:{params:{publicUser}},
    user,
 }) => {
-  const [profile, updateProfile, saving, profileExist] = useProfile(publicUser);
+  const [profile, , , profileExist] = useProfile(publicUser);
   const isPublicProfile = !isEmpty(publicUser)
+  const currentUser = isPublicProfile? profile : user || {};
   const {
     name = '',
     username = '',
     profileImage,
     description = '',
-  } = isPublicProfile? profile : user || {};
+  } = currentUser;
+  const profileLoading = isEmpty(currentUser);
   if(!profileExist) {
     return (
       <div>
@@ -35,7 +38,9 @@ const Profile = ({
   return (
     <div className={styles.background}>
       <div className={styles.container}>
-        <div className={styles.upper}>
+        
+       { profileLoading ? <ProfileLoader /> :
+          <div className={styles.upper}>
           {profileImage && profileImage !== 'use name' ? (<Image
             src={profileImage}
             size="medium"
@@ -43,6 +48,7 @@ const Profile = ({
             className={styles.image}
           />):
            (<UIAvatar name={name} size={200} rounded className={styles.image} uppercase/>)}
+
           <div className={styles.profileContent}>
             <h1 className={styles.name}> {name}  </h1>
             <h2 className={styles.username}> {username}  </h2>
@@ -50,14 +56,14 @@ const Profile = ({
               {description}
             </h3>
           </div>
-          {/* TODO: Conditional render */}
          { !isPublicProfile &&  <EditProfile />}
         </div>
-        <Divider horizontal inverted>
+        }<Divider horizontal inverted>
           ***
         </Divider>
         <div className={styles.lower}>
-          {isPublicProfile ? <ProfileBlogsPublic username={publicUser} profile={profile}/>  : <ProfileBlogs profile={profile} username={username}/>}
+          {isPublicProfile ? <ProfileBlogsPublic  profile={currentUser} publicUser={publicUser}/> 
+           : <ProfileBlogs profile={currentUser}/>}
         </div>
       </div>
     </div>
