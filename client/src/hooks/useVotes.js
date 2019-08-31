@@ -63,7 +63,10 @@ function useVotes(blogId, userId) {
   }, [blogId, userId]);
 
   useEffect(() => {
-    if(prevVotes !== null) {
+    const hasInitialUpdates = prevVotes == null || lastUserVotes == null;
+    const hasInvalidUpdate = prevVotes === userVotes;
+    const isValidVoteUpdate = !hasInitialUpdates && !hasInvalidUpdate
+    if(isValidVoteUpdate) {
       changeUpdating(true);
       if(userVotes === 1) {
           updateVotes((totalVotes) => totalVotes + 1);
@@ -76,7 +79,7 @@ function useVotes(blogId, userId) {
         updateLastUserVotes(() => userVotes);
       });
     }
-  }, [userVotes, blogId]);
+  }, [userVotes, blogId, lastUserVotes, prevVotes]);
 
   return [votes, userVotes, canUserVote, updateUserVotes];
 }

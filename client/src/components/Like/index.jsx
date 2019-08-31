@@ -9,7 +9,7 @@ const LikeButton = ({blogId, _id}) => {
       if(userVotes === 0) {
         updateUserVotes(() => 1);
       } else if (userVotes === 1) {
-        updateUserVotes(() => 0)
+        updateUserVotes(() => 0);
       }
     }
   }
