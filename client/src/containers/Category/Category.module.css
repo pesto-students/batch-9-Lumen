@@ -3,7 +3,16 @@
     background: #121212;
   }
 
+  .container {
+    display: flex;
+    flex-direction: column;
+    padding: 5vh 5vw;
+    color: #F6F4F6;
+    overflow-y: scroll;
+    min-height: 100vh;
+  }
+
 .title{
     color: white;
-    padding: 10px 0px 0px 20px;
+    font-family: 'Hepta Slab', serif;
 }
