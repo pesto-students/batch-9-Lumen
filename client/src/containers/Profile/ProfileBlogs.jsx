@@ -9,17 +9,23 @@ const ProfileBlogs = ({
 }) => {
   const [activeItem, setActiveItem] = useState('blog');
   const [blogs = { drafts: [], published: []}, blogsExist, fetched] = useGetUserBlogs();
-  const draftsBlogsCards = blogs.drafts.map((blog) => (
-    <div className={styles.blogcardContainer} key={blog._id}>
-    <Blogcard {...blog} username={username} href={`/edit/${blog._id}`}/>
-    </div>
-  ));
+  const draftsBlogsCards = blogs.drafts.map(blog => {
+    const user = blog.userId && blog.userId.name ? blog.userId : {};
+    return (
+      <div className={styles.blogcardContainer} key={blog._id}>
+        <Blogcard {...user} {...blog} username={username} href={`/edit/${blog._id}`} />
+      </div>
+    );
+  });
 
-  const publishedBlogsCards = blogs.published.map((blog) => (
-    <div className={styles.blogcardContainer} key={blog._id}>
-    <Blogcard {...blog}  username={username} href={`/preview/${blog._id}`}/>
-    </div>
-  ));
+  const publishedBlogsCards = blogs.published.map(blog => {
+    const user = blog.userId && blog.userId.name ? blog.userId : {};
+    return (
+      <div className={styles.blogcardContainer} key={blog._id}>
+        <Blogcard {...user} {...blog} username={username} href={`/preview/${blog._id}`} />
+      </div>
+    );
+  });
 
   const renderBlogs = () => {
     if (activeItem === 'blog') {

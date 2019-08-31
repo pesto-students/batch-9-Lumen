@@ -7,11 +7,14 @@ const ProfileBlogs = ({
   username,
 }) => {
   const [blogs = [], blogsExist, fetched ] = useGetUserBlogs(username);
-  const blogsCards = blogs.map((blog) => (
+  const blogsCards = blogs.map((blog) => {
+    const user = blog.userId && blog.userId.name ? blog.userId : {};
+    return(
     <div className={styles.blogcardContainer} key={blog._id}>
-    <Blogcard blog={blog} username={username} href={`/preview/${blog._id}`} />
+    <Blogcard {...user} {...blog} username={username} href={`/preview/${blog._id}`} />
     </div>
-  ));
+  );
+});
   
   return (
     <div>

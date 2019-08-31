@@ -10,60 +10,24 @@ import HomeExtended from './HomeExtended';
 import useGetTopBlogs from '../../hooks/useGetTopBlogs';
 import HomeLoader from './HomeLoader';
 
-const getBlog = (blog, size) => {
-  const user = blog.userId && blog.userId.name ? blog.userId : {};
-  return (
-    <div className={styles[size]} key={blog._id}>
-      <BlogCard {...user} {...blog} href={`/blog/${blog._id}`} />
-    </div>
-  );
-};
-
 const Home = ({ isAuthenticated }) => {
   const [blogs = [], fetched] = useGetTopBlogs(1);
 
-  const biggerCards = blogs
-    .slice(0, 4)
-    .map(blog => getBlog(blog, 'large-blog')); 
-  const smallerCardsFirstColumn = blogs
-    .slice(4, 8)
-    .map(blog => getBlog(blog, 'small-blog'));
-  const smallerCardsSecondColumn = blogs
-    .slice(8,12)
-    .map(blog => getBlog(blog, 'small-blog'));
-
-  const sampleBlogCard = () => <BlogCard />
+  const topBlogCards = blogs.map(blog => {
+    const user = blog.userId && blog.userId.name ? blog.userId : {};
+    return (
+      <div className={styles.child}>
+        <BlogCard {...user} {...blog} href={`/blog/${blog._id}`} />
+      </div>
+    );
+  });
 
   return (
     <div className={styles.background}>
       <h1 className={styles.title}> Top trending blogs</h1>
-      <div className={styles.container}>
+      <div>
         {fetched ? (
-          <>
-            <div className={[styles.column, styles['column-first']].join(' ')}>
-              {/* {biggerCards} */}
-              <BlogCard />
-              <BlogCard />
-              <BlogCard />
-              <BlogCard />
-            </div>
-
-            <div className={[styles.column, styles['column-others']].join(' ')}>
-              {/* {smallerCardsFirstColumn} */}
-              <BlogCard />
-              <BlogCard />
-              <BlogCard />
-              <BlogCard />
-            </div>
-
-            <div className={[styles.column, styles['column-others']].join(' ')}>
-              {/* {smallerCardsSecondColumn} */}
-              <BlogCard />
-              <BlogCard />
-              <BlogCard />
-              <BlogCard />
-            </div>
-          </>
+          <div className={styles.parent}>{topBlogCards}</div>
         ) : (
           <HomeLoader />
         )}

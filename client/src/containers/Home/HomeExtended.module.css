@@ -43,7 +43,7 @@ font-family: "Fjalla One", sans-serif;
     .child{
         flex: 1 0 35%;
         height: 250px;
-        margin: 5px;
+        margin: 16px 16px;
     }  
     .child h2{
         font-weight: 700;
