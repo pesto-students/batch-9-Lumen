@@ -1,9 +1,11 @@
 .background{
-  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("https://images.pexels.com/photos/36717/amazing-animal-beautiful-beautifull.jpg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
+  /* background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("https://images.pexels.com/photos/36717/amazing-animal-beautiful-beautifull.jpg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"); */
+  background: #121212;
 }
 .title{
   color: white;
-  padding: 10px 0px 0px 20px;
+  padding: 10px 0px 0px 25px;
+  font-family: 'Hepta Slab', serif;
 }
 .container {
   display: flex;
@@ -16,7 +18,7 @@
 .column {
   display: flex;
   flex-direction: column;
-  margin: 5px;
+  margin: 25px;
 }
 
 .column-first {
