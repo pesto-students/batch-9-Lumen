@@ -9,11 +9,12 @@ import BlogMarkdownInput, {
   BlogsCoverImage,
   BlogsPreviewButton,
   BlogsCategorySelect,
-  BlogsToggle,
   BlogDescriptionInput
 } from '../Form/BlogsInputs';
 import useGetBlog from '../../hooks/useBlog';
 import classes from './blogBox.module.css';
+import Loader from '../UI/Loader';
+import isEmpty from '../../utils/validations/isEmpty';
 
 const BlogBox = ({
   match: {
@@ -21,7 +22,7 @@ const BlogBox = ({
   },
   history
 }) => {
-  const [blog, updateBlog, updating] = useGetBlog(blogId, true);
+  const [blog, updateBlog, updating, fetchBlogError] = useGetBlog(blogId, true);
   const {
     content = '',
     title = '',
@@ -44,7 +45,24 @@ const BlogBox = ({
       redirectToPreview();
     }
   };
-
+  if (!isEmpty(fetchBlogError)) {
+    return (
+      <div>
+        <Loader
+          size="small"
+          text="Oops! We cannot find blog you are looking for. 😕"
+          disabled
+        />
+      </div>
+    );
+  }
+  if (isEmpty(blog)) {
+    return (
+      <div>
+        <Loader size="massive" text="Good things take time 🚀" />
+      </div>
+    );
+  }
   return (
     <div className={classes.background}>
       <div className={classes.container}>
@@ -105,11 +123,14 @@ const BlogBox = ({
             deActiveIcon="circle outline"
             active={published}
             onClick={() => {
-              console.log('clicked');
               onChangeBlog('published', !published);
             }}
           />
-          <BlogsPreviewButton redirectToView={redirectToPreview} floated="right" className={classes.preview}/>
+          <BlogsPreviewButton
+            redirectToView={redirectToPreview}
+            floated="right"
+            className={classes.preview}
+          />
         </Form>
       </div>
     </div>
