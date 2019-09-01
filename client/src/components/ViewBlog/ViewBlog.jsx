@@ -4,6 +4,7 @@ import React from 'react'
 import UIAvatar from 'react-ui-avatars';
 import {Link} from 'react-router-dom';
 import { Divider } from 'semantic-ui-react'
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 import styles from './ViewBlog.module.css';
 import MarkdownRenderer from '../markdownRenderer';
 import {simpleDate} from '../../utils/date/index';
@@ -39,7 +40,7 @@ const ViewBlog = ({blog}) => {
                         <span className={styles.date}> {simpleDate(blog.createdAt)} </span>
                     </div>
                 </div>
-                <img src={imageUrl || defaultImageURL } alt={title}/>
+                <LazyLoadImage src={imageUrl || defaultImageURL} alt={title} effect="blur" />
                 <Divider horizontal inverted>
 
                 <ShareBlog 
