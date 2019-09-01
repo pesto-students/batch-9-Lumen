@@ -1,7 +1,6 @@
 .parent {
   display: flex;
   flex-wrap: wrap;
-  cursor: pointer;
 }
 
 .child {
