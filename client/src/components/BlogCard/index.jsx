@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 import styles from './BlogCard.module.css';
 import fromNow from '../../utils/date/fromNow';
+
 
 const defaultImageURL =
   'https://miro.medium.com/max/2082/1*7goNE2n2xxOlmomHfC0-Qw.jpeg';
@@ -22,11 +24,14 @@ const BlogCard = ({
     <div className={styles.container}>
       <Link className={styles.cardLink} to={href}>
         <article className={styles.blogCard}>
-          <img
-            className={styles.postImage}
-            src={imageUrl || defaultImageURL}
-            alt="Blog"
-          />
+          <div className={styles.postImage}>
+           <LazyLoadImage
+              alt={"Blog"}
+              height="100%"
+              width="100%"
+              effect="blur"
+              src={imageUrl || defaultImageURL} />
+          </div>
           <div className={styles.articleDetails}>
             <h3 className={styles.postTitle}>{title}</h3>
             <p className={styles.postDescription}>{`${desc.slice(

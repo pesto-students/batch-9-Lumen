@@ -5,6 +5,7 @@
 
 .parent {
   display: flex;
+  align-items: stretch;
   flex-wrap: wrap;
   cursor: pointer;
 }
@@ -15,6 +16,12 @@
   background-size: cover;
   position: relative;
   float: left;
+  /* change in bottom 4 lines, to be removed if didn't like new design */
+  border-radius: 5px;
+  box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5;
+  background-size: cover;
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+    url('https://scx1.b-cdn.net/csz/news/800/2017/1-meteor.jpg') no-repeat;
 }
 .title {
   color: white;
@@ -38,7 +45,7 @@
     width: 100%;
   }
 
-  .parent{
+  .parent {
     flex-direction: column;
   }
 
@@ -46,5 +53,9 @@
     flex: 0 0 90%;
     margin: 0px;
     padding: 5px 5vw;
+    border-radius: 0px;
+    box-shadow: none;
+    background-size: cover;
+    background: none;
   }
 }
