@@ -8,7 +8,7 @@ import styles from './ProfileDropdown.module.css';
 const ProfileDropdown = ({ onLogout, history, user }) => {
   const profile = user || {};
   return (<div className={styles.container}>
-    <Dropdown text={profile.name} item floating>
+    <Dropdown text={profile.name? profile.name.replace(/\s.*/,''): ""} item floating>
       <Dropdown.Menu direction="left">
         <Dropdown.Item text="Profile" onClick={() => { history.push('/profile')}} />
         <Dropdown.Item text="Sign out" onClick={onLogout} />

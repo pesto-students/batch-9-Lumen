@@ -22,12 +22,14 @@ const SearchNav = ({ history }) => {
       <div className="searchxx">
         <form className="searchxx" onSubmit={handleSearchClick}>
           <input
+            aria-label="search text"
             type="text"
             className="searchTermxx"
             placeholder="Search blogs.."
             {...bind}
           />
           <button
+            aria-label="search button"
             type="submit"
             className="searchButtonxx"
             disabled={value === ''}
