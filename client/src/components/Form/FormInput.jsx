@@ -8,7 +8,7 @@ const FormInput = props => (
     iconPosition="left"
     control={Input}
     fluid
-    className={classes.label}
+    className={classes.label2}
     {...props}
   />
 );

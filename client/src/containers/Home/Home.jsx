@@ -2,13 +2,14 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React, {lazy, Suspense} from 'react';
 import PropTypes from 'prop-types';
+import { Divider } from 'semantic-ui-react';
 import styles from './Home.module.css';
 import FloatingActionButton from '../../components/FloatingActionButton/FloatingActionButton';
 import BlogCard from '../../components/BlogCard/index';
 import '../../customStyles.css';
 import useGetTopBlogs from '../../hooks/useGetTopBlogs';
 import HomeLoader from './HomeLoader';
-// import HomeExtended from './HomeExtended';
+
 const HomeExtended = React.lazy(() => import('./HomeExtended'));
 
 
@@ -26,7 +27,9 @@ const Home = ({ isAuthenticated }) => {
 
   return (
     <div className={styles.background}>
-      <h1 className={styles.title}> Top trending blogs</h1>
+      <Divider inverted horizontal className={styles.title}>
+        <h1> Top trending blogs</h1>
+      </Divider>
       <div>
         {fetched ? (
           <div className={styles.parent}>{topBlogCards}</div>
@@ -34,7 +37,9 @@ const Home = ({ isAuthenticated }) => {
           <HomeLoader />
         )}
       </div>
-      <h1 className={styles.title}> Explore more</h1>
+      <Divider inverted horizontal className={styles.title}>
+        <h1> Explore more</h1>
+      </Divider>
       <Suspense fallback={<HomeLoader />}>
         <HomeExtended />
       </Suspense>

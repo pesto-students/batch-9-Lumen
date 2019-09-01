@@ -22,7 +22,7 @@ const SignupForm = ({ onRegister, error, loading }) => {
   return (
     <Grid textAlign="center" verticalAlign="middle">
       <Grid.Column style={{ maxWidth: 450 }}>
-        <Header as="h2" color="teal" textAlign="center">
+        <Header as="h2" color="#333" textAlign="center">
           Register your account
         </Header>
         <Form size="large" onSubmit={handleSignup}>

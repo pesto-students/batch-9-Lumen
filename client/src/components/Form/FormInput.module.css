@@ -2,3 +2,8 @@
   text-align: left;
   color: #f6f4f6 !important;
 }
+
+.label2 label{
+  text-align: left;
+  color: black;
+}

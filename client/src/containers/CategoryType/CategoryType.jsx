@@ -19,7 +19,9 @@ const CategoryType = ({ match, location: { search }, history }) => {
   const blogsCards = blogs.map(blog => {
     const user = blog.userId || {};
     return (
-      <BlogCard {...user} {...blog} href={`/blog/${blog._id}`} key={blog._id} />
+      <div className={classes.blogContainer}>
+        <BlogCard {...user} {...blog} href={`/blog/${blog._id}`} key={blog._id} />
+      </div>
     );
   });
 

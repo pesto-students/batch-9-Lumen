@@ -28,7 +28,7 @@ const  EditBlog = lazy(() => import('./components/blogBox'));
 
 function LazyRoute(Component) {
   return props => (
-    <Suspense fallback={<Loader text="Bazzingaa!"/>}>
+    <Suspense fallback={<Loader size="massive" text="It's worth your time, trust us!"/>}>
       <Component {...props} />
     </Suspense>
   );

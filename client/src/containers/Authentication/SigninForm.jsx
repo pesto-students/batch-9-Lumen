@@ -17,7 +17,7 @@ const SigninForm = ({onLogin, error, loading}) => {
   return (
     <Grid textAlign="center" verticalAlign="middle">
       <Grid.Column style={{ maxWidth: 450 }}>
-        <Header as="h2" color="teal" textAlign="center">
+        <Header as="h2" color="#ccc" textAlign="center">
           Sign-in to your account
         </Header>
         <Form size="large" onSubmit={handleLogin}>

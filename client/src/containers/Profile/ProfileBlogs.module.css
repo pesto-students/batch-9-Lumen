@@ -15,6 +15,15 @@
   font-family: 'Hepta Slab', serif;
 }
 
+.error{
+  padding-left: 30px;
+  color: #F6F4F6;
+  opacity: 0.75
+}
+.write{
+  padding-left: 30px;
+}
+
 @media(max-width: 800px){
     .blogcardContainer {
         /* height: 150px; */
@@ -22,5 +31,11 @@
       } 
     .menuStyle{
         padding-left: 15px;
+    }
+    .error{
+      padding-left: 15px;
+    }
+    .write{
+      padding-left: 15px;
     }
 }

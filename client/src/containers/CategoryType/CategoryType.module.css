@@ -14,9 +14,15 @@
   color: white;
   font-family: 'Hepta Slab', serif;
 }
+.blogContainer{
+  padding: 30px 5px;
+}
 
 @media (max-width: 700px) {
     .container {
         padding: 5vh 5vw;
+      }
+      .blogContainer{
+        padding: 15px 0px;
       }
 }

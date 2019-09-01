@@ -26,6 +26,7 @@ const ProfileBlogs = ({
         !fetched ? <BlogsLoader externalStyles={loaderStyles}/> :
         blogsCards(blogs,profile)
       }
+      { blogs.length === 0 ? <h3 className={styles.error}> {`${profile.name} has not written any blogs yet.`}</h3> : null}
     </div>
   );
 };

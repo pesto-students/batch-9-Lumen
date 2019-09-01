@@ -22,6 +22,10 @@
 }
 .cardContainer {
   width: 500px;
+  background: #121212;
+  border-radius: 5px;
+  box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5;
+  background-size: cover;
 }
 
 @media (max-width: 800px) {
