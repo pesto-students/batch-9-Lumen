@@ -56,7 +56,7 @@ const addCommentButton = (<Button content="Add Comment" onClick={(event) => crea
           commentId={comment._id}
           blogId={blogId}
           name={name}
-          username={username}
+          username={comment.author.username}
         />
         </div>
       )) : null}
