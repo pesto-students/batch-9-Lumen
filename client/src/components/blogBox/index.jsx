@@ -110,7 +110,7 @@ const BlogBox = ({
             deActiveText="Private"
             activeIcon="unlock"
             deActiveIcon="lock"
-            active={isPrivate}
+            active={!isPrivate}
             onClick={() => {
               onChangeBlog('isPrivate', !isPrivate);
             }}
