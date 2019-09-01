@@ -1,14 +1,16 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable react/jsx-props-no-spreading */
-import React from 'react';
+import React, {lazy, Suspense} from 'react';
 import PropTypes from 'prop-types';
 import styles from './Home.module.css';
 import FloatingActionButton from '../../components/FloatingActionButton/FloatingActionButton';
 import BlogCard from '../../components/BlogCard/index';
 import '../../customStyles.css';
-import HomeExtended from './HomeExtended';
 import useGetTopBlogs from '../../hooks/useGetTopBlogs';
 import HomeLoader from './HomeLoader';
+// import HomeExtended from './HomeExtended';
+const HomeExtended = React.lazy(() => import('./HomeExtended'));
+
 
 const Home = ({ isAuthenticated }) => {
   const [blogs = [], fetched] = useGetTopBlogs(1);
@@ -33,7 +35,9 @@ const Home = ({ isAuthenticated }) => {
         )}
       </div>
       <h1 className={styles.title}> Explore more</h1>
-      <HomeExtended />
+      <Suspense fallback={<HomeLoader />}>
+        <HomeExtended />
+      </Suspense>
       {isAuthenticated ? <FloatingActionButton /> : null}
     </div>
   );
