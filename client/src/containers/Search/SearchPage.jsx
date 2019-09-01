@@ -8,7 +8,7 @@ import image from '../../noresult.png';
 const getSearchStringFromQuery = query => {
   const params = new URLSearchParams(query);
   const joinedQuery = params.get('query');
-  const queryString = joinedQuery.replace('+', ' ');
+  const queryString = joinedQuery? joinedQuery.replace('+', ' '): "";
   return queryString;
 };
 
