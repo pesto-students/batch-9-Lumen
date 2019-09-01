@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, lazy, Suspense } from 'react';
 import { Route, Redirect, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -6,17 +6,33 @@ import './App.css';
 import 'semantic-ui-css/semantic.min.css';
 import Layout from './components/hoc/Layout/Layout';
 import Home from './containers/Home/Home';
-import EditBlog from './components/blogBox';
-import PreviewBlog from './components/blogBox/preview';
-import createBlog from './components/createBlogs';
 import Authentication from './containers/Authentication/Authentication';
 import * as actions from './store/actions/index';
 import Loader from './components/UI/Loader';
-import Category from './containers/Category/Category';
-import CategoryType from './containers/CategoryType/CategoryType';
-import SearchPage from './containers/Search/SearchPage';
-import Profile from './containers/Profile';
-import BlogPage from './containers/BlogPage';
+const Category = lazy(() => import('./containers/Category/Category'));
+const CategoryType = lazy(() => import('./containers/CategoryType/CategoryType'));
+const SearchPage = lazy(() => import('./containers/Search/SearchPage'));
+const Profile = lazy(() => import('./containers/Profile'));
+const BlogPage = lazy(() => import('./containers/BlogPage'));
+const PreviewBlog = lazy(() => import('./components/blogBox/preview'));
+const createBlog = lazy(() => import('./components/createBlogs'));
+const  EditBlog = lazy(() => import('./components/blogBox'));
+// import Category from './containers/Category/Category';
+// import CategoryType from './containers/CategoryType/CategoryType';
+// import SearchPage from './containers/Search/SearchPage';
+// import Profile from './containers/Profile';
+// import BlogPage from './containers/BlogPage';
+// import EditBlog from './components/blogBox';
+// import PreviewBlog from './components/blogBox/preview';
+// import createBlog from './components/createBlogs';
+
+function LazyRoute(Component) {
+  return props => (
+    <Suspense fallback={<Loader text="Bazzingaa!"/>}>
+      <Component {...props} />
+    </Suspense>
+  );
+};
 
 const App = ({
   onTryAutoLogin,
@@ -32,16 +48,16 @@ const App = ({
   let routes = (
     <Switch>
       <Route path="/" exact component={Home} />
-      <Route path="/category" exact component={Category} />
-      <Route path="/category/:type" component={CategoryType} />
-      <Route path="/search" component={SearchPage} />
-      <Route path="/profile/:publicUser" exact component={Profile} />
-      <Route path="/blog/:blogId" exact component={BlogPage} />
-      <Route path="/blog/draft/:draftPath/:blogId" exact component={BlogPage} />
+      <Route path="/category" exact component={LazyRoute(Category)} />
+      <Route path="/category/:type" component={LazyRoute(CategoryType)} />
+      <Route path="/search" component={LazyRoute(SearchPage)} />
+      <Route path="/profile/:publicUser" exact component={LazyRoute(Profile)} />
+      <Route path="/blog/:blogId" exact component={LazyRoute(BlogPage)} />
+      <Route path="/blog/draft/:draftPath/:blogId" exact component={LazyRoute(BlogPage)} />
       <Route
         path="/blog/secured/:privatePath/:blogId"
         exact
-        component={BlogPage}
+        component={LazyRoute(BlogPage)}
       />
       <Redirect to="/" />
     </Switch>
@@ -50,24 +66,24 @@ const App = ({
   if (isAuthenticated) {
     routes = (
       <Switch>
-        <Route path="/write" exact component={createBlog} />
-        <Route path="/edit/:blogId" exact component={EditBlog} />
-        <Route path="/preview/:blogId" exact component={PreviewBlog} />
+        <Route path="/write" exact component={LazyRoute(createBlog)} />
+        <Route path="/edit/:blogId" exact component={LazyRoute(EditBlog)} />
+        <Route path="/preview/:blogId" exact component={LazyRoute(PreviewBlog)} />
         <Route
           path="/"
           exact
           render={() => <Home isAuthenticated={isAuthenticated} />}
         />
-        <Route path="/category" exact component={Category} />
-        <Route path="/category/:type" component={CategoryType} />
-        <Route path="/search" component={SearchPage} />
-        <Route path="/profile" exact component={Profile} />
-        <Route path="/profile/:publicUser" exact component={Profile} />
-        <Route path="/blog/:blogId" exact component={BlogPage} />
+        <Route path="/category" exact component={LazyRoute(Category)} />
+        <Route path="/category/:type" component={LazyRoute(CategoryType)} />
+        <Route path="/search" component={LazyRoute(SearchPage)} />
+        <Route path="/profile" exact component={LazyRoute(Profile)} />
+        <Route path="/profile/:publicUser" exact component={LazyRoute(Profile)} />
+        <Route path="/blog/:blogId" exact component={LazyRoute(BlogPage)} />
         <Route
           path="/blog/draft/:draftPath/:blogId"
           exact
-          component={BlogPage}
+          component={LazyRoute(BlogPage)}
         />
         <Route
           path="/blog/secured/:privatePath/:blogId"
