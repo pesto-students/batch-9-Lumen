@@ -3,10 +3,12 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React, {useState} from 'react';
 import { Menu } from 'semantic-ui-react';
+import {Link} from 'react-router-dom';
 import Blogcard from '../../components/BlogCard';
 import styles from './ProfileBlogs.module.css';
 import useGetUserBlogs from '../../hooks/useGetUserBlogs';
 import BlogsLoader from '../Home/HomeLoader';
+import LabelButton from '../../components/common/LabelButton';
 
 const ProfileBlogs = ({ 
   profile,
@@ -34,8 +36,17 @@ const ProfileBlogs = ({
 
   const renderBlogs = () => {
     if (activeItem === 'blog') {
+      if(blogs.published.length === 0){
+        return (<> 
+          <h3 className={styles.error}> You have not written any blogs yet. This is the good time to write your first blog and share with the world!</h3> 
+          <Link to="/write" className={styles.write}><LabelButton active activeText="Write" activeIcon="edit"/> </Link>
+        </>)
+      }
       return publishedBlogsCards;
     } if (activeItem === 'draft') {
+      if(blogs.drafts.length === 0){
+        return <h3 className={styles.error}> You have no blogs in draft.</h3>
+      }
       return draftsBlogsCards;
     }
     return (<></>);

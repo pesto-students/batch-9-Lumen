@@ -6,7 +6,7 @@ const TextInput = ({ name, iconName, ...props }) => (
   <FormInput
     required
     icon={iconName}
-    placeholder="Name"
+    placeholder={name}
     type="text"
     label={name}
     id={name}
