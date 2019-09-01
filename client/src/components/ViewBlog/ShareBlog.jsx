@@ -32,7 +32,7 @@ const ShareBlog = ({
   }
 
   const shareData = urlToShare.map(urlData => (
-    <div>
+    <div key={urlData.link}>
       <h5>{urlData.name}</h5>
       <a href={urlData.link} target="blank">
         {urlData.link}

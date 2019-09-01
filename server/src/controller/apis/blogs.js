@@ -15,6 +15,9 @@ import {
   attachUserIfExists,
   checkAndAttachUserForUsername
 } from '../../middlewares/user';
+import deleteBlogsVotes from '../../middlewares/votes';
+import deleteBlogsComments from '../../middlewares/comments';
+
 import blogsAPI from '../../services/blogs/api';
 
 const router = Router();
@@ -55,6 +58,8 @@ router.delete(
   authInstance.isValidUser(),
   getBlog,
   authenticateUserBlog,
+  deleteBlogsVotes,
+  deleteBlogsComments,
   deleteBlog,
   blogsAPI.sendResponse
 );

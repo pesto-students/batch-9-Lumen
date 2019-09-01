@@ -40,8 +40,17 @@ const getComments = async (blogId, page = 1, parentId = null, commentsInOnePage 
   return requiredTenComments;
 };
 
+const deleteComments = async (blogId) => {
+  const query = {
+    blogId
+  };
+  const details = await CommentsModel.deleteMany(query);
+  return details;
+}
+
 export {
   createComment,
   deleteComment,
   getComments,
+  deleteComments,
 };

@@ -14,6 +14,7 @@ const CommentsLayout = ({
    _id,
    name,
    username,
+   profileImage,
 }) => {
   const [formInput, setFormInput] = useState('');
   const [comments, updateComments, newComment, addNewComment] = useComments(blogId);
@@ -31,7 +32,8 @@ const CommentsLayout = ({
       author: {
         _id,
         name,
-        username
+        username,
+        profileImage,
       },
       createdAt:createdTime
     }
@@ -50,13 +52,14 @@ const addCommentButton = (<Button content="Add Comment" onClick={(event) => crea
         <div key={comment._id}>
            <CommentComponent
           author={comment.author.name}
-          image={comment.author.imageUrl}
+          image={comment.author.profileImage}
           postedOn={comment.createdAt}
           content={comment.content}
           commentId={comment._id}
           blogId={blogId}
           name={name}
-          username={comment.author.username}
+          username={username}
+          profileImage={profileImage}
         />
         </div>
       )) : null}
