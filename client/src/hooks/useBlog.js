@@ -3,7 +3,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { getBlog, updateBlog as updateBlogCall } from '../apis/blogs';
 import debounce from '../utils/debounce';
 
-const threeSeconds = 3000;
+const threeSeconds = 500;
 const saveUpdate = debounce((blog, blogId, completeCallback) => {
   updateBlogCall(blog, blogId);
   completeCallback();

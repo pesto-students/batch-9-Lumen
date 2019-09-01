@@ -3,10 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <title><%= title %></title>
+<meta property="og:site_name" content="<%= name %> | <%= username %> ">
 <meta property="og:title" content="<%= title %>">
 <meta property="og:description" content="<%= content %>">
-<meta property="og:image" content="<%= imageUrl %>">
+<meta property="og:image" itemprop="image" content="<%= imageUrl %>">
 <meta property="og:url" content="<%= redirectUrl %>">
+<meta property="og:type" content="article" />
+
 </head>
 <body>
     <div style="text-align: center; height:20vh;">
@@ -18,7 +21,7 @@
     const redirectUrl = document.getElementsByTagName('a')[0].getAttribute('href')
     console.log('GOING TO REDIRECT TO ', redirectUrl)
     setTimeout(()=>{
-        window.location.replace(redirectUrl);
+        // window.location.replace(redirectUrl);
     })
 </script>
 </html>

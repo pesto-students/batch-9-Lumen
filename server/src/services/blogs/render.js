@@ -5,7 +5,8 @@ const shareBlog = async (req, res) => {
     _id,
     title = '',
     description = '',
-    imageUrl = 'https://cdn3.wpbeginner.com/wp-content/uploads/2016/11/blogimagetools.jpg'
+    imageUrl = 'https://miro.medium.com/max/2082/1*7goNE2n2xxOlmomHfC0-Qw.jpeg',
+    userId = {}
   } = req.blog;
   const prependPath = `${env.appViewUrl}blog`;
   const draftPath = `${prependPath}/draft/${req.params.draftUrl}/${_id}`;
@@ -19,11 +20,18 @@ const shareBlog = async (req, res) => {
   } else {
     redirectUrl = publicUrl;
   }
+  const authorName = userId.name || '';
+  const authorUsername = userId.username || '';
+  console.log('SENDING IMAGE URL AS', imageUrl);
   res.render('shareBlog', {
     title,
     content: description,
-    imageUrl,
-    redirectUrl
+    imageUrl:
+      imageUrl ||
+      'https://miro.medium.com/max/2082/1*7goNE2n2xxOlmomHfC0-Qw.jpeg',
+    redirectUrl,
+    name: authorName,
+    username: authorUsername
   });
 };
 
