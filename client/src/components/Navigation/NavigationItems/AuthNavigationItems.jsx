@@ -8,7 +8,7 @@ import Search from '../../Search/Search';
 
 const AuthNavigationItems = ({ isAuthenticated, openAuthenticationModal }) => (
   <ul className={classes.NavigationItems}>
-    <Search />
+    <li><Search /></li>
     <NavigationItem link="/category" exact>
       Category
     </NavigationItem>

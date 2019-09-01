@@ -22,7 +22,7 @@ const BlogCard = ({
   const desc = description || defaultDescription;
   return (
     <div className={styles.container}>
-      <Link className={styles.cardLink} to={href}>
+      <Link className={styles.cardLink} to={href} aria-label="Blog card">
         <article className={styles.blogCard}>
           <div className={styles.postImage}>
            <LazyLoadImage
