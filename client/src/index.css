@@ -11,3 +11,17 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+/* semantic css change for profile drop down */
+.ui.floating.dropdown>.menu{
+  background: #121212;
+  border: 1px solid grey;
+}
+
+.ui.floating.dropdown>.menu .item{
+  color: white;
+}
+.ui.floating.dropdown>.menu .item:hover{
+  color: white;
+  background: #3E50B4;
+}
