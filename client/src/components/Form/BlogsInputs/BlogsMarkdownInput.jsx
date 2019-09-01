@@ -4,13 +4,16 @@ import PropTypes from 'prop-types';
 import FormField from '../../common/FormField';
 import TextAreaAutoResize from '../../common/TextAreaAutoResize';
 import classes from '../FormInput.module.css';
+import MarkdownInstructions from '../../MarkdownInstructions/MarkdownInstructions';
 
 const BlogsMarkdownInput = ({onChange, ...rest}) => {
     return (
+        <>
+        <MarkdownInstructions />
         <FormField
         control={ TextAreaAutoResize }
         required
-        label="Enter Blog Content"
+        label="Enter Blog Content in markdown"
         placeholder="Tell us more about this blog..."
         useCacheForDOMMeasurements
         minRows={20}
@@ -19,6 +22,7 @@ const BlogsMarkdownInput = ({onChange, ...rest}) => {
         className={classes.label}
         {...rest}
         />
+        </>
     )
 }
 
