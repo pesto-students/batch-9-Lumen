@@ -28,6 +28,18 @@ const getBlog = async (blogId, draftPath, privatePath) => {
   }
 };
 
+const deleteBlog = async (blogId) => {
+  try {
+    const requestUrl = `/${blogId}`;
+    const response = await axios.delete(requestUrl);
+    return response.data;
+  } catch (e) {
+    if (!e.response) throw e;
+
+    throw e.response.data;
+  }
+};
+
 const updateBlog = async (blogData, blogId) => {
   try {
     const blogsData = await axios.put(`/${blogId}`, blogData);
@@ -97,6 +109,7 @@ export {
   getBlogsFromUsername,
   getUserBlogs,
   searchBlogs,
-  getTopBlogs
+  getTopBlogs,
+  deleteBlog,
 };
 export default createBlog;

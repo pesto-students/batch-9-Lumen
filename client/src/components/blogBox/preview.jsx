@@ -6,6 +6,7 @@ import Loader from '../UI/Loader';
 import ViewBlog from '../ViewBlog/ViewBlog';
 import isEmpty from '../../utils/validations/isEmpty';
 import PrimaryButton from '../common/PrimaryButton';
+import DeleteBlog from '../deleteBlog';
 
 const PreviewBlog = ({
   match: {
@@ -46,6 +47,7 @@ const PreviewBlog = ({
       >
         Edit
       </PrimaryButton>
+      <DeleteBlog blogId={blogId}/>
       <ViewBlog blog={blog} />
       <PrimaryButton
         style={{ margin: '0px 0px 20px 20px' }}
@@ -53,6 +55,7 @@ const PreviewBlog = ({
       >
         Edit
       </PrimaryButton>
+      <DeleteBlog blogId={blogId}/>
     </div>
   );
 };

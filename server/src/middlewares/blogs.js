@@ -90,6 +90,7 @@ const updateBlog = async (req, res, next) => {
 };
 
 const deleteBlog = async (req, res, next) => {
+  console.log('REACHED DELETE BLOG')
   const blogID = req.params.id;
   try {
     const blog = await deleteBlogById(blogID);
@@ -99,6 +100,7 @@ const deleteBlog = async (req, res, next) => {
     }
     return res.status(404).json({ msg: 'Blog not found.' });
   } catch (err) {
+    console.error(err)
     return res.status(500).json({ msg: 'Something went wrong', error: err });
   }
 };

@@ -101,4 +101,13 @@ const getTopVotedBlogs = async (pageNumber, limit) => {
   });
   return blogs;
 };
-export { voteBlog, countVotesOfBlog, getUserUpVotes, getTopVotedBlogs };
+
+const deleteVotes = async (blogId) => {
+  const query = {
+    blogId
+  };
+  const details = await VotesModel.deleteMany(query);
+  return details;
+}
+
+export { voteBlog, countVotesOfBlog, getUserUpVotes, getTopVotedBlogs, deleteVotes };
