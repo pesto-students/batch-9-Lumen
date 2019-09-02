@@ -3,7 +3,7 @@
 import React from 'react'
 import UIAvatar from 'react-ui-avatars';
 import {Link} from 'react-router-dom';
-import { Divider } from 'semantic-ui-react'
+import { Divider, Image } from 'semantic-ui-react'
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import styles from './ViewBlog.module.css';
 import MarkdownRenderer from '../markdownRenderer';
@@ -21,11 +21,14 @@ const ViewBlog = ({blog}) => {
                 <span className={styles.description}> {description || defaultDescription} </span>
                 <div className={styles.blogDetails}>
                    <Link to={`/profile/${userId.username}`} target="_blank">
-                        <UIAvatar 
-                        name={userId.name} 
-                        size={50} 
-                        rounded 
-                        className={styles.left}  />
+                   {userId.profileImage && userId.profileImage !== 'use name' ? (
+                   <Image
+                     src={userId.profileImage}
+                      size="mini"
+                     circular
+                     className={styles.left}
+                        />):
+           (<UIAvatar name={userId.name} size={50} rounded className={styles.left} uppercase/>)}
                     </Link>
 
                     <div className={styles.right}>

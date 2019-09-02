@@ -83,7 +83,7 @@ const CommentComponent = ({
   return (
     <div>
       <Comment>
-        <Comment.Avatar src={image} />
+        <Comment.Avatar src={image || 'https://react.semantic-ui.com/images/avatar/small/matt.jpg'} />
         <Comment.Content>
           <Comment.Author
             as="a"
@@ -105,7 +105,7 @@ const CommentComponent = ({
             </Comment.Action>
           </Comment.Actions>
         </Comment.Content>
-        <Comment.Group>
+        <Comment.Group size="small">
           {replies.length > 0
             ? replies.map(reply => (
                 <div key={reply._id}>

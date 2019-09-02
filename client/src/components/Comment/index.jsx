@@ -44,7 +44,7 @@ const CommentsLayout = ({
 
 const addCommentButton = (<Button content="Add Comment" onClick={(event) => createComment(event, formInput)} primary />)
   const commentsLayout = (
-    <Comment.Group threaded>
+    <Comment.Group threaded size="large">
       <Header as="h3" inverted>
           Comments
       </Header>
@@ -60,6 +60,7 @@ const addCommentButton = (<Button content="Add Comment" onClick={(event) => crea
           name={name}
           username={username}
           profileImage={profileImage}
+          _id={_id}
         />
         </div>
       )) : null}
