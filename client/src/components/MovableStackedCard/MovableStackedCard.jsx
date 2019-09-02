@@ -13,9 +13,7 @@ const MovableStackedCard = ({ _id }) => {
     const user = blog.userId || {};
     return (
       <div className={styles.card}>
-        <div className={styles.cardContainer}>
           <BlogCard {...user} {...blog} href={`/blog/${blog._id}`} />
-        </div>
       </div>
     );
   });

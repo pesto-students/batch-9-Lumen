@@ -19,8 +19,9 @@
   border-radius: 5px;
   box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5;
   background-size: cover;
-  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
-    url('https://scx1.b-cdn.net/csz/news/800/2017/1-meteor.jpg') no-repeat;
+  /* background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+    url('https://scx1.b-cdn.net/csz/news/800/2017/1-meteor.jpg') no-repeat; */
+  background: #121212;
 }
 .title {
   color: white;
