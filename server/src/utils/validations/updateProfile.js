@@ -5,8 +5,7 @@ import { addErrorIfNotString } from './isString';
 function validateUpdateUser(user) {
   const propertiesToCheck = [
     ['name', [addErrorIfEmpty, addErrorIfNotString]],
-    ['description', [addErrorIfEmpty, addErrorIfNotString]],
-    ['profileImage', [addErrorIfEmpty, addErrorIfNotString]]
+    ['description', [addErrorIfEmpty, addErrorIfNotString]]
   ];
   const isValidAndErrors = getErrorsForProperties(propertiesToCheck, user);
   return isValidAndErrors;
