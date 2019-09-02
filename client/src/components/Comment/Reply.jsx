@@ -9,7 +9,7 @@ const Reply = ({
   const isTempReply = replyId.indexOf('temp-') > -1;
   return (
   <Comment>
-    <Comment.Avatar src={image} />
+    <Comment.Avatar src={image || 'https://react.semantic-ui.com/images/avatar/small/elliot.jpg'} />
     <Comment.Content>
       <Comment.Author as="a" href={`/profile/${username}` } className={classes.color}>{author}</Comment.Author>
       <Comment.Metadata>

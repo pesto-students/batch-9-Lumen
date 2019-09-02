@@ -45,6 +45,7 @@
 }
 
 .left{
+    width: 50px !important;
     flex: 0 0 50px;
     cursor: pointer;
     transition: transform .3s linear;
