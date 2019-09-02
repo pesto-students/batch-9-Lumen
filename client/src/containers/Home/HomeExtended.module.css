@@ -30,7 +30,7 @@ font-family: "Fjalla One", sans-serif;
   left: 50%;
   font-size: 3rem;
   transform: translate(-50%, -50%);
-  transition: transform .5s linear;
+  transition: font-size .3s linear;
 }
 
 .child:hover h2{
