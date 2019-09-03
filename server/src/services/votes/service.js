@@ -28,7 +28,7 @@ const voteBlog = async (blogId, userId, addVotes) => {
 const countVotesOfBlog = async blogId => {
   const query = {
     blogId: convertIntoObjectID(blogId),
-    upVotes: {$gt: 0},
+    upVotes: { $gt: 0 }
   };
   const filterBlog = { $match: query };
 
@@ -43,12 +43,12 @@ const countVotesOfBlog = async blogId => {
 
   const countVotesAggregationPipeline = [filterBlog, groupVotes];
   const votes = await VotesModel.aggregate(countVotesAggregationPipeline);
-  if(!votes[0]) {
+  if (!votes[0]) {
     return {
       _id: blogId,
-      totalUpVotes : 0,
-      uniqueUpVotes : 0,
-    }
+      totalUpVotes: 0,
+      uniqueUpVotes: 0
+    };
   }
   return votes[0];
 };
@@ -62,16 +62,18 @@ const getUserUpVotes = async (blogId, userId) => {
   const projection = 'upVotes';
 
   const votes = await VotesModel.findOne(query, projection);
-  if(!votes) {
+  if (!votes) {
     return {
-      upVotes: 0,
-    }
+      upVotes: 0
+    };
   }
   return votes;
 };
 
 const getTopVotedBlogs = async (pageNumber, limit) => {
-  const query = {};
+  const query = {
+    upVotes: { $gte: 0 }
+  };
   const filterBlogs = {
     $match: query
   };
@@ -102,12 +104,18 @@ const getTopVotedBlogs = async (pageNumber, limit) => {
   return blogs;
 };
 
-const deleteVotes = async (blogId) => {
+const deleteVotes = async blogId => {
   const query = {
     blogId
   };
   const details = await VotesModel.deleteMany(query);
   return details;
-}
+};
 
-export { voteBlog, countVotesOfBlog, getUserUpVotes, getTopVotedBlogs, deleteVotes };
+export {
+  voteBlog,
+  countVotesOfBlog,
+  getUserUpVotes,
+  getTopVotedBlogs,
+  deleteVotes
+};

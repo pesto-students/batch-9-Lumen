@@ -41,8 +41,8 @@ const getTopBlogs = async (req, res) => {
       blogsSent = true;
       res.json({ msg: 'Working', blogs: topBlogs.slice(0, 12) });
     }
-    const blogsIds = await getTopVotedBlogs(1, 30);
-    const blogs = await findBlogsFromArray(blogsIds, 30);
+    const blogsIds = await getTopVotedBlogs(1, 12);
+    const blogs = await findBlogsFromArray(blogsIds, 12);
     console.log('RECEIVED BLOGS', blogs.map(blog => blog._id));
     Array.prototype.splice.apply(topBlogs, [0, topBlogs.length].concat(blogs));
     console.log('UPDATED BLOGS', topBlogs.map(blog => blog._id));
