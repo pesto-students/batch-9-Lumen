@@ -25,7 +25,7 @@ const DeleteBlog = ({ triggerButton, blogId }) => {
       });
   };
   if (deleted) {
-    return <Redirect to="/" />;
+    return <Redirect to="/profile" />;
   }
   return (
     <Modal

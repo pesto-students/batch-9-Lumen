@@ -15,8 +15,8 @@ const HomeExtended = React.lazy(() => import('./HomeExtended'));
 
 const Home = ({ isAuthenticated }) => {
   const [blogs = [], fetched] = useGetTopBlogs(1);
-
-  const topBlogCards = blogs.map(blog => {
+  const reverseBlogs = [...blogs].reverse();
+  const topBlogCards = reverseBlogs.map(blog => {
     const user = blog.userId && blog.userId.name ? blog.userId : {};
     return (
       <div className={styles.child}>
