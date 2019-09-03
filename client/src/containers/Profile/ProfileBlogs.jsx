@@ -18,7 +18,8 @@ const ProfileBlogs = ({
   const loaderStyles = {
     flexDirection :'column'
   }
-  const draftsBlogsCards = blogs.drafts.map(blog => {
+  const reversedDraftsBlogs = [...blogs.drafts].reverse();
+  const draftsBlogsCards = reversedDraftsBlogs.map(blog => {
     return (
       <div className={styles.blogcardContainer} key={blog._id}>
         <Blogcard {...profile} {...blog} href={`/edit/${blog._id}`} />
@@ -26,7 +27,8 @@ const ProfileBlogs = ({
     );
   });
 
-  const publishedBlogsCards = blogs.published.map(blog => {
+  const reversesPublishedBlogs = [...blogs.published].reverse();
+  const publishedBlogsCards = reversesPublishedBlogs.map(blog => {
     return (
       <div className={styles.blogcardContainer} key={blog._id}>
         <Blogcard {...profile} {...blog}  href={`/preview/${blog._id}`} />
