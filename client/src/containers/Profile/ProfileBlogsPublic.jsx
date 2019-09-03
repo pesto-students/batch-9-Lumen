@@ -4,7 +4,7 @@ import styles from './ProfileBlogs.module.css';
 import useGetUserBlogs from '../../hooks/useGetUserBlogs';
 import BlogsLoader from '../Home/HomeLoader';
 
-const blogsCards = (blogs, profile) => blogs.map((blog) => {
+const blogsCards = (blogs, profile) => blogs.reverse().map((blog) => {
   return(
   <div className={styles.blogcardContainer} key={blog._id}>
   <Blogcard {...profile} {...blog} href={`/blog/${blog._id}`} />
