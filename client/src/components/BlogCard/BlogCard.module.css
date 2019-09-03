@@ -71,6 +71,8 @@
 
 .postDescription{
     font-size: 1.3em;
+    opacity: 0.6;
+    transition: opacity .5s linear;
 }
 
 .postAuthor {
@@ -90,6 +92,10 @@
 
 .postAuthor .right{
     float: right;
+}
+
+.container:hover .postDescription{
+  opacity: 1.0
 }
 
 @media(max-width: 700px){
