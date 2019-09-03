@@ -9,6 +9,7 @@ const BlogsCoverImage = ({onChange, ...rest}) => (
     type="text"
     label="Cover Image"
     id="blogsCoverImage"
+    labelStyle = "label1"
     onChange={(event) => {onChange(event.target.value)} }
     {...rest}
   />

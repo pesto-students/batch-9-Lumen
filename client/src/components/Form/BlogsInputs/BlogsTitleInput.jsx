@@ -10,6 +10,7 @@ const BlogsTitleInput = ({onChange, ...rest}) => (
     type="text"
     label="Enter Title"
     id="blogsTitle"
+    labelStyle = "label1"
     onChange={(event) => {onChange(event.target.value)} }
     {...rest}
   />
