@@ -30,7 +30,7 @@ const SearchPage = ({ history }) => {
     blogs.length !== 0
       ? blogs.map(blog => {
           const user = blog.userId || {};
-          return <BlogCard {...user} {...blog} href={`/blog/${blog._id}`} />;
+          return <div className={classes.blogContainer}><BlogCard {...user} {...blog} href={`/blog/${blog._id}`} /></div>;
         })
       : noResults();
   if (!fetched) {

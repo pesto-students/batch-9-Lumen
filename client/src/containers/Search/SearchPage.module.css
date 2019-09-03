@@ -6,6 +6,12 @@
 .container {
   padding: 20px 20vw;
   color: white;
+  display: flex;
+  flex-direction: column;
+}
+
+.blogContainer{
+  padding: 25px 5px;
 }
 
 .image {
